@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="440.0" prefWidth="314.0" style="-fx-background-color: #81e0ff;" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controler.PassengerRegisterControler">
+   <center>
+      <VBox alignment="CENTER" prefHeight="445.0" prefWidth="314.0" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="37.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Picturs/traveler_40px.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="erorlbl" textFill="RED" />
+            <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0" spacing="15.0">
+               <children>
+                  <Label text="Name :" />
+                  <TextField fx:id="namefeild" promptText="Name" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" layoutX="10.0" layoutY="159.0" prefHeight="50.0" prefWidth="200.0" spacing="12.0">
+               <children>
+                  <Label text="Lastname :" />
+                  <TextField fx:id="lastnamefeild" promptText="Lastname" />
+                  <Pane prefHeight="46.0" prefWidth="4.0" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" layoutX="10.0" layoutY="209.0" prefHeight="50.0" prefWidth="200.0" spacing="15.0">
+               <children>
+                  <Label text="Username:" />
+                  <TextField fx:id="usernamefeild" promptText="Username" />
+                  <Pane prefHeight="47.0" prefWidth="2.0" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" layoutX="10.0" layoutY="259.0" prefHeight="50.0" prefWidth="200.0" spacing="15.0">
+               <children>
+                  <Label text="Password :" />
+                  <PasswordField fx:id="passwordfeild" promptText="Password" />
+                  <Pane prefHeight="47.0" prefWidth="0.0" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" layoutX="10.0" layoutY="209.0" prefHeight="50.0" prefWidth="200.0" spacing="15.0">
+               <children>
+                  <Label text="Email :" />
+                  <TextField fx:id="emailfeild" prefHeight="25.0" prefWidth="150.0" promptText="Email" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" layoutX="10.0" layoutY="306.0" prefHeight="50.0" prefWidth="200.0" spacing="1.0">
+               <children>
+                  <Label prefHeight="17.0" prefWidth="90.0" text="Phonenumber :" />
+                  <TextField fx:id="phonefeild" prefHeight="25.0" prefWidth="154.0" promptText="Phone Number" />
+                  <Pane prefHeight="47.0" prefWidth="39.0" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" layoutX="10.0" layoutY="45.0" prefHeight="50.0" prefWidth="200.0" spacing="15.0">
+               <children>
+                  <Label text="Mony" />
+                  <TextField fx:id="monyfeild" promptText="Mony" />
+               </children>
+            </HBox>
+            <HBox alignment="BOTTOM_LEFT" prefHeight="36.0" prefWidth="314.0">
+               <children>
+                  <Button id="savebtn" fx:id="savebtn" mnemonicParsing="false" prefHeight="40.0" prefWidth="222.0" stylesheets="@loginpagbtns.css" text="Save" />
+                  <Button id="cancelbtn" fx:id="cancelbtn" mnemonicParsing="false" prefHeight="40.0" prefWidth="222.0" stylesheets="@loginpagbtns.css" text="Cancel" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </center>
+</BorderPane>

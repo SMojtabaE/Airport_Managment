@@ -1,0 +1,41 @@
+#logbtn{
+    -fx-background-color: transparent;
+    -fx-border-width:  0px 0px 2px 0px;
+    -fx-border-color: yellow;
+}
+#logbtn:hover{
+    -fx-background-color: yellow;
+}
+#closebtn{
+    -fx-background-color: transparent;
+    -fx-border-width:  0px 0px 2px 0px;
+    -fx-border-color: red;
+}
+#closebtn:hover{
+    -fx-background-color: red;
+}
+#singinbtn{
+    -fx-background-color: transparent;
+    -fx-border-width:  0px 0px 2px 0px;
+    -fx-border-color: blue;
+}
+#singinbtn:hover{
+    -fx-background-color: blue;
+}
+
+#savebtn{
+    -fx-background-color: transparent;
+    -fx-border-width:  0px 0px 2px 0px;
+    -fx-border-color: #002d7b;
+}
+#savebtn:hover{
+    -fx-background-color: #002d7b;
+}
+#cancelbtn{
+    -fx-background-color: transparent;
+    -fx-border-width:  0px 0px 2px 0px;
+    -fx-border-color: red;
+}
+#cancelbtn:hover{
+    -fx-background-color: red;
+}
