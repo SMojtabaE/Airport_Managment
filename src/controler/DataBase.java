@@ -12,7 +12,9 @@ public class DataBase {
     private static Connection connection;
     private static Statement statement;
 
+
     private DataBase(){}
+
     public static void makeconnection(){
         try {
             connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/airport_managment",
@@ -33,7 +35,21 @@ public class DataBase {
             }
         }
     }
-
+    public static Manager getsuperadmin() throws SQLException {
+        makeconnection();
+        ResultSet re = statement.executeQuery("select * from users where job like 0");
+        Manager superadmin = null;
+         if(re.next()){
+                superadmin = new Manager(re.getInt(1), re.getString(2), re.getString(3),
+                        re.getString(4), re.getString(5), re.getString(6),
+                        re.getString(7), re.getString(8), re.getInt(9),
+                        re.getInt(10));
+                closeconection();
+                return superadmin;
+            }
+        closeconection();
+         return superadmin;
+    }
     public static void report(String massage){
         /*this method get a string that is the massage of report and than insert it to the database,these massage
         * could be logging in a user or anything else */
@@ -123,25 +139,23 @@ public class DataBase {
 
     public static ArrayList<Manager> getmanagers() throws SQLException {
         makeconnection();
-        ResultSet re = statement.executeQuery("select * from users");
+        ResultSet re = statement.executeQuery("select * from users where job like 1");
         ArrayList<Manager> users = new ArrayList<>();
         while (re.next()){
-            if (re.getInt(10)==1) {
                 users.add(new Manager(re.getInt(1), re.getString(2), re.getString(3),
                         re.getString(4), re.getString(5), re.getString(6),
                         re.getString(7), re.getString(8), re.getInt(9),
                         re.getInt(10)));
-            }
         }
         closeconection();
         return users;
     }
 
-    public static Manager checkusernam(String username,String password) throws SQLException {
+    public static Manager checkusernamOfmanager(String username,String password) throws SQLException {
         makeconnection();
         Manager user = null;
        // System.out.println("user = null");
-        ResultSet re = statement.executeQuery(String.format("select * from users where username like '%s'",username));
+        ResultSet re = statement.executeQuery(String.format("select * from users where username like '%s' and job like 1",username));
        // System.out.println("user name from database " + re.getString(4));
 
         if(re.next()){
@@ -220,18 +234,34 @@ public class DataBase {
 
     public static ArrayList<Employee> getemployees() throws SQLException {
         makeconnection();
-        ResultSet re = statement.executeQuery("select * from users");
+        ResultSet re = statement.executeQuery("select * from users where job like 2");
         ArrayList<Employee> users = new ArrayList<>();
         while (re.next()){
-            if (re.getInt(10)==2) {
                 users.add(new Employee(re.getInt(1), re.getString(2), re.getString(3),
                         re.getString(4), re.getString(5), re.getString(6),
                         re.getString(7), re.getString(8), re.getInt(9),
                         re.getInt(10)));
-            }
+
         }
         closeconection();
         return users;
+    }
+    public static Employee checkusernamOfemployees(String username,String password) throws SQLException {
+        makeconnection();
+        Employee user = null;
+        ResultSet re = statement.executeQuery(String.format("select * from users where username like '%s' and job like 2",username));
+        if(re.next()){
+            if (password.equals(re.getString(5))){
+                user = new Employee(re.getInt(1), re.getString(2), re.getString(3),
+                        re.getString(4), re.getString(5), re.getString(6),
+                        re.getString(7), re.getString(8), re.getFloat(9),
+                        re.getInt(10));
+                closeconection();
+                return user;
+            }
+        }
+        closeconection();
+        return user;
     }
 
     /////////////////////////  passengar database

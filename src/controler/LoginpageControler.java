@@ -1,5 +1,4 @@
 package controler;
-import javafx.animation.FadeTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -8,20 +7,16 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import javafx.util.Duration;
 import model.Employee;
 import model.Manager;
 import model.Passenger;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class LoginpageControler implements Initializable {
@@ -46,7 +41,7 @@ public class LoginpageControler implements Initializable {
 
     static {
         try {
-            superadmin = DataBase.getmanagers().get(0);
+            superadmin = DataBase.getsuperadmin();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -54,8 +49,6 @@ public class LoginpageControler implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
-        //loadsplashscreen();
         empexitbtn.setOnAction( e -> System.exit(0));
         passclosebtn.setOnAction( e -> System.exit(0));
 
@@ -94,35 +87,38 @@ public class LoginpageControler implements Initializable {
 //                            /////////////going to managers page
 //                        }
 //                    }
-                    Manager user = DataBase.checkusernam(empusernamefeild.getText(),emppasswordfeild.getText());
+                    Manager user = DataBase.checkusernamOfmanager(empusernamefeild.getText(),emppasswordfeild.getText());
                     //System.out.println(user.getPassword() + user.getUsername());
                     if (user != null){
-                        emperorlbl.setText("welcome sthsdt sdth stdh sdtf bdsfb dgb");
-                       // System.out.println("welcome sthsdt sdth stdh sdtf bdsfb dgb");
+//                        emperorlbl.setText("welcome sthsdt sdth stdh sdtf bdsfb dgb");
+//                       // System.out.println("welcome sthsdt sdth stdh sdtf bdsfb dgb");
                         BorderPane root = FXMLLoader.load(this.getClass().getResource("../view/PassengerRegister.fxml"));
-                        registerstage = new Stage();
-                        registerstage.initStyle(StageStyle.UNDECORATED);
-                        Scene scene = new Scene(root);
-                        scene.setFill(Color.TRANSPARENT);
-                        registerstage.setScene(scene);
-                        registerstage.initStyle(StageStyle.TRANSPARENT);
-                        registerstage.show();
-                    }else{
-                        emperorlbl.setText("wrong sdfgasfgasfv");
-                    // System.out.println(" sthsdt sdth stdh sdtf bdsfb dgb");
-                }
-                ArrayList<Employee> employees = DataBase.getemployees();
-                for (int i = 0; i < employees.size(); i++) {
-                    if (empusernamefeild.getText().equals(employees.get(i).getUsername()) &&
-                            emppasswordfeild.getText().equals(employees.get(i).getPassword())) {
-                        /////////////going to employees page
+//                        registerstage = new Stage();
+//                        registerstage.initStyle(StageStyle.UNDECORATED);
+//                        Scene scene = new Scene(root);
+//                        scene.setFill(Color.TRANSPARENT);
+//                        registerstage.setScene(scene);
+//                        registerstage.initStyle(StageStyle.TRANSPARENT);
+//                        registerstage.show();
+                    }else {
+//                        ArrayList<Employee> employees = DataBase.getemployees();
+//                        for (int i = 0; i < employees.size(); i++) {
+//                            if (empusernamefeild.getText().equals(employees.get(i).getUsername()) &&
+//                                    emppasswordfeild.getText().equals(employees.get(i).getPassword())) {
+//                                /////////////going to employees page
+//                            }
+//                        }
+                        Employee employee = DataBase.checkusernamOfemployees(empusernamefeild.getText(),emppasswordfeild.getText());
+                        if (employee != null){
+
+                        }
+
                     }
-                }
 
                 } catch (SQLException | IOException ex) {
                     ex.printStackTrace();
                 }
-               // emperorlbl.setText("username Or password Is wrong");
+                emperorlbl.setText("username Or password Is wrong");
             }
 
         });
@@ -193,47 +189,4 @@ public class LoginpageControler implements Initializable {
             ((Stage)empforgetpassbtn.getScene().getWindow()).close();
         });
     }
-
-
-    public void loadsplashscreen(){
-        try {
-            //Load splash screen view FXML
-            AnchorPane pane = FXMLLoader.load(getClass().getResource(("../view/Splashscreen.fxml")));
-            //Add it to root container (Can be StackPane, AnchorPane etc)
-            root.getChildren().removeAll();
-            root.getChildren().setAll(pane);
-
-            //Load splash screen with fade in effect
-            FadeTransition fadeIn = new FadeTransition(Duration.seconds(3), pane);
-            fadeIn.setFromValue(0);
-            fadeIn.setToValue(1);
-            fadeIn.setCycleCount(1);
-
-            //Finish splash with fade out effect
-            FadeTransition fadeOut = new FadeTransition(Duration.seconds(3), pane);
-            fadeOut.setFromValue(1);
-            fadeOut.setToValue(0);
-            fadeOut.setCycleCount(1);
-
-            fadeIn.play();
-
-            //After fade in, start fade out
-            fadeIn.setOnFinished((e) -> {
-                fadeOut.play();
-            });
-
-            //After fade out, load actual content
-            fadeOut.setOnFinished((e) -> {
-                try {
-                    BorderPane parentContent = FXMLLoader.load(getClass().getResource(("../view/Loginpage.fxml")));
-                    root.getChildren().setAll(parentContent);
-                } catch (IOException ex) {
-                    System.out.println(ex);
-                }
-            });
-        } catch (IOException ex) {
-            System.out.println(ex);
-        }
-    }
-
 }
