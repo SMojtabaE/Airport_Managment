@@ -20,20 +20,20 @@
                                     <Pane prefHeight="91.0" prefWidth="600.0" BorderPane.alignment="CENTER" />
                                  </top>
                                  <left>
-                                    <Pane prefHeight="208.0" prefWidth="90.0" BorderPane.alignment="CENTER" />
+                                    <Pane prefHeight="231.0" prefWidth="85.0" BorderPane.alignment="CENTER" />
                                  </left>
                                  <right>
-                                    <Pane prefHeight="208.0" prefWidth="89.0" BorderPane.alignment="CENTER" />
+                                    <Pane prefHeight="231.0" prefWidth="85.0" BorderPane.alignment="CENTER" />
                                  </right>
                                  <bottom>
                                     <Pane prefHeight="49.0" prefWidth="600.0" BorderPane.alignment="CENTER" />
                                  </bottom>
                                  <center>
-                                    <VBox alignment="CENTER" opacity="0.64" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
+                                    <VBox alignment="CENTER" opacity="0.64" prefHeight="231.0" prefWidth="409.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
                                        <children>
                                           <HBox alignment="CENTER" prefHeight="67.0" prefWidth="421.0">
                                              <children>
-                                                <Pane prefHeight="67.0" prefWidth="62.0" />
+                                                <Pane prefHeight="67.0" prefWidth="32.0" />
                                                 <Label text="Emplloyes Login">
                                                    <font>
                                                       <Font name="Impact" size="29.0" />
@@ -47,7 +47,7 @@
                                                    <children>
                                                       <Label text="Username :" />
                                                       <TextField fx:id="empusernamefeild" promptText="UserName" />
-                                                      <Pane prefHeight="32.0" prefWidth="26.0" />
+                                                      <Pane prefHeight="32.0" prefWidth="59.0" />
                                                    </children>
                                                    <padding>
                                                       <Insets left="100.0" />
@@ -57,7 +57,7 @@
                                                    <children>
                                                       <Label text="Password :" />
                                                       <PasswordField fx:id="emppasswordfeild" promptText="Password" />
-                                                      <Pane prefHeight="38.0" prefWidth="22.0" />
+                                                      <Pane prefHeight="38.0" prefWidth="56.0" />
                                                    </children>
                                                    <padding>
                                                       <Insets left="100.0" />
@@ -70,13 +70,14 @@
                                                 </HBox>
                                                 <HBox alignment="TOP_CENTER" prefHeight="41.0" prefWidth="421.0">
                                                    <children>
-                                                      <Pane prefHeight="42.0" prefWidth="58.0" />
-                                                      <Button id="logbtn" fx:id="emploginbtn" alignment="CENTER" mnemonicParsing="false" prefHeight="25.0" prefWidth="113.0" stylesheets="@loginpagbtns.css" text="Log in">
+                                                      <Button id="forgetpassbtn" fx:id="empforgetpassbtn" mnemonicParsing="false" prefHeight="27.0" stylesheets="@loginpagbtns.css" text="Forgotten Password" />
+                                                      <Button id="logbtn" fx:id="emploginbtn" alignment="CENTER" mnemonicParsing="false" prefHeight="27.0" prefWidth="89.0" stylesheets="@loginpagbtns.css" text="Log in">
                                                          <opaqueInsets>
                                                             <Insets left="20.0" />
                                                          </opaqueInsets>
                                                       </Button>
-                                                      <Button id="closebtn" fx:id="empexitbtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="113.0" stylesheets="@loginpagbtns.css" text="Exit" />
+                                                      <Button id="closebtn" fx:id="empexitbtn" mnemonicParsing="false" prefHeight="27.0" prefWidth="89.0" stylesheets="@loginpagbtns.css" text="Exit" />
+                                                      <Pane prefHeight="41.0" prefWidth="2.0" />
                                                    </children>
                                                 </HBox>
                                              </children>
@@ -134,6 +135,7 @@
                                     </HBox>
                                     <HBox alignment="CENTER" prefHeight="53.0" prefWidth="407.0">
                                        <children>
+                                          <Button id="forgetpassbtn" fx:id="passforgotpassbtn" mnemonicParsing="false" stylesheets="@loginpagbtns.css" text="Forgotten Password" />
                                           <Button id="logbtn" fx:id="passloginbtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="113.0" stylesheets="@loginpagbtns.css" text="Login" />
                                           <Button id="closebtn" fx:id="passclosebtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="113.0" stylesheets="@loginpagbtns.css" text="Exit" />
                                        </children>

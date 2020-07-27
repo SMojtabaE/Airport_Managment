@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+
+<AnchorPane fx:id="splashroot" prefHeight="400.0" prefWidth="600.0" stylesheets="@Splashlogin.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controler.SplashscreenControler">
+   <children>
+      <Circle fx:id="crl1" fill="#1495ff03" layoutX="236.0" layoutY="279.0" radius="10.0" stroke="#b1caf6" strokeType="INSIDE" strokeWidth="6.0" />
+      <Circle fx:id="crl2" fill="#1495ff03" layoutX="263.0" layoutY="279.0" radius="10.0" stroke="#d7ffdf" strokeType="INSIDE" strokeWidth="6.0" />
+      <Circle fx:id="crl3" fill="#1495ff03" layoutX="290.0" layoutY="279.0" radius="10.0" stroke="#fbf1e3" strokeType="INSIDE" strokeWidth="6.0" />
+   </children>
+</AnchorPane>

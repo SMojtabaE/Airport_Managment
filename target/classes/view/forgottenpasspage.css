@@ -1,0 +1,8 @@
+#centerpane{
+    -fx-background-image: url('Picturs/forgottenpass1-sdf.png');
+    -fx-background-size: cover;
+    -fx-effect: dropshadow(one-pass-box, black,  20.0,  0.0,  10,  10);
+    -fx-background-color:  #1976D2;
+}
+
+

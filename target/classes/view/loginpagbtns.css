@@ -1,10 +1,10 @@
 #logbtn{
     -fx-background-color: transparent;
     -fx-border-width:  0px 0px 2px 0px;
-    -fx-border-color: yellow;
+    -fx-border-color: green;
 }
 #logbtn:hover{
-    -fx-background-color: yellow;
+    -fx-background-color: green;
 }
 #closebtn{
     -fx-background-color: transparent;
@@ -38,4 +38,13 @@
 }
 #cancelbtn:hover{
     -fx-background-color: red;
+}
+
+#forgetpassbtn{
+    -fx-background-color: transparent;
+    -fx-border-width:  0px 0px 2px 0px;
+    -fx-border-color: yellow;
+}
+#forgetpassbtn:hover{
+    -fx-background-color: yellow;
 }
