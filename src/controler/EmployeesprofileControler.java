@@ -7,14 +7,14 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import model.Passenger;
-import javafx.scene.control.TextField;
+import model.Employee;
 
 import java.awt.*;
 import java.io.File;
@@ -25,8 +25,7 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 import java.util.regex.Pattern;
 
-public class PassengersProfileControler implements Initializable {
-
+public class EmployeesprofileControler implements Initializable {
     @FXML TextField namefeild;
     @FXML TextField lastnamefeild;
     @FXML TextField phnumberfeild;
@@ -44,7 +43,7 @@ public class PassengersProfileControler implements Initializable {
 
     private double x = 0, y = 0;
 
-    private Passenger user;
+    private Employee user;
     private TableView table;
 
     @Override
@@ -65,35 +64,35 @@ public class PassengersProfileControler implements Initializable {
             username.setText(user.getUsername());
             passwordfeild.setText(user.getPassword());
             emailfeild.setText(user.getEmail());
-            moneyfeild.setText(String.valueOf(user.getMoney()));
+            moneyfeild.setText(String.valueOf(user.getSalary()));
             phnumberfeild.setText(user.getPhoneNumber());
             user.show();
         });
 
         savebtn.setOnAction( e -> {
             if (namefeild.getText().isEmpty() || lastnamefeild.getText().isEmpty() || username.getText().isEmpty()
-                        || passwordfeild.getText().isEmpty() || emailfeild.getText().isEmpty() ||
-                        phnumberfeild.getText().isEmpty() || moneyfeild.getText().isEmpty()){
+                    || passwordfeild.getText().isEmpty() || emailfeild.getText().isEmpty() ||
+                    phnumberfeild.getText().isEmpty() || moneyfeild.getText().isEmpty()){
                 erorlbl.setText("fill all parameters");
                 Toolkit.getDefaultToolkit().beep();
             } else if (isValid(emailfeild.getText())) {
                 try {
-                        user.setName(namefeild.getText());
-                        user.setLastname(lastnamefeild.getText());
-                        user.setMoney(Double.parseDouble(moneyfeild.getText()));
-                        user.setEmail(emailfeild.getText());
-                        user.setPassword(passwordfeild.getText());
-                        user.setPhoneNumber(phnumberfeild.getText());
-                        DataBase.updatpassenger(user);
-                        PassebgertableControler.editstage = null;
-                        table.setItems(DataBase.getpassengers());
-                        ((Stage) savebtn.getScene().getWindow()).close();
+                    user.setName(namefeild.getText());
+                    user.setLastname(lastnamefeild.getText());
+                    user.setSalary(Double.parseDouble(moneyfeild.getText()));
+                    user.setEmail(emailfeild.getText());
+                    user.setPassword(passwordfeild.getText());
+                    user.setPhoneNumber(phnumberfeild.getText());
+                    DataBase.updatemployee(user);
+                    EmployeestableControler.editstage = null;
+                    table.setItems(DataBase.getemployees());
+                    ((Stage) savebtn.getScene().getWindow()).close();
 
                 } catch (SQLException ex){
                     ex.printStackTrace();
                 } catch (NumberFormatException ep){
-                    erorlbl.setText("Enter Number in money Field ");
-                        Toolkit.getDefaultToolkit().beep();
+                    erorlbl.setText("Enter Number in Salary Field ");
+                    Toolkit.getDefaultToolkit().beep();
                 }
             }else {
                 erorlbl.setText("The email is invalid");
@@ -102,7 +101,7 @@ public class PassengersProfileControler implements Initializable {
         });
 
         cancelbtn.setOnAction( e -> {
-            PassebgertableControler.editstage = null;
+            EmployeestableControler.editstage = null;
             ((Stage) savebtn.getScene().getWindow()).close();
         });
 
@@ -127,7 +126,6 @@ public class PassengersProfileControler implements Initializable {
                 for (int i = 1; i < path.length; i++) {
                     filepath = filepath + path[i];
                 }
-                System.out.println(filepath);
                 if (file != null) {
                     Image _image_ = null;
                     try {
@@ -142,13 +140,13 @@ public class PassengersProfileControler implements Initializable {
             } catch (NullPointerException ex){ }
         });
     }
-    public void settableANDpassenger(TableView<Passenger> table,int userid){
+    public void settableANDpassenger(TableView<Employee> table,int userid){
         this.table = table;
         setuser(userid);
     }
     public void setuser(int id){
         try {
-            this.user = DataBase.searchFrompassenger(id);
+            this.user = DataBase.searchForemployee(id);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -164,11 +162,11 @@ public class PassengersProfileControler implements Initializable {
             stage.setY(event.getScreenY() - y);
         }));
     }
-        public static boolean isValid(String email){
-            String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
-            Pattern pat = Pattern.compile(emailRegex);
-            if (email == null)
-                return false;
-            return pat.matcher(email).matches();
-        }
+    public static boolean isValid(String email){
+        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
+        Pattern pat = Pattern.compile(emailRegex);
+        if (email == null)
+            return false;
+        return pat.matcher(email).matches();
+    }
 }

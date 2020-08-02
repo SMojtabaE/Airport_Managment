@@ -8,7 +8,7 @@ public class Employee extends Person implements Showable {
     private int job;
 
     public Employee(String name,String lastname,String username,String password,String email,String adress,
-                    String phone,double salary,int job){
+                    String phone,double salary){
         this.setName(name);
         this.setLastname(lastname);
         this.setUsername(username);
@@ -17,8 +17,8 @@ public class Employee extends Person implements Showable {
         this.setPhoneNumber(phone);
         this.setAdress(adress);
         this.setSalary(salary);
-        this.setJob(job);
-        this.setProfile_photo_Path("../view/Picturs/users_defult_photo.png");
+        this.setJob(2);
+        this.setProfile_photo_Path("H:\\programs code\\Java\\Airport_Managment\\src\\view\\Picturs\\users_defult_photo.png");
     }
 
     public Employee(int id,String name,String lastname,String username,String password,String email,String adress,

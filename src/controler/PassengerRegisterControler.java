@@ -3,9 +3,14 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import model.Passenger;
+
+import java.awt.*;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
@@ -42,6 +47,7 @@ public class PassengerRegisterControler implements Initializable {
                     || passwordfeild.getText().isEmpty() || emailfeild.getText().isEmpty() ||
                     phonefeild.getText().isEmpty() || monyfeild.getText().isEmpty()){
                 erorlbl.setText("fill all parameters");
+                Toolkit.getDefaultToolkit().beep();
             } else if (isValid(emailfeild.getText())) {
                 try {
                     if (DataBase.checkregisrerOfpassenger(usernamefeild.getText())){
@@ -58,14 +64,17 @@ public class PassengerRegisterControler implements Initializable {
                         ((Stage)savebtn.getScene().getWindow()).close();
                     }else {
                         erorlbl.setText("chose another username");
+                        Toolkit.getDefaultToolkit().beep();
                     }
                 } catch (SQLException ex) {
                     ex.printStackTrace();
                 } catch (NumberFormatException ep){
                     erorlbl.setText("Enter Number in money Field");
+                    Toolkit.getDefaultToolkit().beep();
                 }
             }else{
                     erorlbl.setText("The email is invalid");
+                Toolkit.getDefaultToolkit().beep();
             }
         });
     }

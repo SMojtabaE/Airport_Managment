@@ -7,7 +7,7 @@ public class Manager extends Person implements Showable {
     private int job;
 
     public Manager(String name,String lastname,String username,String password,String email,String adress,
-                   String phone,double salary,int job){
+                   String phone,double salary){
         this.setName(name);
         this.setLastname(lastname);
         this.setUsername(username);
@@ -16,8 +16,8 @@ public class Manager extends Person implements Showable {
         this.setPhoneNumber(phone);
         this.setAdress(adress);
         this.setSalary(salary);
-        this.setJob(job);
-        this.setProfile_photo_Path("../view/Picturs/users_defult_photo.png");
+        this.setJob(1);
+        this.setProfile_photo_Path("H:\\programs code\\Java\\Airport_Managment\\src\\view\\Picturs\\manager_defult_pic.png");
     }
     public Manager(int id,String name,String lastname,String username,String password,String email,String adress,
                    String phone,double salary,int job,String path){

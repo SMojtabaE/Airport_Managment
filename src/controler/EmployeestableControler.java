@@ -1,4 +1,5 @@
 package controler;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -14,23 +15,25 @@ import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import model.Passenger;
+import model.Employee;
 
+import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-public class PassebgertableControler implements Initializable {
+public class EmployeestableControler implements Initializable {
+
     // initialing the table and its columns
-    @FXML  TableView<Passenger> table;
-    @FXML TableColumn<Passenger, String> name;
-    @FXML TableColumn<Passenger, String> lastname;
-    @FXML TableColumn<Passenger, String> username;
-    @FXML TableColumn<Passenger, String> email;
-    @FXML TableColumn<Passenger, String> phnumber;
-    @FXML TableColumn<Passenger, Double> mony;
-    @FXML TableColumn<Passenger, Integer> id;
+    @FXML TableView<Employee> table;
+    @FXML TableColumn<Employee, String> name;
+    @FXML TableColumn<Employee, String> lastname;
+    @FXML TableColumn<Employee, String> username;
+    @FXML TableColumn<Employee, String> email;
+    @FXML TableColumn<Employee, String> phnumber;
+    @FXML TableColumn<Employee, Double> mony;
+    @FXML TableColumn<Employee, Integer> id;
 
     @FXML Button addbtn;
     @FXML Button removebtn;
@@ -38,6 +41,7 @@ public class PassebgertableControler implements Initializable {
     @FXML ImageView searchimg;
     @FXML ImageView louddataimg;
     @FXML TextField searcgfeild;
+
     static Stage registerstage = null;
     static Stage editstage = null;
 
@@ -46,41 +50,41 @@ public class PassebgertableControler implements Initializable {
         name.setCellValueFactory(new PropertyValueFactory<>("name"));
         id.setCellValueFactory(new PropertyValueFactory<>("id"));
         lastname.setCellValueFactory(new PropertyValueFactory<>("lastname"));
-        mony.setCellValueFactory(new PropertyValueFactory<>("money"));
+        mony.setCellValueFactory(new PropertyValueFactory<>("salary"));
         username.setCellValueFactory(new PropertyValueFactory<>("username"));
         email.setCellValueFactory(new PropertyValueFactory<>("email"));
         phnumber.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
         try {
-             table.setItems(DataBase.getpassengers());
+            table.setItems(DataBase.getemployees());
         } catch (SQLException e) {
             e.printStackTrace();
         }
         addbtn.setOnAction( e -> {
             if (registerstage==null){
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/PassengerRegister.fxml"));
-                    try {
-                        loader.load();
-                    } catch (IOException ex) {
-                        ex.printStackTrace();
-                    }
-                    PassengerRegisterControler controler = loader.getController();
-                    controler.settable(table);
-                    registerstage = new Stage();
-                    registerstage.initStyle(StageStyle.UNDECORATED);
-                    Scene scene = new Scene(loader.getRoot());
-                    scene.setFill(Color.TRANSPARENT);
-                    registerstage.setScene(scene);
-                    registerstage.initStyle(StageStyle.TRANSPARENT);
-                    registerstage.show();
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/AddEmployee.fxml"));
+                try {
+                    loader.load();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+                AddemployeeControler controler = loader.getController();
+                controler.settable(table);
+                registerstage = new Stage();
+                registerstage.initStyle(StageStyle.UNDECORATED);
+                Scene scene = new Scene(loader.getRoot());
+                scene.setFill(Color.TRANSPARENT);
+                registerstage.setScene(scene);
+                registerstage.initStyle(StageStyle.TRANSPARENT);
+                registerstage.show();
             }
         });
 
         removebtn.setOnAction( e -> {
-           Passenger selected= table.getSelectionModel().getSelectedItem();
+            Employee selected= table.getSelectionModel().getSelectedItem();
             if (selected != null) {
                 table.getItems().remove(selected);
                 try {
-                    DataBase.deletpassenger(selected);
+                    DataBase.deletmemployee(selected);
                 } catch (SQLException ex) {
                     ex.printStackTrace();
                 }
@@ -90,25 +94,26 @@ public class PassebgertableControler implements Initializable {
         searchimg.setOnMousePressed( e -> {
             if (!searcgfeild.getText().isEmpty()) {
                 try {
-                    Passenger searchedPassenger = null;
+                    Employee searchedUser = null;
                     try {
-                        searchedPassenger = DataBase.searchFrompassenger(Integer.parseInt(searcgfeild.getText()));
+                        searchedUser = DataBase.searchForemployee(Integer.parseInt(searcgfeild.getText()));
                     } catch (SQLException ex) {
                         ex.printStackTrace();
                     }
-                    if (searchedPassenger != null) {
-                        ObservableList<Passenger> selected = FXCollections.observableArrayList();
-                        selected.add(searchedPassenger);
+                    if (searchedUser != null) {
+                        ObservableList<Employee> selected = FXCollections.observableArrayList();
+                        selected.add(searchedUser);
                         table.setItems(selected);
                     }
                 }catch (NumberFormatException ep){
-                    System.out.println("NumberFormatException exception,pleas enter an integer valuo");
+                    Toolkit.getDefaultToolkit().beep();
+                    System.out.println("NumberFormatException, pleas enter an integer valuo");
                 }
             }
         });
         louddataimg.setOnMousePressed( e -> {
             try {
-                table.setItems(DataBase.getpassengers());
+                table.setItems(DataBase.getemployees());
             } catch (SQLException ex) {
                 ex.printStackTrace();
             }
@@ -117,17 +122,16 @@ public class PassebgertableControler implements Initializable {
 
         editbtn.setOnAction( e -> {
             if (editstage == null){
-                Passenger passenger = table.getSelectionModel().getSelectedItem();
-                if (passenger != null) {
-                    System.out.println(passenger.getId());
-                    FXMLLoader loader_ = new FXMLLoader(getClass().getResource("../view/PassengersProfile.fxml"));
+                Employee user = table.getSelectionModel().getSelectedItem();
+                if (user != null) {
+                    FXMLLoader loader_ = new FXMLLoader(getClass().getResource("../view/EmployeesProfile.fxml"));
                     try {
                         loader_.load();
                     } catch (IOException ex) {
                         ex.printStackTrace();
                     }
-                    PassengersProfileControler controler1 = loader_.getController();
-                    controler1.settableANDpassenger(table, passenger.getId());
+                    EmployeesprofileControler controler1 = loader_.getController();
+                    controler1.settableANDpassenger(table, user.getId());
                     editstage = new Stage();
                     editstage.initStyle(StageStyle.UNDECORATED);
                     Scene scene = new Scene(loader_.getRoot());

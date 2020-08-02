@@ -230,6 +230,33 @@ public class DataBase {
         return user;
     }
 
+    public static Employee searchForemployee(int id) throws SQLException {
+        makeconnection();
+        ResultSet re = statement.executeQuery(String.format("select * from users where id like %d and job = 2",id));
+        Employee user = null;
+        if(re.next()){
+            user = new Employee(re.getInt(1), re.getString(2), re.getString(3),
+                    re.getString(4), re.getString(5), re.getString(6),
+                    re.getString(7), re.getString(8), re.getDouble(9),
+                    re.getInt(10),re.getString(11));
+            closeconection();
+            return user;
+        }
+        closeconection();
+        return user;
+    }
+
+    public static boolean checkregisrerOfemoloyees(String username) throws SQLException {
+        makeconnection();
+        ResultSet re = statement.executeQuery(String.format("select * from users where username like '%s' and job = 2",username));
+        if(re.next()){
+            closeconection();
+            return false;
+        }
+        closeconection();
+        return true;
+    }
+
     /////////////////////////  passengar database
 
     public static int creatpassenger(Passenger user) throws SQLException {

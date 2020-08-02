@@ -13,3 +13,38 @@
     -fx-text-fill: #BDBDBD;
     -fx-cursor: hand;
 }
+.rtg{
+    -fx-background-color: transparent;
+    -fx-border-width:  2px 2px 2px 2px;
+    -fx-border-color:  #EC407A;
+    -fx-border-radius: 20 20 20 0;
+    -fx-background-radius: 21 21 21 0;
+    -fx-text-fill: #BDBDBD;
+}
+.emprtg{
+    -fx-background-color: transparent;
+    -fx-border-width:  2px 2px 2px 2px;
+    -fx-border-color:  #af739a;
+    -fx-border-radius: 20 20 20 0;
+    -fx-background-radius: 21 21 21 0;
+    -fx-text-fill: #BDBDBD;
+}
+.emptxtfields{
+    -fx-background-color: transparent;
+    -fx-border-width:  0px 0px 2px 0px;
+    -fx-border-color:  #af739a;
+    -fx-text-fill: #BDBDBD;
+}
+.emptxtarea{
+    -fx-border-width:  2px 2px 2px 2px;
+    -fx-border-color:  #af739a;
+}
+.empbtns{
+    -fx-background-color: transparent;
+    -fx-border-width:  2px 2px 2px 2px;
+    -fx-border-color:  #af739a;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-text-fill: #BDBDBD;
+    -fx-cursor: hand;
+}

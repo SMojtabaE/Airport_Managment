@@ -1,0 +1,10 @@
+.profile{
+    -fx-background-color: transparent;
+    -fx-border-width:  2px 2px 2px 2px;
+    -fx-border-color:  #4ca6a6;
+    -fx-border-radius: 20 20 20 0;
+    -fx-background-radius: 21 21 21 0;
+}
+.hand{
+    -fx-cursor: hand;
+}
