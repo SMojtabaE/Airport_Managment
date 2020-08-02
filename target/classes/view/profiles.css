@@ -4,3 +4,12 @@
     -fx-border-color:  #EC407A;
     -fx-text-fill: #BDBDBD;
 }
+.btns{
+    -fx-background-color: transparent;
+    -fx-border-width:  2px 2px 2px 2px;
+    -fx-border-color:  #EC407A;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-text-fill: #BDBDBD;
+    -fx-cursor: hand;
+}

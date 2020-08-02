@@ -9,16 +9,16 @@
    <children>
       <Pane layoutX="301.0" layoutY="-301.0" prefHeight="442.0" prefWidth="204.0" rotate="-53.1" style="-fx-background-radius: 70; -fx-background-color: EC407A;" />
       <Circle fx:id="crl" fill="DODGERBLUE" layoutX="133.0" layoutY="60.0" radius="32.0" stroke="#ec407a" strokeType="INSIDE" strokeWidth="2.0" />
-      <Button fx:id="editprofilephbtn" layoutX="176.0" layoutY="60.0" mnemonicParsing="false" text="Edit profile phot" />
+      <Button fx:id="editprofilephbtn" layoutX="176.0" layoutY="60.0" mnemonicParsing="false" styleClass="btns" text="Edit profile phot" />
       <TextField fx:id="namefeild" layoutX="101.0" layoutY="134.0" prefHeight="25.0" prefWidth="128.0" promptText="Name" styleClass="txtfeilds" />
-      <TextField fx:id="lastnamefeild" layoutX="299.0" layoutY="134.0" prefHeight="25.0" prefWidth="128.0" promptText="LastName" styleClass="txtfeilds" />
+      <TextField fx:id="lastnamefeild" layoutX="299.0" layoutY="135.0" prefHeight="25.0" prefWidth="128.0" promptText="LastName" styleClass="txtfeilds" />
       <TextField fx:id="phnumberfeild" layoutX="101.0" layoutY="194.0" prefHeight="25.0" prefWidth="128.0" promptText="Phonenumber" styleClass="txtfeilds" />
       <TextField fx:id="moneyfeild" layoutX="299.0" layoutY="263.0" prefHeight="25.0" prefWidth="128.0" promptText="Money" styleClass="txtfeilds" />
       <TextField fx:id="usernamefeild" layoutX="500.0" layoutY="134.0" prefHeight="25.0" prefWidth="128.0" promptText="Username" styleClass="txtfeilds" />
       <TextField fx:id="passwordfeild" layoutX="299.0" layoutY="194.0" prefHeight="25.0" prefWidth="128.0" promptText="Password" styleClass="txtfeilds" />
       <TextField fx:id="emailfeild" layoutX="500.0" layoutY="194.0" prefHeight="25.0" prefWidth="128.0" promptText="E-mail" styleClass="txtfeilds" />
-      <Button fx:id="cancelbtn" layoutX="500.0" layoutY="324.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="85.0" text="Cancel" />
-      <Button fx:id="savebtn" layoutX="403.0" layoutY="324.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="85.0" text="Save" />
+      <Button fx:id="cancelbtn" layoutX="500.0" layoutY="324.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="85.0" styleClass="btns" text="Cancel" />
+      <Button fx:id="savebtn" layoutX="403.0" layoutY="324.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="85.0" styleClass="btns" text="Save" />
       <Pane layoutX="132.0" layoutY="223.0" prefHeight="442.0" prefWidth="225.0" rotate="-53.1" style="-fx-background-radius: 70; -fx-background-color: EC407A;" />
       <Label fx:id="erorlbl" layoutX="278.0" layoutY="300.0" textFill="#fc0000">
          <font>
@@ -26,13 +26,11 @@
          </font>
       </Label>
       <Label layoutX="55.0" layoutY="139.0" text="Name :" textFill="#46fb62" />
-      <Label layoutX="232.0" layoutY="140.0" text="LAstName :" textFill="#46fb62" />
+      <Label layoutX="243.0" layoutY="140.0" text="LAstName :" textFill="#46fb62" />
       <Label layoutX="14.0" layoutY="199.0" text="phonenumber :" textFill="#46fb62" />
-      <Label layoutX="234.0" layoutY="199.0" text="Password :" textFill="#46fb62" />
+      <Label layoutX="246.0" layoutY="199.0" text="Password :" textFill="#46fb62" />
       <Label layoutX="438.0" layoutY="139.0" text="Username :" textFill="#46fb62" />
       <Label layoutX="252.0" layoutY="268.0" text="Money :" textFill="#46fb62" />
       <Label layoutX="458.0" layoutY="199.0" text="E-mail :" textFill="#46fb62" />
-      <Line endX="-66.0000228881836" endY="6.500007629394531" layoutX="314.0" layoutY="145.0" rotate="-100.0" startX="-100.0" />
-      <Line endX="-66.0000228881836" endY="6.500007629394531" layoutX="510.0" layoutY="144.0" rotate="80.0" startX="-100.0" />
    </children>
 </AnchorPane>

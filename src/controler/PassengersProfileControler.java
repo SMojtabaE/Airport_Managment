@@ -145,37 +145,39 @@ public class PassengersProfileControler implements Initializable {
         });
 
         editprofilephbtn.setOnAction( e -> {
-            FileChooser fileChooser = new FileChooser();    ///make to me choose from my files
-            //pattern that need to look for like png mp4 and...
-            FileChooser.ExtensionFilter filter = new FileChooser.ExtensionFilter("Select a File (*.jpg) ," +
-                    "(*.png)","*.jpg","*.png");
-            fileChooser.getExtensionFilters().add(filter); // getting patern to filechosser
+            try {
+                FileChooser fileChooser = new FileChooser();    ///make to me choose from my files
+                //pattern that need to look for like png mp4 and...
+                FileChooser.ExtensionFilter filter = new FileChooser.ExtensionFilter("Select a File (*.jpg) ," +
+                        "(*.png)", "*.jpg", "*.png");
+                fileChooser.getExtensionFilters().add(filter); // getting patern to filechosser
 
-            File file = fileChooser.showOpenDialog(null);
-            String filepath = file.toURI().toString();
+                File file = fileChooser.showOpenDialog(null);
+                String filepath = file.toURI().toString();
 
-            // hear i just set path to be good
-            filepath=  filepath.replace("file:","");
-            filepath=  filepath.replace("/","\\");
-            filepath=  filepath.replace("%20"," ");
-            String[] path = filepath.split("");
-            // deleting the firs / of path
-            filepath = "";
-            for (int i = 1 ; i<path.length ; i++){
-                filepath = filepath + path[i];
-            }
-            System.out.println(filepath);
-            if (file != null){
-                Image _image_ = null;
-                try {
-                    _image_ = new Image(new FileInputStream(filepath));
-
-                } catch (FileNotFoundException ex) {
-                    ex.printStackTrace();
+                // hear i just set path to be good
+                filepath = filepath.replace("file:", "");
+                filepath = filepath.replace("/", "\\");
+                filepath = filepath.replace("%20", " ");
+                String[] path = filepath.split("");
+                // deleting the firs / of path
+                filepath = "";
+                for (int i = 1; i < path.length; i++) {
+                    filepath = filepath + path[i];
                 }
-                crl.setFill(new ImagePattern(_image_));
-                user.setProfile_photo_Path(filepath);
-            }
+                System.out.println(filepath);
+                if (file != null) {
+                    Image _image_ = null;
+                    try {
+                        _image_ = new Image(new FileInputStream(filepath));
+
+                    } catch (FileNotFoundException ex) {
+                        ex.printStackTrace();
+                    }
+                    crl.setFill(new ImagePattern(_image_));
+                    user.setProfile_photo_Path(filepath);
+                }
+            } catch (NullPointerException ex){ }
         });
     }
     public void settableANDpassenger(TableView<Passenger> table,int userid){
