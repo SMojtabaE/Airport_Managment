@@ -9,6 +9,7 @@ public abstract class Person {
     private String password;
     private String email;
     private String phoneNumber;
+    private String profile_photo_Path;
 
     public int getId() { return id; }
 
@@ -37,4 +38,8 @@ public abstract class Person {
     public String getPhoneNumber() { return phoneNumber; }
 
     public void setPhoneNumber(String phoneNumber) { this.phoneNumber = phoneNumber; }
+
+    public String getProfile_photo_Path() { return profile_photo_Path; }
+
+    public void setProfile_photo_Path(String profile_photo_Path) { this.profile_photo_Path = profile_photo_Path; }
 }

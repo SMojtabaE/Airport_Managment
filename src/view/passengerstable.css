@@ -1,0 +1,44 @@
+.table-view{
+    -fx-background-color: #474747;
+    -fx-background-radius: 30;
+    -fx-text-fill: white;
+}
+
+.table-view.column-header-background{
+    -fx-background-color: transparent;
+    -fx-background-radius: 30;
+    -fx-background-insets: 0 0 10 0;
+    -fx-padding: 0 0 10 0;
+    -fx-text-fill: white;
+}
+
+.table-view.column-header{
+    -fx-size: 40;
+    -fx-border-width: 0 0 10 0;
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+}
+
+.table-view.column-header.label{
+    -fx-text-fill: white;
+}
+
+.hand{
+    -fx-cursor: hand;
+    -fx-background-color: #4ca6a6;
+    -fx-background-radius: 30;
+}
+.hand:hover{
+    -fx-border-width:  0px 0px 2px 0px;
+    -fx-border-color: #474747;
+    -fx-background-radius: 5;
+}
+.searchfeild{
+    -fx-border-width:  2px 2px 2px 2px;
+    -fx-border-color: #4ca6a6;
+    -fx-border-radius: 15;
+    -fx-background-radius: 15;
+}
+.searchimg{
+    -fx-cursor: hand;
+}

@@ -10,7 +10,7 @@
          <children>
             <ImageView fitHeight="37.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@Picturs/traveler_40px.png" />
+                  <Image url="@Picturs/passengers_defult_photo.png" />
                </image>
             </ImageView>
             <Label fx:id="erorlbl" textFill="RED" />

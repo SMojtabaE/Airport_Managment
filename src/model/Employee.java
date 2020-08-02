@@ -7,7 +7,8 @@ public class Employee extends Person implements Showable {
     private double salary;
     private int job;
 
-    public Employee(String name,String lastname,String username,String password,String email,String adress,String phone,double salary,int job){
+    public Employee(String name,String lastname,String username,String password,String email,String adress,
+                    String phone,double salary,int job){
         this.setName(name);
         this.setLastname(lastname);
         this.setUsername(username);
@@ -17,9 +18,11 @@ public class Employee extends Person implements Showable {
         this.setAdress(adress);
         this.setSalary(salary);
         this.setJob(job);
+        this.setProfile_photo_Path("../view/Picturs/users_defult_photo.png");
     }
 
-    public Employee(int id,String name,String lastname,String username,String password,String email,String adress,String phone,double salary,int job){
+    public Employee(int id,String name,String lastname,String username,String password,String email,String adress,
+                    String phone,double salary,int job,String path){
         this.setName(name);
         this.setLastname(lastname);
         this.setUsername(username);
@@ -30,6 +33,7 @@ public class Employee extends Person implements Showable {
         this.setSalary(salary);
         this.setJob(job);
         this.setId(id);
+        this.setProfile_photo_Path(path);
     }
 
     @Override

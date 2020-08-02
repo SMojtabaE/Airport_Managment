@@ -3,10 +3,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -54,19 +51,32 @@ public class LoginpageControler implements Initializable {
 
         passsinginbtn.setOnAction( e -> {
             if (registerstage==null){
-                try {
-                    BorderPane root = FXMLLoader.load(this.getClass().getResource("../view/PassengerRegister.fxml"));
+//                    BorderPane root = FXMLLoader.load(this.getClass().getResource("../view/PassengerRegister.fxml"));
+//                    registerstage = new Stage();
+//                    registerstage.initStyle(StageStyle.UNDECORATED);
+//                    Scene scene = new Scene(root);
+//                    scene.setFill(Color.TRANSPARENT);
+//                    registerstage.setScene(scene);
+//                    registerstage.initStyle(StageStyle.TRANSPARENT);
+//                    registerstage.show();
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/PassengerRegister.fxml"));
+                    try {
+                        loader.load();
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
+                    TableView table = null;
+                    PassengerRegisterControler controler = loader.getController();
+                    controler.settable(table);
                     registerstage = new Stage();
                     registerstage.initStyle(StageStyle.UNDECORATED);
-                    Scene scene = new Scene(root);
+                    Scene scene = new Scene(loader.getRoot());
                     scene.setFill(Color.TRANSPARENT);
                     registerstage.setScene(scene);
                     registerstage.initStyle(StageStyle.TRANSPARENT);
                     registerstage.show();
 
-                } catch (IOException ex) {
-                    ex.printStackTrace();
-                }
+
             }
         });
 

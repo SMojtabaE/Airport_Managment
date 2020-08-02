@@ -16,8 +16,12 @@ public class Main extends Application{
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-       AnchorPane pane =  FXMLLoader.load(Main.class.getResource("view/Splashscreen.fxml"));
+      BorderPane pane =  FXMLLoader.load(Main.class.getResource("view/DashbordSuperadmin.fxml"));
+      //AnchorPane pane =  FXMLLoader.load(Main.class.getResource("view/PassengersProfile.fxml"));
+       //AnchorPane pane =  FXMLLoader.load(Main.class.getResource("view/Splashscreen.fxml"));
+      //  AnchorPane pane =  FXMLLoader.load(Main.class.getResource("view/PassengersProfile.fxml"));
         primaryStage.setScene(new Scene(pane));
+       // primaryStage.setFullScreen(true);
     //    primaryStage.setTitle("Airport Manager by S_M_E");
         primaryStage.show();
     }
