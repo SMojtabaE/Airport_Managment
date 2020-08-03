@@ -32,6 +32,7 @@ public class EmployeestableControler implements Initializable {
     @FXML TableColumn<Employee, String> username;
     @FXML TableColumn<Employee, String> email;
     @FXML TableColumn<Employee, String> phnumber;
+    @FXML TableColumn<Employee, String> addres;
     @FXML TableColumn<Employee, Double> mony;
     @FXML TableColumn<Employee, Integer> id;
 
@@ -54,6 +55,7 @@ public class EmployeestableControler implements Initializable {
         username.setCellValueFactory(new PropertyValueFactory<>("username"));
         email.setCellValueFactory(new PropertyValueFactory<>("email"));
         phnumber.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
+        addres.setCellValueFactory(new PropertyValueFactory<>("adress"));
         try {
             table.setItems(DataBase.getemployees());
         } catch (SQLException e) {
@@ -75,6 +77,7 @@ public class EmployeestableControler implements Initializable {
                 scene.setFill(Color.TRANSPARENT);
                 registerstage.setScene(scene);
                 registerstage.initStyle(StageStyle.TRANSPARENT);
+                editstage = registerstage;
                 registerstage.show();
             }
         });
@@ -138,6 +141,7 @@ public class EmployeestableControler implements Initializable {
                     scene.setFill(Color.TRANSPARENT);
                     editstage.setScene(scene);
                     editstage.initStyle(StageStyle.TRANSPARENT);
+                    registerstage = editstage;
                     editstage.show();
                 }
             }

@@ -31,5 +31,7 @@
         <Label layoutX="446.0" layoutY="199.0" text="Money :" textFill="#46fb62" />
         <Label layoutX="257.0" layoutY="199.0" text="E-mail :" textFill="#46fb62" />
       <Button fx:id="username" layoutX="165.0" layoutY="9.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="74.0" styleClass="emprtg" text="username" />
+      <TextArea fx:id="addresfirld" layoutX="391.0" layoutY="247.0" prefHeight="53.0" prefWidth="194.0" promptText="Addres" styleClass="emptxtarea" />
+      <Label layoutX="391.0" layoutY="230.0" text="Addres" textFill="#46fb62" />
     </children>
 </AnchorPane>

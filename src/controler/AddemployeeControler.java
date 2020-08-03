@@ -42,6 +42,7 @@ public class AddemployeeControler implements Initializable {
         makeDraggable();
         cancelbtn.setOnAction( e -> {
             EmployeestableControler.registerstage = null;
+            EmployeestableControler.editstage = null;
             ((Stage)cancelbtn.getScene().getWindow()).close();
         });
 
@@ -59,6 +60,7 @@ public class AddemployeeControler implements Initializable {
                             addresfield.getText(),phnumberfield.getText(),Double.parseDouble(salaryfield.getText()));
                     user.setId(DataBase.createmployee(user));
                     EmployeestableControler.registerstage = null;
+                    EmployeestableControler.editstage = null;
                     if (table !=null){
                         table.getItems().add(user);
                     }

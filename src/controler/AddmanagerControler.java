@@ -1,14 +1,17 @@
 package controler;
+
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import model.Passenger;
+import model.Employee;
+import model.Manager;
 
 import java.awt.*;
 import java.net.URL;
@@ -16,53 +19,51 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 import java.util.regex.Pattern;
 
-public class PassengerRegisterControler implements Initializable {
-    @FXML Button cancelbtn;
+public class AddmanagerControler implements Initializable {
     @FXML Button savebtn;
-    @FXML TextField namefeild;
-    @FXML TextField lastnamefeild;
-    @FXML TextField usernamefeild;
-    @FXML TextField emailfeild;
-    @FXML TextField phonefeild;
-    @FXML TextField monyfeild;
-    @FXML PasswordField passwordfeild;
+    @FXML Button cancelbtn;
+    @FXML TextField namefield;
+    @FXML TextField lastnamefield;
+    @FXML TextField usernamefield;
+    @FXML TextField passwordfield;
+    @FXML TextField salaryfield;
+    @FXML TextField phnumberfield;
+    @FXML TextField emailfield;
+    @FXML TextArea addresfield;
+    @FXML AnchorPane root;
     @FXML Label erorlbl;
-    @FXML BorderPane root;
 
     private double x = 0, y = 0;
     private TableView table;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
         makeDraggable();
-
         cancelbtn.setOnAction( e -> {
-            LoginpageControler.registerstage = null;
-            PassebgertableControler.registerstage = null;
-            PassebgertableControler.editstage = null;
+            ManagerstableControler.registerstage = null;
+            ManagerstableControler.editstage = null;
             ((Stage)cancelbtn.getScene().getWindow()).close();
         });
 
         savebtn.setOnAction( e -> {
-            if (namefeild.getText().isEmpty() || lastnamefeild.getText().isEmpty() || usernamefeild.getText().isEmpty()
-                    || passwordfeild.getText().isEmpty() || emailfeild.getText().isEmpty() ||
-                    phonefeild.getText().isEmpty() || monyfeild.getText().isEmpty()){
+            if (namefield.getText().isEmpty() || lastnamefield.getText().isEmpty() || usernamefield.getText().isEmpty()
+                    || passwordfield.getText().isEmpty() || emailfield.getText().isEmpty() ||
+                    phnumberfield.getText().isEmpty() || salaryfield.getText().isEmpty() || addresfield.getText().isEmpty()){
                 erorlbl.setText("fill all parameters");
                 Toolkit.getDefaultToolkit().beep();
-            } else if (isValid(emailfeild.getText())) {
+            } else if (isValid(emailfield.getText())) {
                 try {
-                    if (DataBase.checkregisrerOfpassenger(usernamefeild.getText())){
-                        Passenger passenger = new Passenger(namefeild.getText(),lastnamefeild.getText(),
-                                usernamefeild.getText(),passwordfeild.getText(),emailfeild.getText(),
-                                phonefeild.getText(),Double.parseDouble(monyfeild.getText()));
-                        int id = DataBase.creatpassenger(passenger);
-                        passenger.setId(id);
-                        LoginpageControler.registerstage = null;
-                        PassebgertableControler.registerstage = null;
-                        PassebgertableControler.editstage = null;
-                            if (table !=null){
-                                table.getItems().add(passenger);
-                            }
+                    if (DataBase.checkregisrerOfmanager(usernamefield.getText())){
+                        Manager user = new Manager(namefield.getText(),lastnamefield.getText(),
+                                usernamefield.getText(),passwordfield.getText(),emailfield.getText(),
+                                addresfield.getText(),phnumberfield.getText(),Double.parseDouble(salaryfield.getText()));
+                        user.setId(DataBase.creatmanager(user));
+                        ManagerstableControler.registerstage = null;
+                        ManagerstableControler.editstage = null;
+                        if (table !=null){
+                            table.getItems().add(user);
+                        }
                         ((Stage)savebtn.getScene().getWindow()).close();
                     }else {
                         erorlbl.setText("chose another username");
@@ -75,10 +76,11 @@ public class PassengerRegisterControler implements Initializable {
                     Toolkit.getDefaultToolkit().beep();
                 }
             }else{
-                    erorlbl.setText("The email is invalid");
+                erorlbl.setText("The email is invalid");
                 Toolkit.getDefaultToolkit().beep();
             }
         });
+
     }
     public void settable(TableView table){ this.table = table; }
 
@@ -89,7 +91,6 @@ public class PassengerRegisterControler implements Initializable {
             return false;
         return pat.matcher(email).matches();
     }
-
     private void makeDraggable(){
         root.setOnMousePressed( ( (event) -> {
             x = event.getSceneX();

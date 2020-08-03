@@ -54,7 +54,14 @@ public class SuperadminDashbordControler implements Initializable {
             borderpane.setCenter(passtbl);
         });
         managersstack.setOnMousePressed( e -> {
+            BorderPane passtbl = null;
+            try {
+                passtbl = FXMLLoader.load(getClass().getResource("../view/Managerstable.fxml"));
 
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+            borderpane.setCenter(passtbl);
         });
 
         employeesstack.setOnMousePressed( e -> {

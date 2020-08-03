@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane fx:id="root" prefHeight="388.0" prefWidth="653.0" style="-fx-background-color: #1f222b; -fx-background-radius: 30;" stylesheets="@profiles.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controler.AddmanagerControler">
+    <children>
+        <Pane layoutX="462.0" layoutY="-51.0" prefHeight="10.0" prefWidth="228.0" rotate="45.0" style="-fx-background-color: #4cf39f; -fx-background-radius: 100;" />
+        <Pane layoutX="455.0" layoutY="-28.0" prefHeight="10.0" prefWidth="228.0" rotate="45.0" style="-fx-background-color: #4cf29f; -fx-background-radius: 100;" />
+        <Pane layoutX="455.0" layoutY="9.0" prefHeight="10.0" prefWidth="228.0" rotate="45.0" style="-fx-background-color: #4cf29f; -fx-background-radius: 100;" />
+        <Pane layoutX="455.0" layoutY="45.0" prefHeight="10.0" prefWidth="228.0" rotate="45.0" style="-fx-background-color: #4cf29f; -fx-background-radius: 100;" />
+        <Pane layoutX="-58.0" layoutY="347.0" prefHeight="12.0" prefWidth="328.0" rotate="45.0" style="-fx-background-color: #4cf29f; -fx-background-radius: 100;" />
+        <Pane layoutX="-68.0" layoutY="376.0" prefHeight="12.0" prefWidth="316.0" rotate="45.0" style="-fx-background-color: #4cf29f; -fx-background-radius: 100;" />
+        <Pane layoutX="-51.0" layoutY="308.0" prefHeight="12.0" prefWidth="328.0" rotate="45.0" style="-fx-background-color: #4cf29f; -fx-background-radius: 100;" />
+        <Circle fill="DODGERBLUE" layoutX="319.0" layoutY="61.0" radius="28.0" stroke="#4cf29f" strokeWidth="3.0" />
+        <TextField fx:id="namefield" layoutX="62.0" layoutY="109.0" promptText="Name" styleClass="emptxtfields" />
+        <TextField fx:id="lastnamefield" layoutX="285.0" layoutY="109.0" promptText="Lastname" styleClass="emptxtfields" />
+        <TextField fx:id="passwordfield" layoutX="62.0" layoutY="174.0" promptText="Password" styleClass="emptxtfields" />
+        <TextField fx:id="usernamefield" layoutX="502.0" layoutY="109.0" promptText="Username" styleClass="emptxtfields" />
+        <TextField fx:id="emailfield" layoutX="285.0" layoutY="174.0" promptText="E-maile" styleClass="emptxtfields" />
+        <TextField fx:id="salaryfield" layoutX="502.0" layoutY="174.0" promptText="Salary" styleClass="emptxtfields" />
+        <TextField fx:id="phnumberfield" layoutX="152.0" layoutY="239.0" promptText="Phonenumber" styleClass="emptxtfields" />
+        <Label layoutX="21.0" layoutY="113.0" text="Name :" textFill="#ec407a">
+            <font>
+                <Font size="13.0" />
+            </font></Label>
+        <Label layoutX="226.0" layoutY="113.0" text="Lastname :" textFill="#ec407a">
+            <font>
+                <Font size="13.0" />
+            </font>
+        </Label>
+        <Label layoutX="437.0" layoutY="113.0" text="Username :" textFill="#ec407a">
+            <font>
+                <Font size="13.0" />
+            </font>
+        </Label>
+        <Label layoutY="178.0" text="Password :" textFill="#ec407a">
+            <font>
+                <Font size="13.0" />
+            </font>
+        </Label>
+        <Label layoutX="245.0" layoutY="178.0" text="E-mail :" textFill="#ec407a">
+            <font>
+                <Font size="13.0" />
+            </font>
+        </Label>
+        <Label layoutX="69.0" layoutY="243.0" text="Phonenumber :" textFill="#ec407a">
+            <font>
+                <Font size="13.0" />
+            </font>
+        </Label>
+        <Label layoutX="461.0" layoutY="178.0" text="Salary :" textFill="#ec407a">
+            <font>
+                <Font size="13.0" />
+            </font>
+        </Label>
+        <TextArea fx:id="addresfield" layoutX="382.0" layoutY="237.0" prefHeight="50.0" prefWidth="278.0" promptText="Addres" styleClass="emptxtarea" />
+        <Label layoutX="382.0" layoutY="223.0" text="Addres" textFill="#ec407a">
+            <font>
+                <Font size="13.0" />
+            </font>
+        </Label>
+        <Button fx:id="savebtn" layoutX="275.0" layoutY="328.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="88.0" styleClass="empbtns" text="Save" />
+        <Button fx:id="cancelbtn" layoutX="390.0" layoutY="328.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="88.0" styleClass="empbtns" text="Cancel" />
+        <ImageView fitHeight="50.0" fitWidth="43.0" layoutX="298.0" layoutY="40.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@Picturs/manager_defult_pic.png" />
+            </image>
+        </ImageView>
+        <Label layoutX="55.0" layoutY="36.0" prefHeight="59.0" prefWidth="149.0" text="Add Manager" textFill="#ffe63a">
+            <font>
+                <Font size="23.0" />
+            </font>
+        </Label>
+        <Label fx:id="erorlbl" layoutX="157.0" layoutY="297.0" textFill="RED">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Label>
+    </children>
+</AnchorPane>

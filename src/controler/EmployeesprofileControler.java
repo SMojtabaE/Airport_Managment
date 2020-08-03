@@ -7,6 +7,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
@@ -33,6 +34,7 @@ public class EmployeesprofileControler implements Initializable {
     @FXML Button username;
     @FXML TextField passwordfeild;
     @FXML TextField emailfeild;
+    @FXML TextArea addresfirld;
 
     @FXML Button savebtn;
     @FXML Button cancelbtn;
@@ -66,13 +68,14 @@ public class EmployeesprofileControler implements Initializable {
             emailfeild.setText(user.getEmail());
             moneyfeild.setText(String.valueOf(user.getSalary()));
             phnumberfeild.setText(user.getPhoneNumber());
+            addresfirld.setText(user.getAdress());
             user.show();
         });
 
         savebtn.setOnAction( e -> {
             if (namefeild.getText().isEmpty() || lastnamefeild.getText().isEmpty() || username.getText().isEmpty()
                     || passwordfeild.getText().isEmpty() || emailfeild.getText().isEmpty() ||
-                    phnumberfeild.getText().isEmpty() || moneyfeild.getText().isEmpty()){
+                    phnumberfeild.getText().isEmpty() || moneyfeild.getText().isEmpty() || addresfirld.getText().isEmpty()){
                 erorlbl.setText("fill all parameters");
                 Toolkit.getDefaultToolkit().beep();
             } else if (isValid(emailfeild.getText())) {
@@ -85,7 +88,10 @@ public class EmployeesprofileControler implements Initializable {
                     user.setPhoneNumber(phnumberfeild.getText());
                     DataBase.updatemployee(user);
                     EmployeestableControler.editstage = null;
-                    table.setItems(DataBase.getemployees());
+                    EmployeestableControler.registerstage = null;
+                    if (table != null) {
+                        table.setItems(DataBase.getemployees());
+                    }
                     ((Stage) savebtn.getScene().getWindow()).close();
 
                 } catch (SQLException ex){
@@ -102,6 +108,7 @@ public class EmployeesprofileControler implements Initializable {
 
         cancelbtn.setOnAction( e -> {
             EmployeestableControler.editstage = null;
+            EmployeestableControler.registerstage = null;
             ((Stage) savebtn.getScene().getWindow()).close();
         });
 
