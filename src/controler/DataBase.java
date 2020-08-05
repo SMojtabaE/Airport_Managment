@@ -1,13 +1,14 @@
 package controler;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import model.Employee;
-import model.Manager;
-import model.Passenger;
+import model.*;
+
 import java.sql.*;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 
 public class DataBase {
@@ -376,16 +377,233 @@ public class DataBase {
     }
     public static Passenger searchFrompassenger(int id) throws SQLException {
         makeconnection();
-        ResultSet re = statement.executeQuery(String.format("select * from passengers where id like %d",id));
+        ResultSet re = statement.executeQuery(String.format("select * from passengers where id like %d", id));
         Passenger passenger = null;
-        if(re.next()){
+        if (re.next()) {
             passenger = new Passenger(re.getInt(1), re.getString(2), re.getString(3),
                     re.getString(4), re.getString(5), re.getString(6),
-                    re.getString(7), re.getDouble(8),re.getString(9));
+                    re.getString(7), re.getDouble(8), re.getString(9));
             closeconection();
             return passenger;
         }
         closeconection();
         return passenger;
     }
+    ///////////////////////////////////////////////////////////// ticket database
+
+    public static int createticket(Ticket ticket) throws SQLException {
+        makeconnection();  // making connection to database
+        statement.execute(String.format("insert into ticket (price,loss,flight_id,passengers_id) values ( '%f', '%f'," +
+                        " '%d', '%d')",ticket.getPrice(),ticket.getLoss(),ticket.getFlight_id(),ticket.getPassengers_id())
+                ,Statement.RETURN_GENERATED_KEYS); //writing into database
+        ResultSet rs = statement.getGeneratedKeys(); // returning the id of user
+        rs.next();
+        ticket.setId(rs.getInt(1));
+        report("ticket " + ticket.getId() + " created.");
+        closeconection(); // closing the connection
+        return ticket.getId();
+    }
+
+    public static void updatticket(Ticket ticket) throws SQLException {
+        makeconnection();
+        statement.execute(String.format("update ticket set price = %f, loss = %f, flight_id = %d," +
+                        " passengers_id = %d where id = %d",ticket.getPrice(),ticket.getLoss(),ticket.getFlight_id(),ticket.getPassengers_id(),ticket.getId()));
+        report( "ticket " + ticket.getId() + " updated.");
+
+        closeconection();
+    }
+
+    public static void deletticket(Ticket ticket) throws SQLException {
+        makeconnection();
+        statement.execute(String.format("delete from ticket where id = %d",ticket.getId()));
+        report( "ticket " + ticket.getId() + " deleted.");
+        closeconection();
+    }
+
+    public static ObservableList<Ticket> gettickets() throws SQLException {
+        makeconnection();
+        ResultSet re = statement.executeQuery("select * from ticket");
+
+        ObservableList<Ticket> tickets = FXCollections.observableArrayList();
+        while (re.next()){
+            tickets.add(new Ticket(re.getInt(1), re.getDouble(2), re.getDouble(3),
+                    re.getInt(4), re.getInt(5)));
+        }
+        closeconection();
+        return tickets;
+    }
+
+    public static ObservableList<Ticket> searchflight_idIntickets(int flight_id) throws SQLException {
+        makeconnection();
+        ResultSet re = statement.executeQuery(String.format("select * from ticket where flight_id like %d", flight_id));
+        ObservableList<Ticket> tickets = FXCollections.observableArrayList();
+        if (re.next()) {
+              tickets.add(new Ticket(re.getInt(1), re.getDouble(2), re.getDouble(3),
+                    re.getInt(4), re.getInt(5)));
+            closeconection();
+            return tickets;
+        }
+        closeconection();
+        return tickets;
+    }
+    public static ObservableList<Ticket> searchpassenger_idIntickets(int passenger_id) throws SQLException {
+        makeconnection();
+        ResultSet re = statement.executeQuery(String.format("select * from ticket where passengers_id like %d", passenger_id));
+        ObservableList<Ticket> tickets = FXCollections.observableArrayList();
+        if (re.next()) {
+            tickets.add(new Ticket(re.getInt(1), re.getDouble(2), re.getDouble(3),
+                    re.getInt(4), re.getInt(5)));
+            closeconection();
+            return tickets;
+        }
+        closeconection();
+        return tickets;
+    }
+//////////////////////////////////////////////////////////////////////////////// Airplains database
+
+    public static int createAirplane(Airplane airplane) throws SQLException {
+        makeconnection();  // making connection to database
+        statement.execute(String.format("insert into airplane (seats) values (%d)",airplane.getSeats())
+                ,Statement.RETURN_GENERATED_KEYS); //writing into database
+        //ResultSet rs = statement.getGeneratedKeys(); // returning the id of user
+        //rs.next();
+       // airplane.setId(rs.getInt(1));
+        ResultSet re = statement.getGeneratedKeys();
+        re.next();
+        airplane.setId(re.getInt(1));
+        report("Airplane " + airplane.getId() + " created.");
+        closeconection(); // closing the connection
+        return airplane.getId();
+    }
+
+    public static void updateairplane(Airplane airplane) throws SQLException {
+        makeconnection();
+        statement.execute(String.format("update airplane set seats = %d where id = %d",airplane.getSeats(),
+                airplane.getId()));
+        report( "Airplane " + airplane.getId() + " updated.");
+
+        closeconection();
+    }
+
+    public static void deletairplane(Airplane airplane) throws SQLException {
+        makeconnection();
+        statement.execute(String.format("delete from airplane where id = %d",airplane.getId()));
+        report( "Airplane " + airplane.getId() + " deleted.");
+        closeconection();
+    }
+
+    public static ObservableList<Airplane> getAirplanes() throws SQLException {
+        makeconnection();
+        ResultSet re = statement.executeQuery("select * from airplane");
+
+        ObservableList<Airplane> airplanes = FXCollections.observableArrayList();
+        while (re.next()){
+            airplanes.add(new Airplane(re.getInt(1), re.getInt(2)));
+        }
+        closeconection();
+        return airplanes;
+    }
+
+///////////////////////////////////////////////////////////////flight daatabase
+
+    public static int createflight(Flight flight) throws SQLException {
+        makeconnection();  // making connection to database
+        statement.execute(String.format("insert into flight (airplane_id,origin,destination,date,time,sold_ticket,longs" +
+                        ",status) values ( '%d', '%s', '%s', '%tF','%tT','%d','%s','%s')",flight.getAirplaine_id(),
+                flight.getOrigin(),flight.getDestination(),flight.getDate(),flight.getTime(),flight.getSold_tickets(),
+                flight.getLongs(),flight.getStatus()),Statement.RETURN_GENERATED_KEYS); //writing into database
+        ResultSet rs = statement.getGeneratedKeys(); // returning the id of user
+        rs.next();
+        flight.setId(rs.getInt(1));
+        report("flight " + flight.getId() + " created.");
+        closeconection(); // closing the connection
+        return flight.getId();
+    }
+
+    public static void updateflight(Flight flight) throws SQLException {
+        makeconnection();
+      //LocalDate ld = LocalDate.parse(new SimpleDateFormat("yyyy-mm-dd").format(flight.getDate()));
+      Date ld = Date.valueOf(flight.getDate());
+        statement.execute(String.format("update flight set airplane_id = %d, origin = '%s', destination = '%s'," +
+                        " date = '%tF', time = '%tT', sold_ticket = %d, longs = '%s', status = '%s' where id = %d"
+                ,flight.getAirplaine_id(),flight.getOrigin(),flight.getDestination()
+                ,ld,flight.getTime(),flight.getSold_tickets(),flight.getLongs(),flight.getStatus(),flight.getId()));
+        report( "flight " + flight.getId() + " updated.");
+        closeconection();
+    }
+
+    public static void deleteflight(Flight fligjt) throws SQLException {
+        makeconnection();
+        statement.execute(String.format("delete from flight where id = %d",fligjt.getId()));
+        report( "Flight " + fligjt.getId() + " deleted.");
+        closeconection();
+    }
+
+    public static ObservableList<Flight> getflights() throws SQLException {
+        makeconnection();
+        ResultSet re = statement.executeQuery("select * from flight");
+
+        ObservableList<Flight> flights = FXCollections.observableArrayList();
+        while (re.next()){
+            String date = String.valueOf(re.getDate(5));
+            String[] dt = date.split("-");
+            int[] dtn = new int[3];
+            for (int i = 0 ; i < dtn.length ; i++){
+                dtn[i] = Integer.parseInt(dt[i]);
+            }
+            LocalDate ldate = LocalDate.of(dtn[0],dtn[1],dtn[2]);
+            String time = String.valueOf(re.getTime(6));
+            flights.add(new Flight(re.getInt(1), re.getInt(2), re.getString(3),
+                    re.getString(4), ldate, time, re.getInt(7), re.getString(8),
+                    Status.valueOf(re.getString(9))));
+        }
+        closeconection();
+        return flights;
+    }
+
+    public static ObservableList<Flight> searchidInflights(int flight_id) throws SQLException {
+        makeconnection();
+        ResultSet re = statement.executeQuery(String.format("select * from flight where id like %d", flight_id));
+        ObservableList<Flight> flights = FXCollections.observableArrayList();
+        if (re.next()) {
+            String date = String.valueOf(re.getDate(5));
+            String[] dt = date.split("-");
+            int[] dtn = new int[3];
+            for (int i = 0 ; i < dtn.length ; i++){
+                dtn[i] = Integer.parseInt(dt[i]);
+            }
+            LocalDate ldate = LocalDate.of(dtn[0],dtn[1],dtn[2]);
+            String time = String.valueOf(re.getTime(6));
+            flights.add(new Flight(re.getInt(1), re.getInt(2), re.getString(3),
+                    re.getString(4), ldate, time, re.getInt(7), re.getString(8),
+                    Status.valueOf(re.getString(9))));
+            closeconection();
+            return flights;
+        }
+        closeconection();
+        return flights;
+    }
+    public static ObservableList<Flight> searchairplane_idIntickets(int airplaine_id) throws SQLException {
+        makeconnection();
+        ResultSet re = statement.executeQuery(String.format("select * from flight where airplane_id like %d", airplaine_id));
+        ObservableList<Flight> flights = FXCollections.observableArrayList();
+        if (re.next()) {
+            String date = String.valueOf(re.getDate(5));
+            String[] dt = date.split("-");
+            int[] dtn = new int[3];
+            for (int i = 0 ; i < dtn.length ; i++){
+                dtn[i] = Integer.parseInt(dt[i]);
+            }
+            LocalDate ldate = LocalDate.of(dtn[0],dtn[1],dtn[2]);
+            String time = String.valueOf(re.getTime(6));
+            flights.add(new Flight(re.getInt(1), re.getInt(2), re.getString(3),
+                    re.getString(4), ldate, time, re.getInt(7), re.getString(8),
+                    Status.valueOf(re.getString(9))));
+            closeconection();
+            return flights;
+        }
+        closeconection();
+        return flights;
+    }
+
 }
