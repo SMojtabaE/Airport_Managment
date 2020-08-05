@@ -25,6 +25,7 @@ public class SuperadminDashbordControler implements Initializable {
     @FXML StackPane passengersstack;
     @FXML StackPane employeesstack;
     @FXML StackPane managersstack;
+    @FXML StackPane airplanestack;
     @FXML Button username;
 
     private Manager superadmin;
@@ -42,6 +43,17 @@ public class SuperadminDashbordControler implements Initializable {
                 }
                 profilepic.setFill(new ImagePattern(image));
             }
+        });
+
+        airplanestack.setOnMousePressed( e -> {
+            BorderPane passtbl = null;
+            try {
+                passtbl = FXMLLoader.load(getClass().getResource("../view/AirplanesTable.fxml"));
+
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+            borderpane.setCenter(passtbl);
         });
         passengersstack.setOnMousePressed( e -> {
             BorderPane passtbl = null;

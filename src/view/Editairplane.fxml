@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane fx:id="root" prefHeight="193.0" prefWidth="375.0" style="-fx-background-color: #1f222b; -fx-background-radius: 40;" stylesheets="@profiles.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controler.EditairplaneControler">
+    <children>
+        <Pane layoutX="112.0" layoutY="-99.0" prefHeight="136.0" prefWidth="247.0" rotate="-141.8" style="-fx-background-color: #f4d52b; -fx-background-radius: 70;" />
+      <Group layoutX="43.0" layoutY="72.0">
+         <children>
+              <TextField fx:id="txtfield" layoutX="46.0" promptText="Seats" styleClass="txt" />
+              <Label layoutY="4.0" text="Seats :" textFill="#89b7b7" />
+         </children>
+      </Group>
+        <Button fx:id="savebtn" layoutX="84.0" layoutY="139.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="113.0" styleClass="addairplanebtns" text="Save" />
+        <Button fx:id="cancelbtn" layoutX="207.0" layoutY="139.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="113.0" styleClass="addairplanebtns" text="Cancel" />
+        <Label fx:id="erorlbl" layoutX="26.0" layoutY="99.0" textFill="RED">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Label>
+    </children>
+</AnchorPane>

@@ -31,18 +31,6 @@ public class Main extends Application{
     }
 
     public static void main(String[] args) { launch(args);
-
-
-//        Manager mg = new Manager("moji","ahmadi","mo93","123",
-//                "mo93esdm@gmail.com","khoddrmoj","09174601584",57.50,1);
-//        try {
-//            mg.setId(DataBase.creatmanager(mg));
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//        System.out.println(mg.getId() + "  " + mg.getName());
-//        mg.show();
-
 //        Flight fl = new Flight(1,1,"khurmoj","Ahvaz", LocalDate.now(),
 //                LocalTime.now().format(DateTimeFormatter.ofPattern("hh:mm:ss")),44,"5H", Status.open);
 //        System.out.println(fl.getAirplaine_id());

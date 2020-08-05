@@ -44,6 +44,16 @@
                         </ImageView>
                      </children>
                   </StackPane>
+                  <StackPane fx:id="airplanestack" layoutX="143.0" layoutY="354.0" styleClass="hand">
+                     <children>
+                        <Circle fx:id="passengerscrl2" fill="#4ca6a6" radius="32.0" stroke="WHITE" strokeType="OUTSIDE" strokeWidth="4.0" styleClass="hand" />
+                        <ImageView fitHeight="37.0" fitWidth="79.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@Picturs/Boeing-PNG-Photo.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </StackPane>
                </children>
                <VBox.margin>
                   <Insets />

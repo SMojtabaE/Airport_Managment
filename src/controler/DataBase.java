@@ -504,6 +504,19 @@ public class DataBase {
         return airplanes;
     }
 
+    public static Airplane searchForairplane(int id) throws SQLException {
+        makeconnection();
+        ResultSet re = statement.executeQuery(String.format("select * from airplane where id like %d", id));
+        Airplane airplane = null;
+        if (re.next()) {
+            airplane = new Airplane(re.getInt(1), re.getInt(2));
+            closeconection();
+            return airplane;
+        }
+        closeconection();
+        return airplane;
+    }
+
 ///////////////////////////////////////////////////////////////flight daatabase
 
     public static int createflight(Flight flight) throws SQLException {
