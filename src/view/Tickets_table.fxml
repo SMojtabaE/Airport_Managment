@@ -31,6 +31,7 @@
                     <children>
                         <Button fx:id="addbtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="130.0" styleClass="hand" text="Add" />
                         <Button fx:id="removebtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="130.0" styleClass="hand" text="Remove" />
+                  <Button fx:id="buy" layoutX="307.0" layoutY="10.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="130.0" styleClass="hand" text="Buy for Passenger" />
                     </children>
                     <effect>
                         <DropShadow />

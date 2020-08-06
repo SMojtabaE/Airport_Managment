@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane fx:id="root" prefHeight="220.0" prefWidth="524.0" style="-fx-background-color: #1f222b; -fx-background-radius: 35;" stylesheets="@profiles.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controler.Add_ticketControler">
+   <children>
+      <Button fx:id="savebtn" layoutX="254.0" layoutY="170.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="93.0" styleClass="ticketbtns" text="Save" />
+      <Button fx:id="cancelbtn" layoutX="364.0" layoutY="170.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="93.0" styleClass="ticketbtns" text="Cancel" />
+      <Label layoutX="78.0" layoutY="39.0" text="Price :" textFill="#4aff00">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <TextField fx:id="price" layoutX="113.0" layoutY="35.0" styleClass="tickettxt" />
+      <Label layoutX="58.0" layoutY="101.0" text="Flight ID :" textFill="#4aff00">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <TextField fx:id="flightid" layoutX="113.0" layoutY="97.0" styleClass="tickettxt" />
+      <Label layoutX="304.0" layoutY="39.0" text="Loss :" textFill="#4aff00">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <TextField fx:id="loss" layoutX="336.0" layoutY="35.0" styleClass="tickettxt" />
+      <Label fx:id="erorlbl" layoutX="287.0" layoutY="111.0" textFill="RED">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

@@ -682,4 +682,24 @@ public class DataBase {
         closeconection();
         return flight;
     }
+    public static boolean isvalidflightid(int flightid) throws SQLException {
+        makeconnection();
+        ResultSet re = statement.executeQuery(String.format("select * from flight where id like %d", flightid));
+        if (re.next()) {
+            closeconection();
+            return true;
+        }
+        closeconection();
+        return false;
+    }
+
+/////////////////////////////////////////////////////////  Passengers_ticket database
+
+    public static void createpassengers_ticket(int ticket_id,int passenger_id) throws SQLException {
+        makeconnection();  // making connection to database
+        statement.execute(String.format("insert into passengers_ticket (ticket_id,passenger_id) values (%d,%d)",
+                ticket_id,passenger_id),Statement.RETURN_GENERATED_KEYS); //writing into database
+        report("passengers_ticket " + ticket_id + " and "+ passenger_id + " created.");
+        closeconection(); // closing the connection
+    }
 }

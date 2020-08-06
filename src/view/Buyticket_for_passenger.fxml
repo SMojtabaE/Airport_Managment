@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="root" prefHeight="147.0" prefWidth="340.0" style="-fx-background-color: #1f222b; -fx-background-radius: 35;" stylesheets="@profiles.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controler.Buyticket_for_passengerControler">
+   <children>
+      <Button fx:id="savebtn" layoutX="62.0" layoutY="104.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="89.0" styleClass="addairplanebtns" text="Save" />
+      <Button fx:id="cancelbtn" layoutX="166.0" layoutY="104.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="89.0" styleClass="addairplanebtns" text="Cancel" />
+      <Label layoutX="28.0" layoutY="27.0" text="Passengers ID :" textFill="#36f705" />
+      <TextField fx:id="passengerid" layoutX="108.0" layoutY="22.0" promptText="Passengers ID" styleClass="txt" />
+      <Label fx:id="erorlbl" layoutX="22.0" layoutY="65.0" textFill="#f50707" />
+   </children>
+</AnchorPane>

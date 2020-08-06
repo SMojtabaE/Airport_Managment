@@ -3,17 +3,22 @@ package controler;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import model.Ticket;
 
 import java.awt.*;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
@@ -27,6 +32,7 @@ public class Ticket_tableControler implements Initializable {
     @FXML TableColumn<Ticket, Double> loss;
 
     @FXML Button addbtn;
+    @FXML Button buy;
     @FXML Button removebtn;
     @FXML ImageView searchimg;
     @FXML ImageView louddataimg;
@@ -100,7 +106,47 @@ public class Ticket_tableControler implements Initializable {
             } catch (SQLException ex) {
                 ex.printStackTrace();
             }
+        });
 
+        addbtn.setOnAction( e -> {
+            if (registerstage==null){
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/Add_ticket.fxml"));
+                try {
+                    loader.load();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+                Add_ticketControler controler = loader.getController();
+                controler.settable(table);
+                registerstage = new Stage();
+                registerstage.initStyle(StageStyle.UNDECORATED);
+                Scene scene = new Scene(loader.getRoot());
+                scene.setFill(Color.TRANSPARENT);
+                registerstage.setScene(scene);
+                registerstage.initStyle(StageStyle.TRANSPARENT);
+                registerstage.show();
+            }
+        });
+
+        buy.setOnAction( e -> {
+            if (registerstage==null){
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/Buyticket_for_passenger.fxml"));
+                try {
+                    loader.load();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+                Buyticket_for_passengerControler controler = loader.getController();
+                Ticket ticket= table.getSelectionModel().getSelectedItem();
+                controler.settable(ticket);
+                registerstage = new Stage();
+                registerstage.initStyle(StageStyle.UNDECORATED);
+                Scene scene = new Scene(loader.getRoot());
+                scene.setFill(Color.TRANSPARENT);
+                registerstage.setScene(scene);
+                registerstage.initStyle(StageStyle.TRANSPARENT);
+                registerstage.show();
+            }
         });
 
     }
