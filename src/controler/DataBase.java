@@ -395,9 +395,8 @@ public class DataBase {
 
     public static int createticket(Ticket ticket) throws SQLException {
         makeconnection();  // making connection to database
-        statement.execute(String.format("insert into ticket (price,loss,flight_id,passengers_id) values ( '%f', '%f'," +
-                        " '%d', '%d')",ticket.getPrice(),ticket.getLoss(),ticket.getFlight_id(),ticket.getPassengers_id())
-                ,Statement.RETURN_GENERATED_KEYS); //writing into database
+        statement.execute(String.format("insert into ticket (price,loss,flight_id) values ( '%f', '%f','%d')",
+                ticket.getPrice(),ticket.getLoss(),ticket.getFlight_id()),Statement.RETURN_GENERATED_KEYS);              //writing into database
         ResultSet rs = statement.getGeneratedKeys(); // returning the id of user
         rs.next();
         ticket.setId(rs.getInt(1));
@@ -408,8 +407,8 @@ public class DataBase {
 
     public static void updatticket(Ticket ticket) throws SQLException {
         makeconnection();
-        statement.execute(String.format("update ticket set price = %f, loss = %f, flight_id = %d," +
-                        " passengers_id = %d where id = %d",ticket.getPrice(),ticket.getLoss(),ticket.getFlight_id(),ticket.getPassengers_id(),ticket.getId()));
+        statement.execute(String.format("update ticket set price = %f, loss = %f, flight_id = %d, where id = %d",
+                ticket.getPrice(),ticket.getLoss(),ticket.getFlight_id(),ticket.getId()));
         report( "ticket " + ticket.getId() + " updated.");
 
         closeconection();
@@ -429,7 +428,7 @@ public class DataBase {
         ObservableList<Ticket> tickets = FXCollections.observableArrayList();
         while (re.next()){
             tickets.add(new Ticket(re.getInt(1), re.getDouble(2), re.getDouble(3),
-                    re.getInt(4), re.getInt(5)));
+                    re.getInt(4)));
         }
         closeconection();
         return tickets;
@@ -441,25 +440,25 @@ public class DataBase {
         ObservableList<Ticket> tickets = FXCollections.observableArrayList();
         if (re.next()) {
               tickets.add(new Ticket(re.getInt(1), re.getDouble(2), re.getDouble(3),
-                    re.getInt(4), re.getInt(5)));
+                    re.getInt(4)));
             closeconection();
             return tickets;
         }
         closeconection();
         return tickets;
     }
-    public static ObservableList<Ticket> searchpassenger_idIntickets(int passenger_id) throws SQLException {
+    public static Ticket searchInticketsid(int id) throws SQLException {
         makeconnection();
-        ResultSet re = statement.executeQuery(String.format("select * from ticket where passengers_id like %d", passenger_id));
-        ObservableList<Ticket> tickets = FXCollections.observableArrayList();
+        ResultSet re = statement.executeQuery(String.format("select * from ticket where id like %d", id));
+        Ticket ticket =null;
         if (re.next()) {
-            tickets.add(new Ticket(re.getInt(1), re.getDouble(2), re.getDouble(3),
-                    re.getInt(4), re.getInt(5)));
+            ticket = new Ticket(re.getInt(1), re.getDouble(2), re.getDouble(3),
+                    re.getInt(4));
             closeconection();
-            return tickets;
+            return ticket;
         }
         closeconection();
-        return tickets;
+        return ticket;
     }
 //////////////////////////////////////////////////////////////////////////////// Airplains database
 

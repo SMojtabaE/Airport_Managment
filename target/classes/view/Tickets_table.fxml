@@ -6,21 +6,16 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="422.0" prefWidth="573.0" stylesheets="@passengerstable.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controler.Flights_tableControler">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="422.0" prefWidth="573.0" stylesheets="@passengerstable.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controler.Ticket_tableControler">
     <center>
         <VBox prefHeight="425.0" prefWidth="573.0" BorderPane.alignment="CENTER">
             <children>
                 <TableView fx:id="table" stylesheets="@passengerstable.css">
                     <columns>
                         <TableColumn fx:id="id" prefWidth="49.0" style="-fx-background-color: #575757; -fx-text-fill: #4ca6a6;" text="ID" />
-                        <TableColumn fx:id="origin" prefWidth="87.0" style="-fx-background-color: #575757; -fx-text-fill: #4ca6a6;" text="Origin" />
-                        <TableColumn fx:id="destination" prefWidth="75.0" style="-fx-background-color: #575757; -fx-text-fill: #4ca6a6;" text="Destination" />
-                        <TableColumn fx:id="date" prefWidth="75.0" style="-fx-background-color: #575757; -fx-text-fill: #4ca6a6;" text="Date" />
-                        <TableColumn fx:id="time" prefWidth="75.0" style="-fx-background-color: #575757; -fx-text-fill: #4ca6a6;" text="Time" />
-                        <TableColumn fx:id="soldticket" prefWidth="104.0" style="-fx-background-color: #575757; -fx-text-fill: #4ca6a6;" text="Solde_tickets" />
-                        <TableColumn fx:id="longs" prefWidth="72.0" style="-fx-background-color: #575757; -fx-text-fill: #4ca6a6;" text="long" />
-                        <TableColumn fx:id="status" minWidth="9.0" prefWidth="48.0" style="-fx-background-color: #575757; -fx-text-fill: #4ca6a6;" text="Status" />
-                  <TableColumn fx:id="airplaneid" prefWidth="70.0" style="-fx-background-color: #575757; -fx-text-fill: #4ca6a6;" text="Airplane_ID" />
+                        <TableColumn fx:id="price" prefWidth="87.0" style="-fx-background-color: #575757; -fx-text-fill: #4ca6a6;" text="Price" />
+                        <TableColumn fx:id="loss" prefWidth="75.0" style="-fx-background-color: #575757; -fx-text-fill: #4ca6a6;" text="Loss" />
+                        <TableColumn fx:id="flightid" prefWidth="75.0" style="-fx-background-color: #575757; -fx-text-fill: #4ca6a6;" text="Flight_ID" />
                     </columns>
                     <VBox.margin>
                         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
@@ -60,12 +55,12 @@
                     <image>
                         <Image url="@Picturs/delete.png" />
                     </image></ImageView>
-            <ImageView fx:id="airplanesearchimg" fitHeight="22.0" fitWidth="26.0" layoutX="187.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" styleClass="searchimg">
+            <ImageView fx:id="airplanesearchimg" fitHeight="22.0" fitWidth="26.0" layoutX="319.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" styleClass="searchimg">
                <image>
                   <Image url="@Picturs/find_and_replace_64px.png" />
                </image>
             </ImageView>
-            <TextField fx:id="airplanesearcgfeild" layoutX="219.0" layoutY="10.0" promptText="Search for Airplane_Id" styleClass="searchfeild" />
+            <TextField fx:id="airplaneidsearcgfeild" layoutX="351.0" layoutY="10.0" promptText="Search for Airplane_Id" styleClass="searchfeild" />
             </children>
             <BorderPane.margin>
                 <Insets />

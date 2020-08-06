@@ -26,6 +26,7 @@ public class SuperadminDashbordControler implements Initializable {
     @FXML StackPane employeesstack;
     @FXML StackPane managersstack;
     @FXML StackPane airplanestack;
+    @FXML StackPane ticketstack;
     @FXML StackPane flightstack;
     @FXML Button username;
 
@@ -55,6 +56,16 @@ public class SuperadminDashbordControler implements Initializable {
                 ex.printStackTrace();
             }
             borderpane.setCenter(passtbl);
+        });
+        ticketstack.setOnMousePressed( e -> {
+            BorderPane tickettbl = null;
+            try {
+                tickettbl = FXMLLoader.load(getClass().getResource("../view/Tickets_table.fxml"));
+
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+            borderpane.setCenter(tickettbl);
         });
         passengersstack.setOnMousePressed( e -> {
             BorderPane passtbl = null;
