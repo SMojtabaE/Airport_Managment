@@ -13,13 +13,14 @@
                 <TableView fx:id="table" stylesheets="@passengerstable.css">
                     <columns>
                         <TableColumn fx:id="id" prefWidth="49.0" style="-fx-background-color: #575757; -fx-text-fill: #4ca6a6;" text="ID" />
-                        <TableColumn fx:id="name" prefWidth="87.0" style="-fx-background-color: #575757; -fx-text-fill: #4ca6a6;" text="Name" />
-                        <TableColumn fx:id="lastname" prefWidth="75.0" style="-fx-background-color: #575757; -fx-text-fill: #4ca6a6;" text="Lastname" />
-                        <TableColumn fx:id="username" prefWidth="75.0" style="-fx-background-color: #575757; -fx-text-fill: #4ca6a6;" text="Username" />
-                        <TableColumn fx:id="email" prefWidth="75.0" style="-fx-background-color: #575757; -fx-text-fill: #4ca6a6;" text="E-mail" />
-                        <TableColumn fx:id="phnumber" prefWidth="104.0" style="-fx-background-color: #575757; -fx-text-fill: #4ca6a6;" text="Adress" />
-                        <TableColumn fx:id="mony" prefWidth="72.0" style="-fx-background-color: #575757; -fx-text-fill: #4ca6a6;" text="mony" />
-                        <TableColumn fx:id="adress" prefWidth="72.0" style="-fx-background-color: #575757; -fx-text-fill: #4ca6a6;" text="phoneNumber" />
+                        <TableColumn fx:id="origin" prefWidth="87.0" style="-fx-background-color: #575757; -fx-text-fill: #4ca6a6;" text="Origin" />
+                        <TableColumn fx:id="destination" prefWidth="75.0" style="-fx-background-color: #575757; -fx-text-fill: #4ca6a6;" text="Destination" />
+                        <TableColumn fx:id="date" prefWidth="75.0" style="-fx-background-color: #575757; -fx-text-fill: #4ca6a6;" text="Date" />
+                        <TableColumn fx:id="time" prefWidth="75.0" style="-fx-background-color: #575757; -fx-text-fill: #4ca6a6;" text="Time" />
+                        <TableColumn fx:id="soldticket" prefWidth="104.0" style="-fx-background-color: #575757; -fx-text-fill: #4ca6a6;" text="Solde_tickets" />
+                        <TableColumn fx:id="longs" prefWidth="72.0" style="-fx-background-color: #575757; -fx-text-fill: #4ca6a6;" text="long" />
+                        <TableColumn fx:id="status" prefWidth="72.0" style="-fx-background-color: #575757; -fx-text-fill: #4ca6a6;" text="Status" />
+                  <TableColumn fx:id="airplaneid" prefWidth="49.0" style="-fx-background-color: #575757; -fx-text-fill: #4ca6a6;" text="Airplane_ID" />
                     </columns>
                     <VBox.margin>
                         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
@@ -35,7 +36,6 @@
                     <children>
                         <Button fx:id="addbtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="130.0" styleClass="hand" text="Add" />
                         <Button fx:id="removebtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="130.0" styleClass="hand" text="Remove" />
-                        <Button fx:id="editbtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="130.0" styleClass="hand" text="Edit" />
                     </children>
                     <effect>
                         <DropShadow />
@@ -60,6 +60,12 @@
                     <image>
                         <Image url="@Picturs/delete.png" />
                     </image></ImageView>
+            <ImageView fx:id="airplanesearchimg" fitHeight="22.0" fitWidth="26.0" layoutX="187.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" styleClass="searchimg">
+               <image>
+                  <Image url="@Picturs/find_and_replace_64px.png" />
+               </image>
+            </ImageView>
+            <TextField fx:id="airplanesearcgfeild" layoutX="219.0" layoutY="10.0" promptText="Search for Airplane_Id" styleClass="searchfeild" />
             </children>
             <BorderPane.margin>
                 <Insets />

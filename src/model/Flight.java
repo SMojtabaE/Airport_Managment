@@ -1,7 +1,5 @@
 package model;
 
-import java.sql.Date;
-import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -16,7 +14,7 @@ public class Flight implements Showable {
     private String longs;
     private Status status;
 
-    public Flight(int airplaine_id,String origin,String destination,LocalDate date,String time,int sold_tickets,String longs){
+    public Flight(int airplaine_id,String origin,String destination,LocalDate date,String time,String longs){
         this.setAirplaine_id(airplaine_id);
         this.setOrigin(origin);
         this.setDestination(destination);

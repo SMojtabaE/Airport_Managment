@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane fx:id="root" prefHeight="331.0" prefWidth="690.0" styleClass="root" stylesheets="@addflight.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controler.Add_flightControler">
+   <children>
+      <Group layoutX="229.0" layoutY="46.0">
+         <children>
+            <Label layoutY="5.0" text="Time :" textFill="#faeb47" />
+            <TextField fx:id="time" layoutX="32.0" promptText="HH:MM:SS" styleClass="txt" />
+         </children>
+      </Group>
+      <Group layoutX="417.0" layoutY="47.0">
+         <children>
+            <DatePicker fx:id="date" layoutX="36.0" promptText="Date" />
+            <Label layoutY="4.0" text="Date :" textFill="#faeb47" />
+         </children>
+      </Group>
+      <Group layoutX="139.0" layoutY="110.0">
+         <children>
+            <Label layoutX="-7.0" layoutY="5.0" text="Origin :" textFill="#faeb47" />
+            <TextField fx:id="origin" layoutX="32.0" promptText="Origin" styleClass="txt" />
+         </children>
+      </Group>
+      <Group layoutX="410.0" layoutY="110.0">
+         <children>
+            <TextField fx:id="destination" layoutX="33.0" promptText="Destination" styleClass="txt" />
+         </children>
+      </Group>
+      <Group layoutX="42.0" layoutY="173.0">
+         <children>
+            <Label layoutY="5.0" textFill="#faeb47" />
+         </children>
+      </Group>
+      <Group layoutX="319.0" layoutY="173.0">
+         <children>
+            <TextField fx:id="airplaneid" layoutX="32.0" promptText="Airplane Id" styleClass="txt" />
+         </children>
+      </Group>
+      <Group layoutX="48.0" layoutY="173.0">
+         <children>
+            <Label layoutY="5.0" text="Long :" textFill="#faeb47" />
+            <TextField fx:id="longs" layoutX="32.0" promptText="Long" styleClass="txt" />
+         </children>
+      </Group>
+      <Label layoutX="376.0" layoutY="115.0" text="Destination :" textFill="#faeb47" />
+      <Label layoutX="287.0" layoutY="178.0" text="Airplane ID :" textFill="#faeb47" />
+      <Button fx:id="savebtn" layoutX="277.0" layoutY="266.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="113.0" styleClass="btns" text="Save" />
+      <Button fx:id="cancelbtn" layoutX="409.0" layoutY="266.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="113.0" styleClass="btns" text="Cansel" />
+      <Label fx:id="erorlbl" layoutX="215.0" layoutY="230.0" textFill="#ff0101">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

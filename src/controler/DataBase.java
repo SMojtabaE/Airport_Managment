@@ -7,6 +7,8 @@ import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.Month;
+import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
@@ -517,10 +519,24 @@ public class DataBase {
         return airplane;
     }
 
+    public static boolean airplaine_ID_Isvali(int airplane_id) throws SQLException {
+        makeconnection();
+        ResultSet re = statement.executeQuery(String.format("select * from airplane where id like %d", airplane_id));
+        if (re.next()) {
+            closeconection();
+            return true;
+        }
+        closeconection();
+        return false;
+    }
+
 ///////////////////////////////////////////////////////////////flight daatabase
 
     public static int createflight(Flight flight) throws SQLException {
+        Airplane seats = searchForairplane(flight.getAirplaine_id());
+        flight.setSold_tickets(seats.getSeats());
         makeconnection();  // making connection to database
+
         statement.execute(String.format("insert into flight (airplane_id,origin,destination,date,time,sold_ticket,longs" +
                         ",status) values ( '%d', '%s', '%s', '%tF','%tT','%d','%s','%s')",flight.getAirplaine_id(),
                 flight.getOrigin(),flight.getDestination(),flight.getDate(),flight.getTime(),flight.getSold_tickets(),
@@ -566,9 +582,35 @@ public class DataBase {
             }
             LocalDate ldate = LocalDate.of(dtn[0],dtn[1],dtn[2]);
             String time = String.valueOf(re.getTime(6));
-            flights.add(new Flight(re.getInt(1), re.getInt(2), re.getString(3),
+
+            Flight flight =new Flight(re.getInt(1), re.getInt(2), re.getString(3),
                     re.getString(4), ldate, time, re.getInt(7), re.getString(8),
-                    Status.valueOf(re.getString(9))));
+                    Status.valueOf(re.getString(9)));
+
+            LocalDate now = LocalDate.now();
+            Period between = Period.between(now,ldate);
+            if (between.getDays() < 0  || flight.getStatus().equals(Status.open) || flight.getStatus().equals(Status.now)){
+                DateTimeFormatter ftime = DateTimeFormatter.ofPattern("HH:mm:ss");
+                LocalTime time1 = LocalTime.now();
+                String timenow = time1.format(ftime);
+                String[] timenowsplited = timenow.split(":");
+                int[] timeintnow = new int[2];
+                String[] timesplited = time.split(":");
+                int[] timeint = new int[2];
+                for (int i = 0 ; i < timeint.length ; i++){      ///// timeint[0] === hour // timeint[1] = minet
+                    timeint[i] = Integer.parseInt(timesplited[i]);
+                    timeintnow[i] = Integer.parseInt(timenowsplited[i]);
+                }
+                if (timeint[0] == timeintnow[0]){
+                        flight.setStatus(Status.now);
+                        updateflight(flight);
+                }else if (timeint[0] < timeintnow[0]){
+                    flight.setStatus(Status.close);
+                    updateflight(flight);
+                }
+            }
+
+            flights.add(flight);
         }
         closeconection();
         return flights;
@@ -619,4 +661,26 @@ public class DataBase {
         return flights;
     }
 
+    public static Flight searchForflight(int id) throws SQLException {
+        makeconnection();
+        ResultSet re = statement.executeQuery(String.format("select * from flight where id like %d", id));
+        Flight flight = null;
+        if (re.next()) {
+            String date = String.valueOf(re.getDate(5));
+            String[] dt = date.split("-");
+            int[] dtn = new int[3];
+            for (int i = 0 ; i < dtn.length ; i++){
+                dtn[i] = Integer.parseInt(dt[i]);
+            }
+            LocalDate ldate = LocalDate.of(dtn[0],dtn[1],dtn[2]);
+            String time = String.valueOf(re.getTime(6));
+            flight = new Flight(re.getInt(1), re.getInt(2), re.getString(3),
+                    re.getString(4), ldate, time, re.getInt(7), re.getString(8),
+                    Status.valueOf(re.getString(9)));
+            closeconection();
+            return flight;
+        }
+        closeconection();
+        return flight;
+    }
 }
