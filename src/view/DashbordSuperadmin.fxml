@@ -13,7 +13,7 @@
             <Pane prefHeight="1000.0" prefWidth="200.0" style="-fx-background-radius: 0 70 0 0; -fx-background-color: #198c8c;">
                <children>
                   <Pane prefWidth="204.0" />
-                  <Circle fill="#4ca6a6" layoutX="39.0" layoutY="520.0" radius="32.0" stroke="WHITE" strokeType="OUTSIDE" strokeWidth="4.0" styleClass="hand" />
+                  <Circle fill="#4ca6a6" layoutX="25.0" layoutY="520.0" radius="32.0" stroke="WHITE" strokeType="OUTSIDE" strokeWidth="4.0" styleClass="hand" />
                   <StackPane fx:id="passengersstack" layoutX="143.0" layoutY="219.0" styleClass="hand">
                      <children>
                         <Circle fx:id="passengerscrl" fill="#4ca6a6" radius="32.0" stroke="WHITE" strokeType="OUTSIDE" strokeWidth="4.0" styleClass="hand" />
@@ -70,6 +70,26 @@
                         <ImageView fitHeight="54.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@Picturs/ticket_50px.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </StackPane>
+                  <StackPane fx:id="reportsstack" layoutX="-11.0" layoutY="397.0" styleClass="hand">
+                     <children>
+                        <Circle fx:id="passengerscrl212" fill="#4ca6a6" radius="32.0" stroke="WHITE" strokeType="OUTSIDE" strokeWidth="4.0" styleClass="hand" />
+                        <ImageView fitHeight="52.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@Picturs/urgent_message_40px.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </StackPane>
+                  <StackPane fx:id="logsstack" layoutX="-11.0" layoutY="305.0" styleClass="hand">
+                     <children>
+                        <Circle fx:id="passengerscrl2121" fill="#4ca6a6" radius="32.0" stroke="WHITE" strokeType="OUTSIDE" strokeWidth="4.0" styleClass="hand" />
+                        <ImageView fitHeight="62.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@Picturs/log_80px.png" />
                            </image>
                         </ImageView>
                      </children>

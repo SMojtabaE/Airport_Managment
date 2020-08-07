@@ -1,12 +1,18 @@
 package model;
 
-public class Reports {
+public class Logs {
 
     private int id;
     private String time;
     private String date;
     private String report;
 
+    public Logs(int id,String report , String date, String time) {
+        this.id = id;
+        this.time = time;
+        this.date = date;
+        this.report = report;
+    }
 
     public int getId() { return id; }
 

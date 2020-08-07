@@ -52,6 +52,7 @@ public class DataBase {
         closeconection();
          return superadmin;
     }
+//////////////////////////////////////////////////////////////////////////
     public static void report(String massage){
         /*this method get a string that is the massage of report and than insert it to the database,these massage
         * could be logging in a user or anything else
@@ -70,6 +71,32 @@ public class DataBase {
         closeconection();
     }
 
+    public static ObservableList<Logs> getlogs() throws SQLException {
+        makeconnection();
+        ResultSet re = statement.executeQuery("select * from reports");
+        ObservableList<Logs> logs = FXCollections.observableArrayList();
+        while (re.next()){
+            logs.add(new Logs(re.getInt(1), re.getString(2), re.getString(3),
+                    re.getString(4)));
+        }
+        closeconection();
+        return logs;
+    }
+
+    public static void deletlog(Logs log) throws SQLException {
+        makeconnection();
+        statement.execute(String.format("delete from reports where id = %d",log.getId()));
+        closeconection();
+    }
+    public static void deletlogAll() throws SQLException {
+        makeconnection();
+        statement.execute("TRUNCATE TABLE reports");
+        closeconection();
+    }
+
+//////////////////////////////////////////////////////////////////////////////////
+
+
     public static String resetpasswordusers(String email) throws SQLException {
         makeconnection();
         String password = null;
@@ -82,6 +109,8 @@ public class DataBase {
         closeconection();
         return password;
     }
+
+
 
     ///////////////////////////////////////////////////// // managers database;
     public static int creatmanager(Manager user) throws SQLException {
