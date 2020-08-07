@@ -4,10 +4,8 @@ import javafx.collections.ObservableList;
 import model.*;
 
 import java.sql.*;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.time.Month;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -418,8 +416,8 @@ public class DataBase {
     public static void deletticket(Ticket ticket) throws SQLException {
         makeconnection();
         statement.execute(String.format("delete from ticket where id = %d",ticket.getId()));
+        deletpassengers_ticket_ticke_tdeleted(ticket);
         report( "ticket " + ticket.getId() + " deleted.");
-        deletpassengers_ticket_ticke_tdeleted(ticket.getId());
         closeconection();
     }
 
@@ -616,7 +614,7 @@ public class DataBase {
 
             LocalDate now = LocalDate.now();
             Period between = Period.between(now,ldate);
-            if (between.getDays() < 0  || flight.getStatus().equals(Status.open) || flight.getStatus().equals(Status.now)){
+            if ((between.getDays() < 0 ) && (flight.getStatus().equals(Status.open) || flight.getStatus().equals(Status.now))){
                 DateTimeFormatter ftime = DateTimeFormatter.ofPattern("HH:mm:ss");
                 LocalTime time1 = LocalTime.now();
                 String timenow = time1.format(ftime);
@@ -756,10 +754,25 @@ public class DataBase {
         closeconection(); // closing the connection
     }
 
-    public static void deletpassengers_ticket_ticke_tdeleted(int ticketIhd) throws SQLException {
+    public static void deletpassengers_ticket_ticke_tdeleted(Ticket ticket) throws SQLException {
         makeconnection();
-        statement.execute(String.format("delete from passengers_ticket where ticket_id = %d",ticketIhd));
-        report( "ticket " + ticketIhd + "in passengerdticket deleted.");
+        if (searchForflight(ticket.getFlight_id()).getStatus().equals(Status.open)){
+            makeconnection();
+            ResultSet re = statement.executeQuery(String.format("select * from passengers_ticket where ticket_id = %d",
+                    ticket.getId()));
+            while (re.next()) {
+                Passenger passenger = searchFrompassenger(re.getInt(2));
+                makeconnection();
+                passenger.setMoney(passenger.getMoney() + ticket.getPrice());
+                updatpassenger(passenger);
+            }
+            makeconnection();
+            statement.execute(String.format("delete from passengers_ticket where ticket_id = %d",ticket.getId()));
+        }else {
+            makeconnection();
+            statement.execute(String.format("delete from passengers_ticket where ticket_id = %d",ticket.getId()));
+        }
+        report( "ticket " + ticket.getId() + "in passengerdticket deleted.");
         closeconection();
     }
     public static void deletpassengers_ticket_passenger_deleted(int passengerId) throws SQLException {
@@ -768,4 +781,38 @@ public class DataBase {
         report( "passenger " + passengerId + "in passengerdticket deleted.");
         closeconection();
     }
+///////////////////////////////////////////////////// report to database
+
+    public static int creatreport(Report_to_managmers report) throws SQLException {
+        makeconnection();  // making connection to database
+        statement.execute(String.format("insert into report_to (id_of,massage,date,time,who) values ( %d, '%s', '%s'," +
+                        " '%s', '%s')",report.getIdof(),report.getMassage(),report.getDate(),report.getTime(),
+                report.getWho_is()),Statement.RETURN_GENERATED_KEYS); //writing into database
+        ResultSet rs = statement.getGeneratedKeys(); // returning the id of user
+        rs.next();
+        int id = rs.getInt(1);
+        report("user  " + report.getWho_is() + " reported.");
+        closeconection(); // closing the connection
+        return id;
+    }
+    public static void deletreport(Report_to_managmers report) throws SQLException {
+        makeconnection();
+        statement.execute(String.format("delete from report_to where id = %d",report.getId()));
+
+        report("report " + report.getId() + " deleted.");
+        closeconection();
+    }
+
+    public static ObservableList<Report_to_managmers> getreports() throws SQLException {
+        makeconnection();
+        ResultSet re = statement.executeQuery("select * from report_to");
+        ObservableList<Report_to_managmers> reports = FXCollections.observableArrayList();
+        while (re.next()){
+            reports.add(new Report_to_managmers(re.getInt(1), re.getInt(2), re.getString(3),
+                    re.getString(4), re.getString(5), re.getString(6)));
+        }
+        closeconection();
+        return reports;
+    }
+
 }
