@@ -13,7 +13,16 @@
             <Pane prefHeight="1000.0" prefWidth="200.0" style="-fx-background-radius: 0 70 0 0; -fx-background-color: #198c8c;">
                <children>
                   <Pane prefWidth="204.0" />
-                  <Circle fill="#4ca6a6" layoutX="25.0" layoutY="520.0" radius="32.0" stroke="WHITE" strokeType="OUTSIDE" strokeWidth="4.0" styleClass="hand" />
+                  <StackPane fx:id="logout" layoutX="-11.0" layoutY="484.0" styleClass="hand">
+                     <children>
+                        <Circle fx:id="passengerscr12" fill="#4ca6a6" radius="32.0" stroke="WHITE" strokeType="OUTSIDE" strokeWidth="4.0" styleClass="hand" />
+                        <ImageView fitHeight="64.0" fitWidth="57.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@Picturs/logout_rounded_left_100px.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </StackPane>
                   <StackPane fx:id="passengersstack" layoutX="143.0" layoutY="219.0" styleClass="hand">
                      <children>
                         <Circle fx:id="passengerscrl" fill="#4ca6a6" radius="32.0" stroke="WHITE" strokeType="OUTSIDE" strokeWidth="4.0" styleClass="hand" />
@@ -56,7 +65,7 @@
                   </StackPane>
                   <StackPane fx:id="passtickesstack" layoutX="-11.0" layoutY="219.0" styleClass="hand">
                      <children>
-                        <Circle fx:id="passengerscrl2" fill="#4ca6a6" radius="32.0" stroke="WHITE" strokeType="OUTSIDE" strokeWidth="4.0" styleClass="hand" />
+                        <Circle fx:id="passengerscr2" fill="#4ca6a6" radius="32.0" stroke="WHITE" strokeType="OUTSIDE" strokeWidth="4.0" styleClass="hand" />
                         <ImageView fitHeight="43.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@Picturs/giving_tickets_40px.png" />
@@ -117,7 +126,7 @@
          <children>
             <Pane prefHeight="52.0" prefWidth="301.0" style="-fx-background-color: white;">
                <children>
-                  <Circle fx:id="profilepic" fill="DODGERBLUE" layoutX="26.0" layoutY="23.0" radius="25.0" stroke="WHITE" strokeWidth="4.0" />
+                  <Circle fx:id="profilepic" fill="DODGERBLUE" layoutX="26.0" layoutY="23.0" radius="25.0" stroke="WHITE" strokeWidth="4.0" styleClass="hand" />
                   <Button fx:id="username" layoutX="52.0" layoutY="10.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="70.0" styleClass="profile" textFill="#030303" />
                   <ImageView fitHeight="28.0" fitWidth="115.0" layoutX="130.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
                      <image>

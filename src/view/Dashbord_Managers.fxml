@@ -6,15 +6,24 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.shape.*?>
 
-<BorderPane fx:id="borderpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="617.0" prefWidth="829.0" style="-fx-background-color: #ffff;" stylesheets="@dashbord.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controler.SuperadminDashbordControler">
+<BorderPane fx:id="borderpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="617.0" prefWidth="829.0" style="-fx-background-color: #ffff;" stylesheets="@dashbord.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controler.Dashbord_managerControler">
     <left>
         <VBox prefHeight="568.0" prefWidth="179.0" BorderPane.alignment="CENTER">
             <children>
                 <Pane prefHeight="1000.0" prefWidth="200.0" style="-fx-background-radius: 0 70 0 0; -fx-background-color: #198c8c;">
                     <children>
                         <Pane prefWidth="204.0" />
-                        <Circle fill="#4ca6a6" layoutX="25.0" layoutY="520.0" radius="32.0" stroke="WHITE" strokeType="OUTSIDE" strokeWidth="4.0" styleClass="hand" />
-                        <StackPane fx:id="passengersstack" layoutX="143.0" layoutY="219.0" styleClass="hand">
+                        <StackPane fx:id="reportsstack" layoutX="-11.0" layoutY="403.0" styleClass="hand">
+                            <children>
+                                <Circle fill="#4ca6a6" layoutX="25.0" layoutY="520.0" radius="32.0" stroke="WHITE" strokeType="OUTSIDE" strokeWidth="4.0" styleClass="hand" />
+                                <ImageView fitHeight="52.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@Picturs/urgent_message_40px.png" />
+                                    </image>
+                                </ImageView>
+                            </children>
+                        </StackPane>
+                        <StackPane fx:id="passengersstack" layoutX="143.0" layoutY="138.0" styleClass="hand">
                             <children>
                                 <Circle fx:id="passengerscrl" fill="#4ca6a6" radius="32.0" stroke="WHITE" strokeType="OUTSIDE" strokeWidth="4.0" styleClass="hand" />
                                 <ImageView fitHeight="48.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
@@ -24,7 +33,7 @@
                                 </ImageView>
                             </children>
                         </StackPane>
-                        <StackPane fx:id="employeesstack" layoutX="143.0" layoutY="128.0" styleClass="hand">
+                        <StackPane fx:id="employeesstack" layoutX="143.0" layoutY="47.0" styleClass="hand">
                             <children>
                                 <Circle fx:id="passengerscrl1" fill="#4ca6a6" radius="32.0" stroke="WHITE" strokeType="OUTSIDE" strokeWidth="4.0" styleClass="hand" />
                                 <ImageView fitHeight="54.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
@@ -34,7 +43,7 @@
                                 </ImageView>
                             </children>
                         </StackPane>
-                        <StackPane fx:id="airplanestack" layoutX="143.0" layoutY="305.0" styleClass="hand">
+                        <StackPane fx:id="airplanestack" layoutX="143.0" layoutY="224.0" styleClass="hand">
                             <children>
                                 <Circle fx:id="passengerscrl2" fill="#4ca6a6" radius="32.0" stroke="WHITE" strokeType="OUTSIDE" strokeWidth="4.0" styleClass="hand" />
                                 <ImageView fitHeight="67.0" fitWidth="69.0" pickOnBounds="true" preserveRatio="true">
@@ -44,7 +53,7 @@
                                 </ImageView>
                             </children>
                         </StackPane>
-                        <StackPane fx:id="flightstack" layoutX="143.0" layoutY="397.0" styleClass="hand">
+                        <StackPane fx:id="flightstack" layoutX="143.0" layoutY="316.0" styleClass="hand">
                             <children>
                                 <Circle fx:id="passengerscrl21" fill="#4ca6a6" radius="32.0" stroke="WHITE" strokeType="OUTSIDE" strokeWidth="4.0" styleClass="hand" />
                                 <ImageView fitHeight="68.0" fitWidth="68.0" pickOnBounds="true" preserveRatio="true">
@@ -54,7 +63,7 @@
                                 </ImageView>
                             </children>
                         </StackPane>
-                        <StackPane fx:id="ticketstack" layoutX="143.0" layoutY="484.0" styleClass="hand">
+                        <StackPane fx:id="ticketstack" layoutX="143.0" layoutY="403.0" styleClass="hand">
                             <children>
                                 <Circle fx:id="passengerscrl211" fill="#4ca6a6" radius="32.0" stroke="WHITE" strokeType="OUTSIDE" strokeWidth="4.0" styleClass="hand" />
                                 <ImageView fitHeight="54.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true">
@@ -64,16 +73,26 @@
                                 </ImageView>
                             </children>
                         </StackPane>
-                        <StackPane fx:id="reportsstack" layoutX="-11.0" layoutY="397.0" styleClass="hand">
+                        <StackPane fx:id="logout" layoutX="-11.0" layoutY="484.0" styleClass="hand">
                             <children>
                                 <Circle fx:id="passengerscrl212" fill="#4ca6a6" radius="32.0" stroke="WHITE" strokeType="OUTSIDE" strokeWidth="4.0" styleClass="hand" />
-                                <ImageView fitHeight="52.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true">
+                                <ImageView fitHeight="64.0" fitWidth="57.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
-                                        <Image url="@Picturs/urgent_message_40px.png" />
+                                        <Image url="@Picturs/logout_rounded_left_100px.png" />
                                     </image>
                                 </ImageView>
                             </children>
                         </StackPane>
+                  <StackPane fx:id="passticketsstack" layoutX="143.0" layoutY="484.0" styleClass="hand">
+                     <children>
+                        <Circle fx:id="passengerscrl2111" fill="#4ca6a6" radius="32.0" stroke="WHITE" strokeType="OUTSIDE" strokeWidth="4.0" styleClass="hand" />
+                        <ImageView fitHeight="38.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@Picturs/giving_tickets_40px.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </StackPane>
                     </children>
                     <VBox.margin>
                         <Insets />
@@ -87,7 +106,7 @@
             <children>
                 <Pane prefHeight="52.0" prefWidth="301.0" style="-fx-background-color: white;">
                     <children>
-                        <Circle fx:id="profilepic" fill="DODGERBLUE" layoutX="26.0" layoutY="23.0" radius="25.0" stroke="WHITE" strokeWidth="4.0" />
+                        <Circle fx:id="profilepic" fill="DODGERBLUE" layoutX="26.0" layoutY="23.0" radius="25.0" stroke="WHITE" strokeWidth="4.0" styleClass="hand" />
                         <Button fx:id="username" layoutX="52.0" layoutY="10.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="70.0" styleClass="profile" textFill="#030303" />
                     </children>
                 </Pane>

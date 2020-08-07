@@ -48,13 +48,13 @@ public class ManagersprofileControler implements Initializable {
     private Manager user;
     private TableView table;
     private int who_is;    ///// 0 = superadmin      1 = manager
+    private Circle profile;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
         makeDraggable();
         Platform.runLater( () -> {
-
             Image image = null;
             try {
                 image = new Image(new FileInputStream(user.getProfile_photo_Path()));
@@ -88,10 +88,24 @@ public class ManagersprofileControler implements Initializable {
                     user.setEmail(emailfeild.getText());
                     user.setPassword(passwordfeild.getText());
                     user.setPhoneNumber(phnumberfeild.getText());
+                    user.setAdress(addresfirld.getText());
                     DataBase.updatemanager(user);
                     ManagerstableControler.editstage = null;
                     ManagerstableControler.registerstage = null;
-                    table.setItems(DataBase.getmanagers());
+                    SuperadminDashbordControler.profilestage = null;
+                    Dashbord_managerControler.profilestage = null;
+                    if (table != null) {
+                        table.setItems(DataBase.getmanagers());
+                    }
+                    if (profile != null){
+                        Image image = null;
+                        try {
+                            image = new Image(new FileInputStream(user.getProfile_photo_Path()));
+                        } catch (FileNotFoundException ex) {
+                            ex.printStackTrace();
+                        }
+                        profile.setFill(new ImagePattern(image));
+                    }
                     ((Stage) savebtn.getScene().getWindow()).close();
 
                 } catch (SQLException ex){
@@ -109,6 +123,8 @@ public class ManagersprofileControler implements Initializable {
         cancelbtn.setOnAction( e -> {
             ManagerstableControler.editstage = null;
             ManagerstableControler.registerstage = null;
+            SuperadminDashbordControler.profilestage = null;
+            Dashbord_managerControler.profilestage = null;
             ((Stage) savebtn.getScene().getWindow()).close();
         });
 
@@ -147,17 +163,11 @@ public class ManagersprofileControler implements Initializable {
             } catch (NullPointerException ex){ }
         });
     }
-    public void settableANDpassenger(TableView<Manager> table, int userid,int who_is){
+    public void settableANDpassenger(TableView<Manager> table, Manager user,int who_is,Circle crl){
         this.table = table;
-        setuser(userid);
+        this.user = user;
         this.who_is =   who_is;
-    }
-    public void setuser(int id){
-        try {
-            this.user = DataBase.searchFormanager(id);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        this.profile = crl;
     }
     private void makeDraggable(){
         root.setOnMousePressed( ( (event) -> {

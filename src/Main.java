@@ -20,9 +20,9 @@ public class Main extends Application{
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-      BorderPane pane =  FXMLLoader.load(Main.class.getResource("view/DashbordSuperadmin.fxml"));
+     // BorderPane pane =  FXMLLoader.load(Main.class.getResource("view/DashbordSuperadmin.fxml"));
       //AnchorPane pane =  FXMLLoader.load(Main.class.getResource("view/PassengersProfile.fxml"));
-       //AnchorPane pane =  FXMLLoader.load(Main.class.getResource("view/Splashscreen.fxml"));
+       AnchorPane pane =  FXMLLoader.load(Main.class.getResource("view/Splashscreen.fxml"));
       //  AnchorPane pane =  FXMLLoader.load(Main.class.getResource("view/PassengersProfile.fxml"));
         primaryStage.setScene(new Scene(pane));
        // primaryStage.setFullScreen(true);

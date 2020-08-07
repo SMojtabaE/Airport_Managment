@@ -134,7 +134,7 @@ public class ManagerstableControler implements Initializable {
                         ex.printStackTrace();
                     }
                     ManagersprofileControler controler1 = loader_.getController();
-                    controler1.settableANDpassenger(table, user.getId(),0);
+                    controler1.settableANDpassenger(table, user,0,null);
                     editstage = new Stage();
                     editstage.initStyle(StageStyle.UNDECORATED);
                     Scene scene = new Scene(loader_.getRoot());

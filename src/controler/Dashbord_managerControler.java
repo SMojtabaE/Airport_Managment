@@ -22,33 +22,30 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class SuperadminDashbordControler implements Initializable {
-    
+public class Dashbord_managerControler implements Initializable {
     @FXML BorderPane borderpane;
     @FXML Circle profilepic;
     @FXML StackPane passengersstack;
     @FXML StackPane employeesstack;
-    @FXML StackPane managersstack;
     @FXML StackPane airplanestack;
     @FXML StackPane ticketstack;
-    @FXML StackPane logsstack;
     @FXML StackPane reportsstack;
     @FXML StackPane flightstack;
-    @FXML StackPane passtickesstack;
+    @FXML StackPane passticketsstack;
     @FXML StackPane logout;
     @FXML Button username;
 
-    private Manager superadmin = LoginpageControler.superadmin;
+    private Manager manager;
     static Stage profilestage = null;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
         Platform.runLater( () -> {
-            if (superadmin != null) {
-                username.setText(superadmin.getUsername());
+            if (manager != null) {
+                username.setText(manager.getUsername());
                 Image image = null;
                 try {
-                    image = new Image(new FileInputStream(superadmin.getProfile_photo_Path()));
+                    image = new Image(new FileInputStream(manager.getProfile_photo_Path()));
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 }
@@ -79,7 +76,7 @@ public class SuperadminDashbordControler implements Initializable {
                     ex.printStackTrace();
                 }
                 ManagersprofileControler controler1 = loader_.getController();
-                controler1.settableANDpassenger(null, superadmin, 0, profilepic);
+                controler1.settableANDpassenger(null, manager, 1, profilepic);
                 profilestage = new Stage();
                 profilestage.initStyle(StageStyle.UNDECORATED);
                 Scene scene = new Scene(loader_.getRoot());
@@ -100,7 +97,7 @@ public class SuperadminDashbordControler implements Initializable {
             borderpane.setCenter(passtbl);
         });
 
-        passtickesstack.setOnMousePressed( e -> {
+        passticketsstack.setOnMousePressed( e -> {
             BorderPane passticket = null;
             try {
                 passticket = FXMLLoader.load(getClass().getResource("../view/Passengers_ticket.fxml"));
@@ -141,26 +138,6 @@ public class SuperadminDashbordControler implements Initializable {
             }
             borderpane.setCenter(passtbl);
         });
-        managersstack.setOnMousePressed( e -> {
-            BorderPane passtbl = null;
-            try {
-                passtbl = FXMLLoader.load(getClass().getResource("../view/Managerstable.fxml"));
-
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
-            borderpane.setCenter(passtbl);
-        });
-        logsstack.setOnMousePressed( e -> {
-            BorderPane passtbl = null;
-            try {
-                passtbl = FXMLLoader.load(getClass().getResource("../view/Logs_table.fxml"));
-
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
-            borderpane.setCenter(passtbl);
-        });
 
         employeesstack.setOnMousePressed( e -> {
             BorderPane employytable = null;
@@ -184,5 +161,8 @@ public class SuperadminDashbordControler implements Initializable {
             borderpane.setCenter(flighttbl);
         });
 
+    }
+    public void setuser(Manager user){
+        this.manager = user;
     }
 }

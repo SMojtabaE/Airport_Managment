@@ -51,14 +51,6 @@ public class LoginpageControler implements Initializable {
 
         passsinginbtn.setOnAction( e -> {
             if (registerstage==null){
-//                    BorderPane root = FXMLLoader.load(this.getClass().getResource("../view/PassengerRegister.fxml"));
-//                    registerstage = new Stage();
-//                    registerstage.initStyle(StageStyle.UNDECORATED);
-//                    Scene scene = new Scene(root);
-//                    scene.setFill(Color.TRANSPARENT);
-//                    registerstage.setScene(scene);
-//                    registerstage.initStyle(StageStyle.TRANSPARENT);
-//                    registerstage.show();
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/PassengerRegister.fxml"));
                     try {
                         loader.load();
@@ -85,46 +77,43 @@ public class LoginpageControler implements Initializable {
                 emperorlbl.setText("fill all fields");
             }else if (empusernamefeild.getText().equals(superadmin.getUsername()) && emppasswordfeild.getText().
                     equals(superadmin.getPassword())){
-
-                ///////////////////later
-
+                BorderPane border = null;
+                try {
+                    border =  FXMLLoader.load(getClass().getResource("../view/DashbordSuperadmin.fxml"));
+                    Stage stage = new Stage();
+                    stage.setTitle("Airport Managment By S_M_E");
+                    stage.setScene(new Scene(border));
+                    stage.show();
+                    ((Stage)emploginbtn.getScene().getWindow()).close();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
             }else{
                 try {
-
-//                    for (int i = 0 ; i < managers.size() ; i++){
-//                        if (empusernamefeild.getText().equals(managers.get(i).getUsername()) &&
-//                                emppasswordfeild.getText().equals(managers.get(i).getPassword())){
-//                            /////////////going to managers page
-//                        }
-//                    }
                     Manager user = DataBase.checkusernamOfmanager(empusernamefeild.getText(),emppasswordfeild.getText());
-                    //System.out.println(user.getPassword() + user.getUsername());
                     if (user != null){
-//                        emperorlbl.setText("welcome sthsdt sdth stdh sdtf bdsfb dgb");
-//                       // System.out.println("welcome sthsdt sdth stdh sdtf bdsfb dgb");
-                        BorderPane root = FXMLLoader.load(this.getClass().getResource("../view/PassengerRegister.fxml"));
-//                        registerstage = new Stage();
-//                        registerstage.initStyle(StageStyle.UNDECORATED);
-//                        Scene scene = new Scene(root);
-//                        scene.setFill(Color.TRANSPARENT);
-//                        registerstage.setScene(scene);
-//                        registerstage.initStyle(StageStyle.TRANSPARENT);
-//                        registerstage.show();
+//                        BorderPane border = FXMLLoader.load(getClass().getResource("../view/Dashbord_Managers.fxml"));
+//                        Stage stage = new Stage();
+//                        stage.setTitle("Airport Managment By S_M_E");
+//                        stage.setScene(new Scene(border));
+//                        stage.show();
+//                        ((Stage)emploginbtn.getScene().getWindow()).close();
+                        FXMLLoader loader_ = new FXMLLoader(getClass().getResource("../view/Dashbord_Managers.fxml"));
+                        loader_.load();
+                        Dashbord_managerControler controler1 = loader_.getController();
+                        controler1.setuser(user);
+                        Stage editstage = new Stage();
+                        Scene scene = new Scene(loader_.getRoot());
+                        editstage.setTitle("Airport Managment By S_M_E");
+                        editstage.setScene(scene);
+                        editstage.show();
+                        ((Stage)emploginbtn.getScene().getWindow()).close();
                     }else {
-//                        ArrayList<Employee> employees = DataBase.getemployees();
-//                        for (int i = 0; i < employees.size(); i++) {
-//                            if (empusernamefeild.getText().equals(employees.get(i).getUsername()) &&
-//                                    emppasswordfeild.getText().equals(employees.get(i).getPassword())) {
-//                                /////////////going to employees page
-//                            }
-//                        }
                         Employee employee = DataBase.checkusernamOfemployees(empusernamefeild.getText(),emppasswordfeild.getText());
                         if (employee != null){
 
                         }
-
                     }
-
                 } catch (SQLException | IOException ex) {
                     ex.printStackTrace();
                 }
@@ -138,14 +127,6 @@ public class LoginpageControler implements Initializable {
                 passerorlbl.setText("fill all fields");
             }else {
                 try {
-//                    ArrayList<Passenger> passengers = DataBase.getpassengers();
-//                    for ( int i = 0 ; i < passengers.size() ; i++){
-//                        if (passusernamefeild.getText().equals(passengers.get(i).getUsername()) && passpasswordfeild.
-//                                getText().equals(passengers.get(i).getUsername())){
-//                            ////////going to passengers page
-//                        }
-//                    }
-
                     Passenger passenger = DataBase.checkusernamOfpassengers(passusernamefeild.getText(),passpasswordfeild.getText());
                     if (passenger != null) {
                         passerorlbl.setText("welcome " + passenger.getUsername());
