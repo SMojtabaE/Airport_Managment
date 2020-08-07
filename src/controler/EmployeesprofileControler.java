@@ -86,6 +86,7 @@ public class EmployeesprofileControler implements Initializable {
                     user.setEmail(emailfeild.getText());
                     user.setPassword(passwordfeild.getText());
                     user.setPhoneNumber(phnumberfeild.getText());
+                    user.setAdress(addresfirld.getText());
                     DataBase.updatemployee(user);
                     EmployeestableControler.editstage = null;
                     EmployeestableControler.registerstage = null;

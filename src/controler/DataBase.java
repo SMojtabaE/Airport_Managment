@@ -321,6 +321,7 @@ public class DataBase {
         makeconnection();
         statement.execute(String.format("delete from passengers where id = %d",user.getId()));
         report( "passenger " + user.getUsername() + " deleted.");
+        deletpassengers_ticket_passenger_deleted(user.getId());
         closeconection();
     }
 
@@ -418,6 +419,7 @@ public class DataBase {
         makeconnection();
         statement.execute(String.format("delete from ticket where id = %d",ticket.getId()));
         report( "ticket " + ticket.getId() + " deleted.");
+        deletpassengers_ticket_ticke_tdeleted(ticket.getId());
         closeconection();
     }
 
@@ -460,6 +462,16 @@ public class DataBase {
         closeconection();
         return ticket;
     }
+    public static boolean flightidhaveticket(int flightid) throws SQLException {
+        makeconnection();
+        ResultSet re = statement.executeQuery(String.format("select * from ticket where flight_id like %d", flightid));
+        if (re.next()) {
+            closeconection();
+            return false;
+        }
+        closeconection();
+        return true;
+    }
 //////////////////////////////////////////////////////////////////////////////// Airplains database
 
     public static int createAirplane(Airplane airplane) throws SQLException {
@@ -490,6 +502,7 @@ public class DataBase {
         makeconnection();
         statement.execute(String.format("delete from airplane where id = %d",airplane.getId()));
         report( "Airplane " + airplane.getId() + " deleted.");
+        deletflight_by_airplaneid(airplane.getId());
         closeconection();
     }
 
@@ -564,13 +577,28 @@ public class DataBase {
         makeconnection();
         statement.execute(String.format("delete from flight where id = %d",fligjt.getId()));
         report( "Flight " + fligjt.getId() + " deleted.");
+        deleteticket_flight(fligjt.getId());
+        closeconection();
+    }
+
+    public static void deleteticket_flight(int flight_id) throws SQLException {
+        makeconnection();
+        ResultSet re = statement.executeQuery(String.format("select * from ticket where flight_id = %d",flight_id));
+
+        ArrayList<Ticket> tickets = new ArrayList<>();
+        while (re.next()){
+            tickets.add(new Ticket(re.getInt(1), re.getDouble(2), re.getDouble(3),
+                    re.getInt(4)));
+        }
+        for (int i = 0 ; i < tickets.size() ; i++){
+            deletticket(tickets.get(i));
+        }
         closeconection();
     }
 
     public static ObservableList<Flight> getflights() throws SQLException {
         makeconnection();
         ResultSet re = statement.executeQuery("select * from flight");
-
         ObservableList<Flight> flights = FXCollections.observableArrayList();
         while (re.next()){
             String date = String.valueOf(re.getDate(5));
@@ -693,13 +721,51 @@ public class DataBase {
         return false;
     }
 
+    public static void deletflight_by_airplaneid(int airplane_id) throws SQLException {
+        makeconnection();
+        ResultSet re = statement.executeQuery(String.format("select * from flight where airplane_id = %d",airplane_id));
+       ArrayList<Flight> flights = new ArrayList<>();
+        while (re.next()) {
+            String date = String.valueOf(re.getDate(5));
+            String[] dt = date.split("-");
+            int[] dtn = new int[3];
+            for (int i = 0; i < dtn.length; i++) {
+                dtn[i] = Integer.parseInt(dt[i]);
+            }
+            LocalDate ldate = LocalDate.of(dtn[0], dtn[1], dtn[2]);
+            String time = String.valueOf(re.getTime(6));
+
+            Flight flight = new Flight(re.getInt(1), re.getInt(2), re.getString(3),
+                    re.getString(4), ldate, time, re.getInt(7), re.getString(8),
+                    Status.valueOf(re.getString(9)));
+            flights.add(flight);
+        }
+        for (int i = 0 ; i < flights.size() ; i++){
+            deleteflight(flights.get(i));
+        }
+            closeconection();
+    }
+
 /////////////////////////////////////////////////////////  Passengers_ticket database
 
     public static void createpassengers_ticket(int ticket_id,int passenger_id) throws SQLException {
         makeconnection();  // making connection to database
         statement.execute(String.format("insert into passengers_ticket (ticket_id,passenger_id) values (%d,%d)",
                 ticket_id,passenger_id),Statement.RETURN_GENERATED_KEYS); //writing into database
-        report("passengers_ticket " + ticket_id + " and "+ passenger_id + " created.");
+        report("passenger " + passenger_id + " buy ticket "+ ticket_id);
         closeconection(); // closing the connection
+    }
+
+    public static void deletpassengers_ticket_ticke_tdeleted(int ticketIhd) throws SQLException {
+        makeconnection();
+        statement.execute(String.format("delete from passengers_ticket where ticket_id = %d",ticketIhd));
+        report( "ticket " + ticketIhd + "in passengerdticket deleted.");
+        closeconection();
+    }
+    public static void deletpassengers_ticket_passenger_deleted(int passengerId) throws SQLException {
+        makeconnection();
+        statement.execute(String.format("delete from passengers_ticket where passenger_id = %d",passengerId));
+        report( "passenger " + passengerId + "in passengerdticket deleted.");
+        closeconection();
     }
 }

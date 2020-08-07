@@ -46,12 +46,17 @@ public class Add_ticketControler implements Initializable {
             } else {
                 try {
                     if (DataBase.isvalidflightid(Integer.parseInt(flightid.getText()))) {
-                        Ticket ticket = new Ticket(Double.parseDouble(price.getText()),Double.parseDouble(loss.getText())
-                        ,Integer.parseInt(flightid.getText()));
-                        ticket.setId(DataBase.createticket(ticket));
-                        Ticket_tableControler.registerstage = null;
-                        table.getItems().add(ticket);
-                        ((Stage) savebtn.getScene().getWindow()).close();
+                        if (DataBase.flightidhaveticket(Integer.parseInt(flightid.getText()))) {
+                            Ticket ticket = new Ticket(Double.parseDouble(price.getText()), Double.parseDouble(loss.getText())
+                                    , Integer.parseInt(flightid.getText()));
+                            ticket.setId(DataBase.createticket(ticket));
+                            Ticket_tableControler.registerstage = null;
+                            table.getItems().add(ticket);
+                            ((Stage) savebtn.getScene().getWindow()).close();
+                        }else {
+                            erorlbl.setText("this flight ID has ticket,search it");
+                            Toolkit.getDefaultToolkit().beep();
+                        }
                     }else {
                         erorlbl.setText("Enter a Valid Flight ID");
                         Toolkit.getDefaultToolkit().beep();

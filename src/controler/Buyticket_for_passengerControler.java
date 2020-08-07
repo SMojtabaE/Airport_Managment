@@ -43,7 +43,9 @@ public class Buyticket_for_passengerControler implements Initializable {
                     Passenger passenger = DataBase.searchFrompassenger(Integer.parseInt(passengerid.getText()));
                     if (passenger != null) {
                         if ((passenger.getMoney() - ticket.getPrice()) > 0 ){
-                            DataBase.createpassengers_ticket(ticket.getId(), Integer.parseInt(passengerid.getText()));
+                            DataBase.createpassengers_ticket(ticket.getId(),passenger.getId());
+                            passenger.setMoney(passenger.getMoney() - ticket.getPrice());
+                            DataBase.updatpassenger(passenger);
                             Ticket_tableControler.registerstage = null;
                             ((Stage) savebtn.getScene().getWindow()).close();
                         }else {
