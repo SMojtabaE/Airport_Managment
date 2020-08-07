@@ -47,6 +47,7 @@ public class EmployeesprofileControler implements Initializable {
 
     private Employee user;
     private TableView table;
+    private int who_is;             //////// 0 = superadmin   1 = manager
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -67,6 +68,9 @@ public class EmployeesprofileControler implements Initializable {
             passwordfeild.setText(user.getPassword());
             emailfeild.setText(user.getEmail());
             moneyfeild.setText(String.valueOf(user.getSalary()));
+
+            if (who_is == 1)    moneyfeild.setEditable(false);
+
             phnumberfeild.setText(user.getPhoneNumber());
             addresfirld.setText(user.getAdress());
             user.show();
@@ -148,9 +152,10 @@ public class EmployeesprofileControler implements Initializable {
             } catch (NullPointerException ex){ }
         });
     }
-    public void settableANDpassenger(TableView<Employee> table,int userid){
+    public void settableANDpassenger(TableView<Employee> table,int userid,int who_is){
         this.table = table;
         setuser(userid);
+        this.who_is = who_is;
     }
     public void setuser(int id){
         try {

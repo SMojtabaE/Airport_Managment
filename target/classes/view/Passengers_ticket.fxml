@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="422.0" prefWidth="573.0" stylesheets="@passengerstable.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controler.Passengers_ticketControler">
+    <center>
+        <VBox prefHeight="425.0" prefWidth="573.0" BorderPane.alignment="CENTER">
+            <children>
+                <TableView fx:id="table" stylesheets="@passengerstable.css">
+                    <columns>
+                        <TableColumn fx:id="ticketid" prefWidth="49.0" style="-fx-background-color: #575757; -fx-text-fill: #4ca6a6;" text="TIcket ID" />
+                        <TableColumn fx:id="passengersid" prefWidth="87.0" style="-fx-background-color: #575757; -fx-text-fill: #4ca6a6;" text="Passengers ID" />
+                    </columns>
+                    <VBox.margin>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                    </VBox.margin>
+                    <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                    </columnResizePolicy>
+                    <effect>
+                        <DropShadow />
+                    </effect>
+                </TableView>
+            </children>
+        </VBox>
+    </center>
+    <top>
+        <HBox alignment="CENTER" prefHeight="19.0" prefWidth="573.0" spacing="10.0" BorderPane.alignment="CENTER">
+            <children>
+                <ImageView fx:id="searchimg" fitHeight="22.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true" styleClass="searchimg">
+                    <image>
+                        <Image url="@Picturs/find_and_replace_64px.png" />
+                    </image>
+                </ImageView>
+                <TextField fx:id="ticketidfield" promptText="Search for ticket ID" styleClass="searchfeild" />
+                <ImageView fx:id="louddataimg" fitHeight="24.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true" styleClass="searchimg">
+                    <image>
+                        <Image url="@Picturs/delete.png" />
+                    </image></ImageView>
+            <ImageView fx:id="passimg" fitHeight="22.0" fitWidth="26.0" layoutX="187.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" styleClass="searchimg">
+               <image>
+                  <Image url="@Picturs/find_and_replace_64px.png" />
+               </image>
+            </ImageView>
+            <TextField fx:id="passidfield" layoutX="219.0" layoutY="10.0" promptText="Search for Passengers ID" styleClass="searchfeild" />
+            </children>
+            <BorderPane.margin>
+                <Insets />
+            </BorderPane.margin>
+        </HBox>
+    </top>
+</BorderPane>

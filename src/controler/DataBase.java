@@ -96,7 +96,6 @@ public class DataBase {
 
 //////////////////////////////////////////////////////////////////////////////////
 
-
     public static String resetpasswordusers(String email) throws SQLException {
         makeconnection();
         String password = null;
@@ -781,6 +780,39 @@ public class DataBase {
                 ticket_id,passenger_id),Statement.RETURN_GENERATED_KEYS); //writing into database
         report("passenger " + passenger_id + " buy ticket "+ ticket_id);
         closeconection(); // closing the connection
+    }
+
+    public static ObservableList<Passengers_ticket> getPassengers_ticket() throws SQLException {
+        makeconnection();
+        ResultSet re = statement.executeQuery("select * from passengers_ticket");
+        ObservableList<Passengers_ticket> tickets = FXCollections.observableArrayList();
+        while (re.next()){
+            tickets.add(new Passengers_ticket(re.getInt(1), re.getInt(2)));
+        }
+        closeconection();
+        return tickets;
+    }
+
+    public static ObservableList<Passengers_ticket> getPassengers_ticketByticketid(int ticket_id) throws SQLException {
+        makeconnection();
+        ResultSet re = statement.executeQuery(String.format("select * from passengers_ticket where ticket_id = %d",ticket_id));
+        ObservableList<Passengers_ticket> tickets = FXCollections.observableArrayList();
+        while (re.next()){
+            tickets.add(new Passengers_ticket(re.getInt(1), re.getInt(2)));
+        }
+        closeconection();
+        return tickets;
+    }
+
+    public static ObservableList<Passengers_ticket> getPassengers_ticketBypassengerid(int passenger_id) throws SQLException {
+        makeconnection();
+        ResultSet re = statement.executeQuery(String.format("select * from passengers_ticket where passenger_id = %d",passenger_id));
+        ObservableList<Passengers_ticket> tickets = FXCollections.observableArrayList();
+        while (re.next()){
+            tickets.add(new Passengers_ticket(re.getInt(1), re.getInt(2)));
+        }
+        closeconection();
+        return tickets;
     }
 
     public static void deletpassengers_ticket_ticke_tdeleted(Ticket ticket) throws SQLException {

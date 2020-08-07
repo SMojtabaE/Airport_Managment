@@ -134,7 +134,7 @@ public class EmployeestableControler implements Initializable {
                         ex.printStackTrace();
                     }
                     EmployeesprofileControler controler1 = loader_.getController();
-                    controler1.settableANDpassenger(table, user.getId());
+                    controler1.settableANDpassenger(table, user.getId(),0);
                     editstage = new Stage();
                     editstage.initStyle(StageStyle.UNDECORATED);
                     Scene scene = new Scene(loader_.getRoot());
