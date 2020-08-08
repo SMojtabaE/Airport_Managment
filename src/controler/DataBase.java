@@ -804,6 +804,21 @@ public class DataBase {
         closeconection();
         return tickets;
     }
+    public static ObservableList<Ticket> getticketsOfpassenger(int passenger_id) throws SQLException {
+        makeconnection();
+        ResultSet re = statement.executeQuery(String.format("select * from passengers_ticket where " +
+                "passenger_id = %d",passenger_id));
+        ObservableList<Ticket> tickets = FXCollections.observableArrayList();
+        while (re.next()){
+            tickets.add(searchInticketsid(re.getInt(1)));
+        }
+        closeconection();
+        return tickets;
+    }
+
+
+
+
 
     public static ObservableList<Passengers_ticket> getPassengers_ticketByticketid(int ticket_id) throws SQLException {
         makeconnection();
@@ -852,6 +867,14 @@ public class DataBase {
         makeconnection();
         statement.execute(String.format("delete from passengers_ticket where passenger_id = %d",passengerId));
         report( "passenger " + passengerId + "in passengerdticket deleted.");
+        closeconection();
+    }
+
+    public static void deletpassengers_ticket_passenger(int ticket_id,int passengerId) throws SQLException {
+        makeconnection();
+        statement.execute(String.format("delete from passengers_ticket where ticket_id = %d and passenger_id = %d",
+                ticket_id,passengerId));
+        report( "ticket of " + passengerId + "in passengerdticket deleted.");
         closeconection();
     }
 ///////////////////////////////////////////////////// report to database

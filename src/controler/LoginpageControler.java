@@ -134,7 +134,23 @@ public class LoginpageControler implements Initializable {
                 try {
                     Passenger passenger = DataBase.checkusernamOfpassengers(passusernamefeild.getText(),passpasswordfeild.getText());
                     if (passenger != null) {
-                        passerorlbl.setText("welcome " + passenger.getUsername());
+
+                            FXMLLoader loader_ = new FXMLLoader(getClass().getResource("../view/Dashbord_Passengers.fxml"));
+                        try {
+                            loader_.load();
+                        } catch (IOException ex) {
+                            ex.printStackTrace();
+                        }
+                        Dashbord_passengersControler controler1 = loader_.getController();
+                            controler1.setuser(passenger);
+                            Stage editstage = new Stage();
+                            Scene scene = new Scene(loader_.getRoot());
+                            editstage.setTitle("Airport Managment By S_M_E");
+                            editstage.setScene(scene);
+                            editstage.show();
+                            DataBase.report( "Passenger " + passenger.getUsername() + " loged in");
+                            ((Stage)emploginbtn.getScene().getWindow()).close();
+
                     }else
                         passerorlbl.setText("username Or password Is wrong");
                 } catch (SQLException ex) {

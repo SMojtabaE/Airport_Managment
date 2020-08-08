@@ -11,6 +11,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import model.Flight;
 import model.Passenger;
+import model.Status;
 import model.Ticket;
 
 import java.awt.*;
@@ -42,16 +43,29 @@ public class Buyticket_for_passengerControler implements Initializable {
                 try {
                     Passenger passenger = DataBase.searchFrompassenger(Integer.parseInt(passengerid.getText()));
                     if (passenger != null) {
-                        if ((passenger.getMoney() - ticket.getPrice()) > 0 ){
-                            DataBase.createpassengers_ticket(ticket.getId(),passenger.getId());
-                            passenger.setMoney(passenger.getMoney() - ticket.getPrice());
-                            DataBase.updatpassenger(passenger);
-                            Ticket_tableControler.registerstage = null;
-                            ((Stage) savebtn.getScene().getWindow()).close();
-                        }else {
-                            erorlbl.setText("Passenger is low on money,charg it");
-                            Toolkit.getDefaultToolkit().beep();
+                        Flight flight = null;
+                        try {
+                            flight = DataBase.searchForflight(ticket.getFlight_id());
+                        } catch (SQLException ex) {
+                            ex.printStackTrace();
                         }
+                        if (flight.getStatus().equals(Status.open)) {
+                            if ((passenger.getMoney() - ticket.getPrice()) > 0) {
+                                DataBase.createpassengers_ticket(ticket.getId(), passenger.getId());
+                                passenger.setMoney(passenger.getMoney() - ticket.getPrice());
+                                DataBase.updatpassenger(passenger);
+                                flight.setSold_tickets(flight.getSold_tickets() - 1);
+                                DataBase.updateflight(flight);
+                                Ticket_tableControler.registerstage = null;
+                                ((Stage) savebtn.getScene().getWindow()).close();
+                            } else {
+                                erorlbl.setText("Passenger is low on money,charg it");
+                                Toolkit.getDefaultToolkit().beep();
+                            }
+                        }else {
+                        erorlbl.setText("you cant buy it");
+                        Toolkit.getDefaultToolkit().beep();
+                    }
                     }else {
                         erorlbl.setText("Passenger ID is Invalid");
                         Toolkit.getDefaultToolkit().beep();

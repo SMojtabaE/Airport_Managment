@@ -124,7 +124,6 @@ public class EmployeesprofileControler implements Initializable {
         cancelbtn.setOnAction( e -> {
             EmployeestableControler.editstage = null;
             EmployeestableControler.registerstage = null;
-            SuperadminDashbordControler.profilestage = null;
             Dashbord_employeeControler.profilestage = null;
             ((Stage) savebtn.getScene().getWindow()).close();
         });

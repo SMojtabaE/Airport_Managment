@@ -40,7 +40,7 @@ public class Add_flightControler implements Initializable {
             Flights_tableControler.registerstage = null;
             Flights_tableControler.editstage = null;
             ((Stage)cancelbtn.getScene().getWindow()).close();
-        }); 
+        });
 
         savebtn.setOnAction( e -> {
             String datek = String.valueOf(date.getValue());

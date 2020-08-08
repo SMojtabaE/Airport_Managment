@@ -13,6 +13,7 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import model.Employee;
 import model.Passenger;
 import javafx.scene.control.TextField;
 
@@ -46,6 +47,7 @@ public class PassengersProfileControler implements Initializable {
 
     private Passenger user;
     private TableView table;
+    private Circle profile;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -87,8 +89,18 @@ public class PassengersProfileControler implements Initializable {
                         DataBase.updatpassenger(user);
                         PassebgertableControler.editstage = null;
                         PassebgertableControler.registerstage = null;
+                        Dashbord_passengersControler.profilestage = null;
                         if (table != null) {
                             table.setItems(DataBase.getpassengers());
+                        }
+                        if (profile != null) {
+                            Image image = null;
+                            try {
+                                image = new Image(new FileInputStream(user.getProfile_photo_Path()));
+                            } catch (FileNotFoundException ex) {
+                                ex.printStackTrace();
+                            }
+                            profile.setFill(new ImagePattern(image));
                         }
                         ((Stage) savebtn.getScene().getWindow()).close();
 
@@ -107,6 +119,7 @@ public class PassengersProfileControler implements Initializable {
         cancelbtn.setOnAction( e -> {
             PassebgertableControler.editstage = null;
             PassebgertableControler.registerstage = null;
+            Dashbord_passengersControler.profilestage = null;
             ((Stage) savebtn.getScene().getWindow()).close();
         });
 
@@ -146,16 +159,10 @@ public class PassengersProfileControler implements Initializable {
             } catch (NullPointerException ex){ }
         });
     }
-    public void settableANDpassenger(TableView<Passenger> table,int userid){
+    public void setdata(TableView table, Passenger user, Circle crl){
         this.table = table;
-        setuser(userid);
-    }
-    public void setuser(int id){
-        try {
-            this.user = DataBase.searchFrompassenger(id);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        this.user = user;
+        this.profile = crl;
     }
     private void makeDraggable(){
         root.setOnMousePressed( ( (event) -> {

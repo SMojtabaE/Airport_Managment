@@ -4,7 +4,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane  maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="422.0" prefWidth="573.0" stylesheets="@passengerstable.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controler.Report_tableControler">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="422.0" prefWidth="573.0" stylesheets="@passengerstable.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controler.Report_tableControler">
    <center>
       <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
          <BorderPane.margin>
@@ -18,7 +18,7 @@
                   <TableColumn fx:id="date" minWidth="0.0" prefWidth="71.0" style="-fx-background-color: #575757; -fx-text-fill: #4ca6a6;" text="Date" />
                   <TableColumn fx:id="time" minWidth="4.0" prefWidth="67.0" style="-fx-background-color: #575757; -fx-text-fill: #4ca6a6;" text="Time" />
                   <TableColumn fx:id="idof" prefWidth="44.0" style="-fx-background-color: #575757; -fx-text-fill: #4ca6a6;" text="ID of" />
-                  <TableColumn fx:id="username" prefWidth="91.0" style="-fx-background-color: #575757; -fx-text-fill: #4ca6a6;" text="Username" />
+                  <TableColumn fx:id="username" prefWidth="91.0" style="-fx-background-color: #575757; -fx-text-fill: #4ca6a6;" text="User" />
               </columns>
                <VBox.margin>
                   <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />

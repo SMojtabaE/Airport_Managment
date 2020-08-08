@@ -128,7 +128,7 @@ public class PassebgertableControler implements Initializable {
                         ex.printStackTrace();
                     }
                     PassengersProfileControler controler1 = loader_.getController();
-                    controler1.settableANDpassenger(table, passenger.getId());
+                    controler1.setdata(table, passenger,null);
                     editstage = new Stage();
                     editstage.initStyle(StageStyle.UNDECORATED);
                     Scene scene = new Scene(loader_.getRoot());
