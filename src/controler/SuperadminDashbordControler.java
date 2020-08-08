@@ -64,6 +64,7 @@ public class SuperadminDashbordControler implements Initializable {
                 stage.setTitle("Airport Managment By S_M_E");
                 stage.setScene(new Scene(border));
                 stage.show();
+                DataBase.report( "Super admin " + superadmin.getUsername() + " loged out");
                 ((Stage)logout.getScene().getWindow()).close();
             } catch (IOException ex) {
                 ex.printStackTrace();

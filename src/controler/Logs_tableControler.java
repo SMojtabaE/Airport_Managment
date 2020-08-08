@@ -1,14 +1,20 @@
 package controler;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
+import model.Employee;
 import model.Logs;
 
 
+import java.awt.*;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
@@ -24,6 +30,9 @@ public class Logs_tableControler implements Initializable {
 
     @FXML Button removebtn;
     @FXML Button removeallbtn;
+    @FXML ImageView searchimg;
+    @FXML ImageView louddataimg;
+    @FXML TextField searcgfeild;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
@@ -38,6 +47,31 @@ public class Logs_tableControler implements Initializable {
             e.printStackTrace();
         }
 
+
+        searchimg.setOnMousePressed( e -> {
+            if (!searcgfeild.getText().isEmpty()) {
+                try {
+                    try {
+                        table.setItems(DataBase.searchinlogs(searcgfeild.getText()));
+                    } catch (SQLException ex) {
+                        ex.printStackTrace();
+                    }
+
+
+                }catch (NumberFormatException ep){
+                    Toolkit.getDefaultToolkit().beep();
+                    System.out.println("NumberFormatException, pleas enter an integer valuo");
+                }
+            }
+        });
+        louddataimg.setOnMousePressed( e -> {
+            try {
+                table.setItems(DataBase.getlogs());
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+
+        });
 
         removebtn.setOnAction( e -> {
             Logs selected= table.getSelectionModel().getSelectedItem();

@@ -77,13 +77,13 @@ public class LoginpageControler implements Initializable {
                 emperorlbl.setText("fill all fields");
             }else if (empusernamefeild.getText().equals(superadmin.getUsername()) && emppasswordfeild.getText().
                     equals(superadmin.getPassword())){
-                BorderPane border = null;
                 try {
-                    border =  FXMLLoader.load(getClass().getResource("../view/DashbordSuperadmin.fxml"));
+                    BorderPane  border =  FXMLLoader.load(getClass().getResource("../view/DashbordSuperadmin.fxml"));
                     Stage stage = new Stage();
                     stage.setTitle("Airport Managment By S_M_E");
                     stage.setScene(new Scene(border));
                     stage.show();
+                    DataBase.report("super admin "+superadmin.getUsername() + " loged in");
                     ((Stage)emploginbtn.getScene().getWindow()).close();
                 } catch (IOException ex) {
                     ex.printStackTrace();
@@ -92,12 +92,6 @@ public class LoginpageControler implements Initializable {
                 try {
                     Manager user = DataBase.checkusernamOfmanager(empusernamefeild.getText(),emppasswordfeild.getText());
                     if (user != null){
-//                        BorderPane border = FXMLLoader.load(getClass().getResource("../view/Dashbord_Managers.fxml"));
-//                        Stage stage = new Stage();
-//                        stage.setTitle("Airport Managment By S_M_E");
-//                        stage.setScene(new Scene(border));
-//                        stage.show();
-//                        ((Stage)emploginbtn.getScene().getWindow()).close();
                         FXMLLoader loader_ = new FXMLLoader(getClass().getResource("../view/Dashbord_Managers.fxml"));
                         loader_.load();
                         Dashbord_managerControler controler1 = loader_.getController();
@@ -107,6 +101,7 @@ public class LoginpageControler implements Initializable {
                         editstage.setTitle("Airport Managment By S_M_E");
                         editstage.setScene(scene);
                         editstage.show();
+                        DataBase.report( "Manager " + user.getUsername() + " loged in");
                         ((Stage)emploginbtn.getScene().getWindow()).close();
                     }else {
                         Employee employee = DataBase.checkusernamOfemployees(empusernamefeild.getText(),emppasswordfeild.getText());

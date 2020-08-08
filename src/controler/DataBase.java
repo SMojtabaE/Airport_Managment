@@ -94,6 +94,18 @@ public class DataBase {
         closeconection();
     }
 
+    public static ObservableList<Logs> searchinlogs(String txt) throws SQLException {
+        makeconnection();
+        ResultSet re = statement.executeQuery("select * from reports where report like '%" + txt +"%'");
+        ObservableList<Logs> logs = FXCollections.observableArrayList();
+        while (re.next()){
+            logs.add(new Logs(re.getInt(1), re.getString(2), re.getString(3),
+                    re.getString(4)));
+        }
+        closeconection();
+        return logs;
+    }
+
 //////////////////////////////////////////////////////////////////////////////////
 
     public static String resetpasswordusers(String email) throws SQLException {
