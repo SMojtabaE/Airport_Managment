@@ -106,7 +106,17 @@ public class LoginpageControler implements Initializable {
                     }else {
                         Employee employee = DataBase.checkusernamOfemployees(empusernamefeild.getText(),emppasswordfeild.getText());
                         if (employee != null){
-
+                            FXMLLoader loader_ = new FXMLLoader(getClass().getResource("../view/Dashbord_Employees.fxml"));
+                            loader_.load();
+                            Dashbord_employeeControler controler1 = loader_.getController();
+                            controler1.setuser(employee);
+                            Stage editstage = new Stage();
+                            Scene scene = new Scene(loader_.getRoot());
+                            editstage.setTitle("Airport Managment By S_M_E");
+                            editstage.setScene(scene);
+                            editstage.show();
+                            DataBase.report( "Employee " + employee.getUsername() + " loged in");
+                            ((Stage)emploginbtn.getScene().getWindow()).close();
                         }
                     }
                 } catch (SQLException | IOException ex) {

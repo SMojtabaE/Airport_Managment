@@ -24,6 +24,7 @@ public class Report_tableControler implements Initializable {
     @FXML TableColumn<Report_to_managmers, Integer> id;
 
     @FXML Button removebtn;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 

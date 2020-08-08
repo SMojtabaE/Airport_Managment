@@ -16,6 +16,7 @@ import javafx.scene.shape.Circle;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import model.Employee;
+import model.Manager;
 
 import java.awt.*;
 import java.io.File;
@@ -47,14 +48,14 @@ public class EmployeesprofileControler implements Initializable {
 
     private Employee user;
     private TableView table;
-    private int who_is;             //////// 0 = superadmin   1 = manager
+    private int who_is;    ///// 0 = superadmin      1 = employee
+    private Circle profile;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
         makeDraggable();
         Platform.runLater( () -> {
-
             Image image = null;
             try {
                 image = new Image(new FileInputStream(user.getProfile_photo_Path()));
@@ -68,9 +69,7 @@ public class EmployeesprofileControler implements Initializable {
             passwordfeild.setText(user.getPassword());
             emailfeild.setText(user.getEmail());
             moneyfeild.setText(String.valueOf(user.getSalary()));
-
             if (who_is == 1)    moneyfeild.setEditable(false);
-
             phnumberfeild.setText(user.getPhoneNumber());
             addresfirld.setText(user.getAdress());
             user.show();
@@ -94,8 +93,19 @@ public class EmployeesprofileControler implements Initializable {
                     DataBase.updatemployee(user);
                     EmployeestableControler.editstage = null;
                     EmployeestableControler.registerstage = null;
+                    SuperadminDashbordControler.profilestage = null;
+                    Dashbord_employeeControler.profilestage = null;
                     if (table != null) {
                         table.setItems(DataBase.getemployees());
+                    }
+                    if (profile != null){
+                        Image image = null;
+                        try {
+                            image = new Image(new FileInputStream(user.getProfile_photo_Path()));
+                        } catch (FileNotFoundException ex) {
+                            ex.printStackTrace();
+                        }
+                        profile.setFill(new ImagePattern(image));
                     }
                     ((Stage) savebtn.getScene().getWindow()).close();
 
@@ -114,6 +124,8 @@ public class EmployeesprofileControler implements Initializable {
         cancelbtn.setOnAction( e -> {
             EmployeestableControler.editstage = null;
             EmployeestableControler.registerstage = null;
+            SuperadminDashbordControler.profilestage = null;
+            Dashbord_employeeControler.profilestage = null;
             ((Stage) savebtn.getScene().getWindow()).close();
         });
 
@@ -152,17 +164,11 @@ public class EmployeesprofileControler implements Initializable {
             } catch (NullPointerException ex){ }
         });
     }
-    public void settableANDpassenger(TableView<Employee> table,int userid,int who_is){
+    public void setdata(TableView table, Employee user, int who_is, Circle crl){
         this.table = table;
-        setuser(userid);
-        this.who_is = who_is;
-    }
-    public void setuser(int id){
-        try {
-            this.user = DataBase.searchForemployee(id);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        this.user = user;
+        this.who_is =   who_is;
+        this.profile = crl;
     }
     private void makeDraggable(){
         root.setOnMousePressed( ( (event) -> {
