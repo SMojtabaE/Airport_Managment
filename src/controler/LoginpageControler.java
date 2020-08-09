@@ -4,6 +4,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -11,6 +14,8 @@ import javafx.stage.StageStyle;
 import model.Employee;
 import model.Manager;
 import model.Passenger;
+
+import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -74,6 +79,7 @@ public class LoginpageControler implements Initializable {
 
         emploginbtn.setOnAction( e -> {
             if (empusernamefeild.getText().isEmpty() || emppasswordfeild.getText().isEmpty()){
+                Toolkit.getDefaultToolkit().beep();
                 emperorlbl.setText("fill all fields");
             }else if (empusernamefeild.getText().equals(superadmin.getUsername()) && emppasswordfeild.getText().
                     equals(superadmin.getPassword())){
@@ -123,12 +129,14 @@ public class LoginpageControler implements Initializable {
                     ex.printStackTrace();
                 }
                 emperorlbl.setText("username Or password Is wrong");
+                Toolkit.getDefaultToolkit().beep();
             }
 
         });
 
         passloginbtn.setOnAction( e -> {
             if (passusernamefeild.getText().isEmpty() || passpasswordfeild.getText().isEmpty()){
+                Toolkit.getDefaultToolkit().beep();
                 passerorlbl.setText("fill all fields");
             }else {
                 try {
@@ -153,6 +161,7 @@ public class LoginpageControler implements Initializable {
 
                     }else
                         passerorlbl.setText("username Or password Is wrong");
+                    Toolkit.getDefaultToolkit().beep();
                 } catch (SQLException ex) {
                     ex.printStackTrace();
                 }

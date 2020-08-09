@@ -10,6 +10,7 @@ public abstract class Person {
     private String email;
     private String phoneNumber;
     private String profile_photo_Path;
+    private String darkthem;
 
     public int getId() { return id; }
 
@@ -42,4 +43,8 @@ public abstract class Person {
     public String getProfile_photo_Path() { return profile_photo_Path; }
 
     public void setProfile_photo_Path(String profile_photo_Path) { this.profile_photo_Path = profile_photo_Path; }
+
+    public String getDarkthem() { return darkthem; }
+
+    public void setDarkthem(String darkthem) { this.darkthem = darkthem; }
 }

@@ -42,10 +42,11 @@ public class DataBase {
         ResultSet re = statement.executeQuery("select * from users where job like 0");
         Manager superadmin = null;
          if(re.next()){
+           String path =  re.getString(11).replace("[\\]+","\\\\");
                 superadmin = new Manager(re.getInt(1), re.getString(2), re.getString(3),
                         re.getString(4), re.getString(5), re.getString(6),
                         re.getString(7), re.getString(8), re.getDouble(9),
-                        re.getInt(10),re.getString(11));
+                        re.getInt(10),path,re.getString(12));
                 closeconection();
                 return superadmin;
             }
@@ -126,12 +127,12 @@ public class DataBase {
     ///////////////////////////////////////////////////// // managers database;
     public static int creatmanager(Manager user) throws SQLException {
         makeconnection();  // making connection to database
-        user.setProfile_photo_Path(user.getProfile_photo_Path().replace("\\","\\\\"));
+        user.setProfile_photo_Path(user.getProfile_photo_Path().replace("[\\]+","\\\\"));
         statement.execute(String.format("insert into users (name,lastname,username,password,email ,phoneNumber," +
-                "adress,salary,job,photo) values ( '%s', '%s', '%s', '%s', '%s', '%s', '%s', %f , %d,'%s')",
+                "adress,salary,job,photo,them) values ( '%s', '%s', '%s', '%s', '%s', '%s', '%s', %f , %d,'%s','%s')",
                 user.getName(),user.getLastname(),user.getUsername(),user.getPassword(),user.getEmail()
-                ,user.getPhoneNumber(),user.getAdress(),user.getSalary(),user.getJob(),user.getProfile_photo_Path())
-                ,Statement.RETURN_GENERATED_KEYS); //writing into database
+                ,user.getPhoneNumber(),user.getAdress(),user.getSalary(),user.getJob(),user.getProfile_photo_Path()
+                ,user.getDarkthem()),Statement.RETURN_GENERATED_KEYS); //writing into database
         ResultSet rs = statement.getGeneratedKeys(); // returning the id of user
         rs.next();
         int id = rs.getInt(1);
@@ -143,15 +144,23 @@ public class DataBase {
 
     public static void updatemanager(Manager user) throws SQLException {
         makeconnection();
-        user.setProfile_photo_Path(user.getProfile_photo_Path().replace("\\","\\\\"));
+        user.setProfile_photo_Path(user.getProfile_photo_Path().replace("[\\]+","\\\\"));
         statement.execute(String.format("update users set name = '%s', lastname = '%s', username = '%s'," +
-                " password = '%S', email = '%s', phoneNumber = '%s', adress = '%s', salary = %f, photo = '%s' where id = %d"
-               ,user.getName(),user.getLastname(),user.getUsername(),user.getPassword(),user.getEmail()
-                ,user.getPhoneNumber(),user.getAdress(),user.getSalary(),user.getProfile_photo_Path(),user.getId()));
+                " password = '%S', email = '%s', phoneNumber = '%s', adress = '%s', salary = %f, photo = '%s',them =" +
+                        " '%s' where id = %d",user.getName(),user.getLastname(),user.getUsername(),user.getPassword(),
+                user.getEmail(),user.getPhoneNumber(),user.getAdress(),user.getSalary(),user.getProfile_photo_Path()
+                ,user.getDarkthem(),user.getId()));
 
         report("user " + user.getUsername() + " updated.");
         closeconection();
     }
+    public static void updatmanagersthem(Manager user) throws SQLException {
+        makeconnection();
+        statement.execute(String.format("update users set them = '%s' where id = %d",user.getDarkthem(),user.getId()));
+        report( "Manager " + user.getUsername() + " them updated.");
+        closeconection();
+    }
+
 
     public static void deletmanager(Manager user) throws SQLException {
         makeconnection();
@@ -169,7 +178,7 @@ public class DataBase {
                 users.add(new Manager(re.getInt(1), re.getString(2), re.getString(3),
                         re.getString(4), re.getString(5), re.getString(6),
                         re.getString(7), re.getString(8), re.getDouble(9),
-                        re.getInt(10),re.getString(11)));
+                        re.getInt(10),re.getString(11),re.getString(12)));
         }
         closeconection();
         return users;
@@ -187,7 +196,7 @@ public class DataBase {
                 user = new Manager(re.getInt(1), re.getString(2), re.getString(3),
                         re.getString(4), re.getString(5), re.getString(6),
                         re.getString(7), re.getString(8), re.getDouble(9),
-                        re.getInt(10),re.getString(11));
+                        re.getInt(10),re.getString(11),re.getString(12));
                 closeconection();
                 return user;
             }
@@ -205,7 +214,7 @@ public class DataBase {
             user = new Manager(re.getInt(1), re.getString(2), re.getString(3),
                     re.getString(4), re.getString(5), re.getString(6),
                     re.getString(7), re.getString(8), re.getDouble(9),
-                    re.getInt(10),re.getString(11));
+                    re.getInt(10),re.getString(11),re.getString(12));
             closeconection();
             return user;
         }
@@ -226,16 +235,16 @@ public class DataBase {
 
 
 
-    //////////////////////////////////// // employees database
+    /////////////////////////////////////////////////////////////////////////////// // employees database
 
     public static int createmployee(Employee user) throws SQLException {
         makeconnection();  // making connection to database
-        user.setProfile_photo_Path(user.getProfile_photo_Path().replace("\\","\\\\"));
+        user.setProfile_photo_Path(user.getProfile_photo_Path().replace("[\\]+","\\\\"));
         statement.execute(String.format("insert into users (name,lastname,username,password,email ,phoneNumber," +
-                        "adress,salary,job,photo) values ( '%s', '%s', '%s', '%s', '%s', '%s', '%s', %f , %d,'%s')",
+                        "adress,salary,job,photo,them) values ( '%s', '%s', '%s', '%s', '%s', '%s', '%s', %f , %d,'%s','%s')",
                 user.getName(),user.getLastname(),user.getUsername(),user.getPassword(),user.getEmail()
-                ,user.getPhoneNumber(),user.getAdress(),user.getSalary(),user.getJob(),user.getProfile_photo_Path())
-                ,Statement.RETURN_GENERATED_KEYS); //writing into database
+                ,user.getPhoneNumber(),user.getAdress(),user.getSalary(),user.getJob(),user.getProfile_photo_Path()
+                ,user.getDarkthem()),Statement.RETURN_GENERATED_KEYS); //writing into database
         ResultSet rs = statement.getGeneratedKeys(); // returning the id of user
         rs.next();
         int id = rs.getInt(1);
@@ -247,14 +256,21 @@ public class DataBase {
 
     public static void updatemployee(Employee emplo) throws SQLException {
         makeconnection();
-        emplo.setProfile_photo_Path(emplo.getProfile_photo_Path().replace("\\","\\\\"));
+        emplo.setProfile_photo_Path(emplo.getProfile_photo_Path().replace("[\\]+","\\\\"));
         statement.execute(String.format("update users set name = '%s', lastname = '%s', username = '%s'," +
-                        " password = '%S', email = '%s', phoneNumber = '%s', adress = '%s', salary = %f, photo = '%s' where id = %d"
-                ,emplo.getName(),emplo.getLastname(),emplo.getUsername(),emplo.getPassword(),emplo.getEmail()
-                ,emplo.getPhoneNumber(),emplo.getAdress(),emplo.getSalary(),emplo.getProfile_photo_Path(),emplo.getId()));
+                        " password = '%S', email = '%s', phoneNumber = '%s', adress = '%s', salary = %f, photo = '%s'" +
+                        ",them = '%s' where id = %d",emplo.getName(),emplo.getLastname(),emplo.getUsername(),
+                emplo.getPassword(),emplo.getEmail(),emplo.getPhoneNumber(),emplo.getAdress(),emplo.getSalary(),
+                emplo.getProfile_photo_Path(),emplo.getDarkthem(),emplo.getId()));
 
         report( "employee " + emplo.getUsername() + " updated.");
 
+        closeconection();
+    }
+    public static void updatemployeesthem(Employee user) throws SQLException {
+        makeconnection();
+        statement.execute(String.format("update users set them = '%s' where id = %d",user.getDarkthem(),user.getId()));
+        report( "Employee " + user.getUsername() + " them updated.");
         closeconection();
     }
 
@@ -274,7 +290,7 @@ public class DataBase {
                 users.add(new Employee(re.getInt(1), re.getString(2), re.getString(3),
                         re.getString(4), re.getString(5), re.getString(6),
                         re.getString(7), re.getString(8), re.getDouble(9),
-                        re.getInt(10),re.getString(11)));
+                        re.getInt(10),re.getString(11),re.getString(12)));
 
         }
         closeconection();
@@ -289,7 +305,7 @@ public class DataBase {
                 user = new Employee(re.getInt(1), re.getString(2), re.getString(3),
                         re.getString(4), re.getString(5), re.getString(6),
                         re.getString(7), re.getString(8), re.getDouble(9),
-                        re.getInt(10),re.getString(11));
+                        re.getInt(10),re.getString(11),re.getString(12));
                 closeconection();
                 return user;
             }
@@ -306,7 +322,7 @@ public class DataBase {
             user = new Employee(re.getInt(1), re.getString(2), re.getString(3),
                     re.getString(4), re.getString(5), re.getString(6),
                     re.getString(7), re.getString(8), re.getDouble(9),
-                    re.getInt(10),re.getString(11));
+                    re.getInt(10),re.getString(11),re.getString(12));
             closeconection();
             return user;
         }
@@ -329,11 +345,11 @@ public class DataBase {
 
     public static int creatpassenger(Passenger user) throws SQLException {
         makeconnection();  // making connection to database
-        user.setProfile_photo_Path(user.getProfile_photo_Path().replace("\\","\\\\"));
-        statement.execute(String.format("insert into passengers (name,lastname,username,password,email ,phoneNumber,mony,photo)" +
-                        " values ( '%s', '%s', '%s', '%s', '%s', '%s', %f,'%s')",
+        user.setProfile_photo_Path(user.getProfile_photo_Path().replace("[\\]+","\\"));
+        statement.execute(String.format("insert into passengers (name,lastname,username,password,email ,phoneNumber," +
+                        "mony,photo,them) values ( '%s', '%s', '%s', '%s', '%s', '%s', %f,'%s','%s')",
                 user.getName(),user.getLastname(),user.getUsername(),user.getPassword(),user.getEmail()
-                ,user.getPhoneNumber(),user.getMoney(),user.getProfile_photo_Path())
+                ,user.getPhoneNumber(),user.getMoney(),user.getProfile_photo_Path(),user.getDarkthem())
                 ,Statement.RETURN_GENERATED_KEYS); //writing into database
         ResultSet rs = statement.getGeneratedKeys(); // returning the id of user
         rs.next();
@@ -342,16 +358,21 @@ public class DataBase {
         closeconection(); // closing the connection
         return id;
     }
-
     public static void updatpassenger(Passenger user) throws SQLException {
         makeconnection();
-        user.setProfile_photo_Path(user.getProfile_photo_Path().replace("\\","\\\\"));
+        user.setProfile_photo_Path(user.getProfile_photo_Path().replace("[\\]+","\\"));
         statement.execute(String.format("update passengers set name = '%s', lastname = '%s', username = '%s'," +
-                        " password = '%S', email = '%s', phoneNumber = '%s', mony = '%f', photo = '%s' where id = %d"
+                        " password = '%S', email = '%s', phoneNumber = '%s', mony = '%f', photo = '%s',them = '%s' " +
+                        "where id = %d"
                 ,user.getName(),user.getLastname(),user.getUsername(),user.getPassword(),user.getEmail()
-                ,user.getPhoneNumber(),user.getMoney(),user.getProfile_photo_Path(),user.getId()));
+                ,user.getPhoneNumber(),user.getMoney(),user.getProfile_photo_Path(),user.getDarkthem(),user.getId()));
          report( "passenger " + user.getUsername() + " updated.");
-
+        closeconection();
+    }
+    public static void updatpassengersthem(Passenger user) throws SQLException {
+        makeconnection();
+        statement.execute(String.format("update passengers set them = '%s' where id = %d",user.getDarkthem(),user.getId()));
+        report( "passenger " + user.getUsername() + " them updated.");
         closeconection();
     }
 
@@ -371,7 +392,7 @@ public class DataBase {
         while (re.next()){
                 users.add(new Passenger(re.getInt(1), re.getString(2), re.getString(3),
                         re.getString(4), re.getString(5), re.getString(6),
-                        re.getString(7), re.getDouble(8),re.getString(9)));
+                        re.getString(7), re.getDouble(8),re.getString(9),re.getString(10)));
         }
         closeconection();
         return users;
@@ -398,7 +419,7 @@ public class DataBase {
             if (password.equals(re.getString(5))){
                 passenger = new Passenger(re.getInt(1), re.getString(2), re.getString(3),
                         re.getString(4), re.getString(5), re.getString(6),
-                        re.getString(7), re.getDouble(8),re.getString(9));
+                        re.getString(7), re.getDouble(8),re.getString(9),re.getString(10));
                 closeconection();
                 return passenger;
             }
@@ -423,7 +444,7 @@ public class DataBase {
         if (re.next()) {
             passenger = new Passenger(re.getInt(1), re.getString(2), re.getString(3),
                     re.getString(4), re.getString(5), re.getString(6),
-                    re.getString(7), re.getDouble(8), re.getString(9));
+                    re.getString(7), re.getDouble(8), re.getString(9),re.getString(10));
             closeconection();
             return passenger;
         }
@@ -681,6 +702,42 @@ public class DataBase {
         return flights;
     }
 
+    public static boolean checkflightstiming(int airplane_id, LocalDate date_, String time_) throws SQLException {
+        makeconnection();
+        ResultSet re = statement.executeQuery(String.format("select * from flight where airplane_id = %d", airplane_id));
+        while (re.next()){
+            String date = String.valueOf(re.getDate(5));
+            String[] dt = date.split("-");
+            int[] dtn = new int[3];
+            for (int i = 0 ; i < dtn.length ; i++){
+                dtn[i] = Integer.parseInt(dt[i]);
+            }
+            LocalDate ldate = LocalDate.of(dtn[0],dtn[1],dtn[2]);
+            String time = String.valueOf(re.getTime(6));
+            Flight flight =new Flight(re.getInt(1), re.getInt(2), re.getString(3),
+                    re.getString(4), ldate, time, re.getInt(7), re.getString(8),
+                    Status.valueOf(re.getString(9)));
+            Period between = Period.between(date_,ldate);
+            if ((between.getDays() <= 0 ) && (flight.getStatus().equals(Status.open) || flight.getStatus().
+                    equals(Status.now))){
+                String[] timenowsplited = time_.split(":");
+                int[] timeintnow = new int[2];
+                String[] timesplited = time.split(":");
+                int[] timeint = new int[2];
+                for (int i = 0 ; i < timeint.length ; i++){      ///// timeint[0] === hour // timeint[1] = minet
+                    timeint[i] = Integer.parseInt(timesplited[i]);
+                    timeintnow[i] = Integer.parseInt(timenowsplited[i]);
+                }
+                if (timeint[0] == timeintnow[0]){
+                    closeconection();
+                    return false;
+                }
+            }
+        }
+        closeconection();
+        return true;
+    }
+
     public static ObservableList<Flight> searchidInflights(int flight_id) throws SQLException {
         makeconnection();
         ResultSet re = statement.executeQuery(String.format("select * from flight where id like %d", flight_id));
@@ -793,6 +850,16 @@ public class DataBase {
         report("passenger " + passenger_id + " buy ticket "+ ticket_id);
         closeconection(); // closing the connection
     }
+    public static boolean passengercanbuy(int ticket_id,int passenger_id) throws SQLException {
+        makeconnection();
+        ResultSet re = statement.executeQuery(String.format("select * from passengers_ticket where ticket_id = %d and " +
+                "passenger_id = %d",ticket_id,passenger_id));
+        while (re.next()){
+          return false;
+        }
+        closeconection();
+        return true;
+    }
 
     public static ObservableList<Passengers_ticket> getPassengers_ticket() throws SQLException {
         makeconnection();
@@ -815,10 +882,6 @@ public class DataBase {
         closeconection();
         return tickets;
     }
-
-
-
-
 
     public static ObservableList<Passengers_ticket> getPassengers_ticketByticketid(int ticket_id) throws SQLException {
         makeconnection();

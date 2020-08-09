@@ -11,6 +11,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -20,11 +21,20 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class Dashbord_managerControler implements Initializable {
     @FXML BorderPane borderpane;
     @FXML Circle profilepic;
+    @FXML Circle crl1;
+    @FXML Circle crl2;
+    @FXML Circle crl3;
+    @FXML Circle crl4;
+    @FXML Circle crl5;
+    @FXML Circle crl6;
+    @FXML Circle crl7;
+    @FXML Circle crl8;
     @FXML StackPane passengersstack;
     @FXML StackPane employeesstack;
     @FXML StackPane airplanestack;
@@ -34,12 +44,17 @@ public class Dashbord_managerControler implements Initializable {
     @FXML StackPane passticketsstack;
     @FXML StackPane logout;
     @FXML Button username;
+    @FXML Button darkthem;
 
     private Manager manager;
     static Stage profilestage = null;
+    static String backgroundColor;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+//        String backgroundColor = "13333e";
+       // profilepic.setStroke(Paint.valueOf(backgroundColor));
         Platform.runLater( () -> {
             if (manager != null) {
                 username.setText(manager.getUsername());
@@ -50,8 +65,22 @@ public class Dashbord_managerControler implements Initializable {
                     e.printStackTrace();
                 }
                 profilepic.setFill(new ImagePattern(image));
+
+                if (manager.getDarkthem().equals("off")){
+                    backgroundColor = "ffff";
+                    username.setTextFill(Paint.valueOf("030303"));
+                    darkthem.setTextFill(Paint.valueOf("030303"));
+                    darkthem.setText("Light them");
+                }else if (manager.getDarkthem().equals("on")){
+                    backgroundColor = "13333e";
+                    username.setTextFill(Paint.valueOf("ffff"));
+                    darkthem.setTextFill(Paint.valueOf("ffff"));
+                    darkthem.setText("Dark them");
+                }
+              setthem();
             }
         });
+
 
         logout.setOnMousePressed( e -> {
             BorderPane border = null;
@@ -64,6 +93,30 @@ public class Dashbord_managerControler implements Initializable {
                 DataBase.report( "Manager " + manager.getUsername() + " loged out");
                 ((Stage)logout.getScene().getWindow()).close();
             } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        });
+
+        darkthem.setOnAction( e -> {
+            try {
+                if (manager.getDarkthem().equals("off")){
+                    manager.setDarkthem("on");
+                    backgroundColor = "13333e";
+                    username.setTextFill(Paint.valueOf("ffff"));
+                    darkthem.setTextFill(Paint.valueOf("ffff"));
+                    DataBase.updatmanagersthem(manager);
+                    darkthem.setText("Light them");
+                    setthem();
+                }else if (manager.getDarkthem().equals("on")){
+                    manager.setDarkthem("off");
+                    backgroundColor = "ffff";
+                    username.setTextFill(Paint.valueOf("030303"));
+                    darkthem.setTextFill(Paint.valueOf("030303"));
+                    DataBase.updatmanagersthem(manager);
+                    darkthem.setText("Dark them");
+                    setthem();
+                }
+            } catch (SQLException ex) {
                 ex.printStackTrace();
             }
         });
@@ -165,5 +218,18 @@ public class Dashbord_managerControler implements Initializable {
     }
     public void setuser(Manager user){
         this.manager = user;
+    }
+
+    public void setthem(){
+        borderpane.setStyle("-fx-background-color: #"+backgroundColor);
+        profilepic.setStroke(Paint.valueOf(backgroundColor));
+        crl1.setStroke(Paint.valueOf(backgroundColor));
+        crl2.setStroke(Paint.valueOf(backgroundColor));
+        crl3.setStroke(Paint.valueOf(backgroundColor));
+        crl4.setStroke(Paint.valueOf(backgroundColor));
+        crl5.setStroke(Paint.valueOf(backgroundColor));
+        crl6.setStroke(Paint.valueOf(backgroundColor));
+        crl7.setStroke(Paint.valueOf(backgroundColor));
+        crl8.setStroke(Paint.valueOf(backgroundColor));
     }
 }

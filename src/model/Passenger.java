@@ -12,10 +12,11 @@ public class Passenger extends Person implements Showable {
         this.setEmail(email);
         this.setPhoneNumber(phone);
         this.setMoney(money);
-        this.setProfile_photo_Path("H:\\programs code\\Java\\Airport_Managment\\src\\view\\Picturs\\passengers_defult_photo.png");
-     //   this.setProfile_photo_Path("H:\\programs code\\Java\\Airport_Managment\\src\\view\\Picturs\\passengers_defult_photo.png");
+        this.setProfile_photo_Path("H:\\\\programs code\\\\Java\\\\Airport_Managment\\\\src\\\\view\\\\Picturs\\\\passengers_defult_photo.png");
+        this.setDarkthem("off");
     }
-    public Passenger(int id,String name,String lastname,String username,String password,String email,String phone,double money,String path){
+    public Passenger(int id,String name,String lastname,String username,String password,String email,String phone,
+                     double money,String path,String them){
         this.setName(name);
         this.setLastname(lastname);
         this.setUsername(username);
@@ -25,7 +26,7 @@ public class Passenger extends Person implements Showable {
         this.setMoney(money);
         this.setId(id);
         this.setProfile_photo_Path(path);
-        //this.setProfile_photo_Path("H:\\programs code\\Java\\Airport_Managment\\src\\view\\Picturs\\passengers_defult_photo.png");
+       this.setDarkthem(them);
     }
 
     @Override

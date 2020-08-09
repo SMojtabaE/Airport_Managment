@@ -1,6 +1,8 @@
 package controler;
 
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -52,7 +54,6 @@ public class ManagersprofileControler implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
         makeDraggable();
         Platform.runLater( () -> {
             Image image = null;
@@ -89,6 +90,7 @@ public class ManagersprofileControler implements Initializable {
                     user.setPassword(passwordfeild.getText());
                     user.setPhoneNumber(phnumberfeild.getText());
                     user.setAdress(addresfirld.getText());
+                    user.setProfile_photo_Path(user.getProfile_photo_Path().replace("[\\]+","\\\\"));
                     DataBase.updatemanager(user);
                     ManagerstableControler.editstage = null;
                     ManagerstableControler.registerstage = null;
@@ -106,6 +108,7 @@ public class ManagersprofileControler implements Initializable {
                         }
                         profile.setFill(new ImagePattern(image));
                     }
+
                     ((Stage) savebtn.getScene().getWindow()).close();
 
                 } catch (SQLException ex){
@@ -141,7 +144,7 @@ public class ManagersprofileControler implements Initializable {
 
                 // hear i just set path to be good
                 filepath = filepath.replace("file:", "");
-                filepath = filepath.replace("/", "\\");
+                filepath = filepath.replace("/", "\\\\");
                 filepath = filepath.replace("%20", " ");
                 String[] path = filepath.split("");
                 // deleting the firs / of path

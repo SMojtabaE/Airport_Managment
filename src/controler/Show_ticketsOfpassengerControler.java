@@ -56,7 +56,7 @@ public class Show_ticketsOfpassengerControler implements Initializable {
                     Flight flight = DataBase.searchForflight(selected.getFlight_id());
                     if (flight.getStatus().equals(Status.open)) {
                             DataBase.deletpassengers_ticket_passenger(selected.getId(), passenger.getId());
-                            passenger.setMoney(passenger.getMoney() + selected.getPrice());
+                            passenger.setMoney(passenger.getMoney() +  ((selected.getLoss() * selected.getPrice()) / 100));
                             flight.setSold_tickets(flight.getSold_tickets() + 1);
                             DataBase.updateflight(flight);
                             DataBase.updatpassenger(passenger);

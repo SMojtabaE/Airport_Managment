@@ -16,7 +16,7 @@ import java.awt.*;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
-import java.util.regex.Pattern;
+
 
 public class Add_flightControler implements Initializable {
 
@@ -33,6 +33,10 @@ public class Add_flightControler implements Initializable {
 
     private double x = 0, y = 0;
     private TableView table;
+
+    // TODO add some cod
+    // FIXME make dark them for all clases:
+    //-classes
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         makeDraggable();
@@ -51,16 +55,21 @@ public class Add_flightControler implements Initializable {
             } else {
                 try {
                     if (DataBase.airplaine_ID_Isvali(Integer.parseInt(airplaneid.getText()))) {
-                        Flight flight = new Flight(Integer.parseInt(airplaneid.getText()), origin.getText(),
-                                destination.getText(), date.getValue(), time.getText(), longs.getText());
-                        flight.setId(DataBase.createflight(flight));
-                        Flights_tableControler.registerstage = null;
-                        Flights_tableControler.editstage = null;
-                        if (table != null) {
-                            table.getItems().add(flight);
+                        if (DataBase.checkflightstiming(Integer.parseInt(airplaneid.getText()),date.getValue(),
+                                time.getText())){
+                            Flight flight = new Flight(Integer.parseInt(airplaneid.getText()), origin.getText(),
+                                    destination.getText(), date.getValue(), time.getText(), longs.getText());
+                            flight.setId(DataBase.createflight(flight));
+                            Flights_tableControler.registerstage = null;
+                            Flights_tableControler.editstage = null;
+                            if (table != null) {
+                                table.getItems().add(flight);
+                            }
+                            ((Stage) savebtn.getScene().getWindow()).close();
+                        }else{
+                            erorlbl.setText("airplane has flight in that time");
+                            Toolkit.getDefaultToolkit().beep();
                         }
-                        ((Stage) savebtn.getScene().getWindow()).close();
-
                     }else {
                         erorlbl.setText("Enter a Valid airplane ID");
                         Toolkit.getDefaultToolkit().beep();

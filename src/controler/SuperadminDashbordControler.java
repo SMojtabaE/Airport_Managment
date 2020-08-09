@@ -11,6 +11,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -20,12 +21,23 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class SuperadminDashbordControler implements Initializable {
     
     @FXML BorderPane borderpane;
     @FXML Circle profilepic;
+    @FXML Circle crl1;
+    @FXML Circle crl2;
+    @FXML Circle crl3;
+    @FXML Circle crl4;
+    @FXML Circle crl5;
+    @FXML Circle crl6;
+    @FXML Circle crl7;
+    @FXML Circle crl8;
+    @FXML Circle crl9;
+    @FXML Circle crl10;
     @FXML StackPane passengersstack;
     @FXML StackPane employeesstack;
     @FXML StackPane managersstack;
@@ -37,9 +49,20 @@ public class SuperadminDashbordControler implements Initializable {
     @FXML StackPane passtickesstack;
     @FXML StackPane logout;
     @FXML Button username;
+    @FXML Button darkthem;
 
-    private Manager superadmin = LoginpageControler.superadmin;
+    private Manager superadmin;
+
+    {
+        try {
+            superadmin = DataBase.getsuperadmin();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     static Stage profilestage = null;
+    static String backgroundColor;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
@@ -53,6 +76,18 @@ public class SuperadminDashbordControler implements Initializable {
                     e.printStackTrace();
                 }
                 profilepic.setFill(new ImagePattern(image));
+                if (superadmin.getDarkthem().equals("off")){
+                    backgroundColor = "ffff";
+                    username.setTextFill(Paint.valueOf("030303"));
+                    darkthem.setTextFill(Paint.valueOf("030303"));
+                    darkthem.setText("Light them");
+                }else if (superadmin.getDarkthem().equals("on")){
+                    backgroundColor = "13333e";
+                    username.setTextFill(Paint.valueOf("ffff"));
+                    darkthem.setTextFill(Paint.valueOf("ffff"));
+                    darkthem.setText("Dark them");
+                }
+                setthem();
             }
         });
 
@@ -71,6 +106,30 @@ public class SuperadminDashbordControler implements Initializable {
             }
         });
 
+        darkthem.setOnAction( e -> {
+            try {
+            if (superadmin.getDarkthem().equals("off")){
+                superadmin.setDarkthem("on");
+                backgroundColor = "13333e";
+                username.setTextFill(Paint.valueOf("ffff"));
+                darkthem.setTextFill(Paint.valueOf("ffff"));
+                darkthem.setText("Light them");
+                DataBase.updatmanagersthem(superadmin);
+                setthem();
+            }else if (superadmin.getDarkthem().equals("on")){
+                superadmin.setDarkthem("off");
+                backgroundColor = "ffff";
+                username.setTextFill(Paint.valueOf("030303"));
+                darkthem.setTextFill(Paint.valueOf("030303"));
+                darkthem.setText("Dark them");
+
+                DataBase.updatmanagersthem(superadmin);
+                setthem();
+            }
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        });
         profilepic.setOnMousePressed( e -> {
             if (profilestage == null) {
                 FXMLLoader loader_ = new FXMLLoader(getClass().getResource("../view/ManagersProfile.fxml"));
@@ -184,6 +243,20 @@ public class SuperadminDashbordControler implements Initializable {
             }
             borderpane.setCenter(flighttbl);
         });
+    }
+    public void setthem(){
 
+        borderpane.setStyle("-fx-background-color: #"+backgroundColor);
+        profilepic.setStroke(Paint.valueOf(backgroundColor));
+        crl1.setStroke(Paint.valueOf(backgroundColor));
+        crl2.setStroke(Paint.valueOf(backgroundColor));
+        crl3.setStroke(Paint.valueOf(backgroundColor));
+        crl4.setStroke(Paint.valueOf(backgroundColor));
+        crl5.setStroke(Paint.valueOf(backgroundColor));
+        crl6.setStroke(Paint.valueOf(backgroundColor));
+        crl7.setStroke(Paint.valueOf(backgroundColor));
+        crl8.setStroke(Paint.valueOf(backgroundColor));
+        crl9.setStroke(Paint.valueOf(backgroundColor));
+        crl10.setStroke(Paint.valueOf(backgroundColor));
     }
 }

@@ -12,6 +12,8 @@ import javafx.stage.Stage;
 import model.Employee;
 import model.Manager;
 import model.Passenger;
+
+import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -41,16 +43,10 @@ public class ForgottenpasswordControler implements Initializable {
             if (lbl.getText().isEmpty()){
                 lbl.setStyle(" -fx-text-fill: red");
                 lbl.setText("Enter Your Email");
+                Toolkit.getDefaultToolkit().beep();
             }else if (isValid(emailfeild.getText())){
                 if (who_is == 0) {
                     try {
-//                        ArrayList<Manager> managers = DataBase.getmanagers();
-//                        for (int i = 0; i < managers.size(); i++) {
-//                            if (emailfeild.getText().equals(managers.get(i).getEmail())) {
-//                                lbl.setText("Your Password Is " + managers.get(i).getPassword());
-//                                flag = true;
-//                            }
-//                        }
                         String password =DataBase.resetpasswordusers(emailfeild.getText());
                         if (password != null){
                             lbl.setText("Password Is " + password);
@@ -61,13 +57,6 @@ public class ForgottenpasswordControler implements Initializable {
                     }
                 } else if (who_is == 1) {
                     try {
-//                        ArrayList<Passenger> passengers = DataBase.getpassengers();
-//                        for (int i = 0; i < passengers.size(); i++) {
-//                            if (emailfeild.getText().equals(passengers.get(i).getEmail())) {
-//                                lbl.setText("Your Password Is " + passengers.get(i).getPassword());
-//                                flag = true;
-//                            }
-//                        }
                         String password = DataBase.resetpasswordPassengers(emailfeild.getText());
                         if (password != null){
                             lbl.setText("Password Is " + password);
@@ -80,10 +69,12 @@ public class ForgottenpasswordControler implements Initializable {
                 if (!flag) {
                     lbl.setStyle(" -fx-text-fill: red");
                     lbl.setText("wrong Email");
+                    Toolkit.getDefaultToolkit().beep();
                 }
             }else {
                 lbl.setStyle(" -fx-text-fill: red");
                 lbl.setText("Email is invalid");
+                Toolkit.getDefaultToolkit().beep();
             }
         });
 

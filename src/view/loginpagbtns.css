@@ -2,11 +2,13 @@
     -fx-background-color: transparent;
     -fx-border-width:  0px 0px 2px 0px;
     -fx-border-color: green;
+    -fx-cursor: hand;
 }
 #logbtn:hover{
     -fx-background-color: green;
 }
 #closebtn{
+    -fx-cursor: hand;
     -fx-background-color: transparent;
     -fx-border-width:  0px 0px 2px 0px;
     -fx-border-color: red;
@@ -15,6 +17,7 @@
     -fx-background-color: red;
 }
 #singinbtn{
+    -fx-cursor: hand;
     -fx-background-color: transparent;
     -fx-border-width:  0px 0px 2px 0px;
     -fx-border-color: blue;
@@ -24,6 +27,7 @@
 }
 
 #savebtn{
+    -fx-cursor: hand;
     -fx-background-color: transparent;
     -fx-border-width:  0px 0px 2px 0px;
     -fx-border-color: #002d7b;
@@ -32,6 +36,7 @@
     -fx-background-color: #002d7b;
 }
 #cancelbtn{
+    -fx-cursor: hand;
     -fx-background-color: transparent;
     -fx-border-width:  0px 0px 2px 0px;
     -fx-border-color: red;
@@ -41,6 +46,7 @@
 }
 
 #forgetpassbtn{
+    -fx-cursor: hand;
     -fx-background-color: transparent;
     -fx-border-width:  0px 0px 2px 0px;
     -fx-border-color: yellow;

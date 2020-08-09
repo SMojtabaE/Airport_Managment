@@ -50,16 +50,21 @@ public class Buyticket_for_passengerControler implements Initializable {
                             ex.printStackTrace();
                         }
                         if (flight.getStatus().equals(Status.open)) {
-                            if ((passenger.getMoney() - ticket.getPrice()) > 0) {
-                                DataBase.createpassengers_ticket(ticket.getId(), passenger.getId());
-                                passenger.setMoney(passenger.getMoney() - ticket.getPrice());
-                                DataBase.updatpassenger(passenger);
-                                flight.setSold_tickets(flight.getSold_tickets() - 1);
-                                DataBase.updateflight(flight);
-                                Ticket_tableControler.registerstage = null;
-                                ((Stage) savebtn.getScene().getWindow()).close();
-                            } else {
-                                erorlbl.setText("Passenger is low on money,charg it");
+                            if (DataBase.passengercanbuy(ticket.getId(),passenger.getId())) {
+                                if ((passenger.getMoney() - ticket.getPrice()) > 0) {
+                                    DataBase.createpassengers_ticket(ticket.getId(), passenger.getId());
+                                    passenger.setMoney(passenger.getMoney() - ticket.getPrice());
+                                    DataBase.updatpassenger(passenger);
+                                    flight.setSold_tickets(flight.getSold_tickets() - 1);
+                                    DataBase.updateflight(flight);
+                                    Ticket_tableControler.registerstage = null;
+                                    ((Stage) savebtn.getScene().getWindow()).close();
+                                } else {
+                                    erorlbl.setText("Passenger is low on money,charg it");
+                                    Toolkit.getDefaultToolkit().beep();
+                                }
+                            }else {
+                                erorlbl.setText("Already have one");
                                 Toolkit.getDefaultToolkit().beep();
                             }
                         }else {
