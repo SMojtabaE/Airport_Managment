@@ -72,7 +72,7 @@
       </ImageView>
       <Label layoutX="55.0" layoutY="36.0" prefHeight="59.0" prefWidth="149.0" text="Add Employee" textFill="#ffe63a">
          <font>
-            <Font size="20.0" />
+            <Font size="23.0" />
          </font>
       </Label>
       <Label fx:id="erorlbl" layoutX="157.0" layoutY="297.0" textFill="RED">

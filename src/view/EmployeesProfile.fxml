@@ -7,31 +7,31 @@
 
 <AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="376.0" prefWidth="641.0" style="-fx-background-color: #37474F; -fx-background-radius: 30;" stylesheets="@profiles.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controler.EmployeesprofileControler">
     <children>
-        <Pane layoutX="301.0" layoutY="-301.0" prefHeight="442.0" prefWidth="204.0" rotate="-53.1" style="-fx-background-radius: 70; -fx-background-color: #af739a;" />
-        <Circle fx:id="crl" fill="DODGERBLUE" layoutX="133.0" layoutY="60.0" radius="32.0" stroke="#af739a" strokeType="INSIDE" strokeWidth="2.0" />
-        <Button fx:id="editprofilephbtn" layoutX="165.0" layoutY="60.0" mnemonicParsing="false" styleClass="empbtns" text="Edit profile phot" />
-        <TextField fx:id="namefeild" layoutX="101.0" layoutY="134.0" prefHeight="25.0" prefWidth="128.0" promptText="Name" styleClass="emptxtfields" />
-        <TextField fx:id="lastnamefeild" layoutX="299.0" layoutY="135.0" prefHeight="25.0" prefWidth="128.0" promptText="LastName" styleClass="emptxtfields" />
-        <TextField fx:id="phnumberfeild" layoutX="101.0" layoutY="194.0" prefHeight="25.0" prefWidth="128.0" promptText="Phonenumber" styleClass="emptxtfields" />
-        <TextField fx:id="moneyfeild" layoutX="493.0" layoutY="194.0" prefHeight="25.0" prefWidth="128.0" promptText="Money" styleClass="emptxtfields" />
-        <TextField fx:id="passwordfeild" layoutX="499.0" layoutY="135.0" prefHeight="25.0" prefWidth="128.0" promptText="Password" styleClass="emptxtfields" />
-        <TextField fx:id="emailfeild" layoutX="299.0" layoutY="194.0" prefHeight="25.0" prefWidth="128.0" promptText="E-mail" styleClass="emptxtfields" />
-        <Button fx:id="cancelbtn" layoutX="500.0" layoutY="324.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="85.0" styleClass="empbtns" text="Cancel" />
-        <Button fx:id="savebtn" layoutX="403.0" layoutY="324.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="85.0" styleClass="empbtns" text="Save" />
-        <Pane layoutX="132.0" layoutY="223.0" prefHeight="442.0" prefWidth="225.0" rotate="-53.1" style="-fx-background-radius: 70; -fx-background-color: #af739a;" />
+        <Pane layoutX="301.0" layoutY="-301.0" prefHeight="442.0" prefWidth="204.0" rotate="-53.1" style="-fx-background-radius: 70; -fx-background-color: #24fff8;" />
+        <Circle fx:id="crl" fill="DODGERBLUE" layoutX="133.0" layoutY="60.0" radius="32.0" stroke="#24fff8" strokeType="INSIDE" strokeWidth="2.0" />
+        <Button fx:id="editprofilephbtn" layoutX="165.0" layoutY="60.0" mnemonicParsing="false" styleClass="empbtnsprofile" text="Edit profile phot" />
+        <TextField fx:id="namefeild" layoutX="101.0" layoutY="134.0" prefHeight="25.0" prefWidth="128.0" promptText="Name" styleClass="emptxtfieldsprofile" />
+        <TextField fx:id="lastnamefeild" layoutX="299.0" layoutY="135.0" prefHeight="25.0" prefWidth="128.0" promptText="LastName" styleClass="emptxtfieldsprofile" />
+        <TextField fx:id="phnumberfeild" layoutX="101.0" layoutY="194.0" prefHeight="25.0" prefWidth="128.0" promptText="Phonenumber" styleClass="emptxtfieldsprofile" />
+        <TextField fx:id="moneyfeild" layoutX="493.0" layoutY="194.0" prefHeight="25.0" prefWidth="128.0" promptText="Money" styleClass="emptxtfieldsprofile" />
+        <TextField fx:id="passwordfeild" layoutX="499.0" layoutY="135.0" prefHeight="25.0" prefWidth="128.0" promptText="Password" styleClass="emptxtfieldsprofile" />
+        <TextField fx:id="emailfeild" layoutX="299.0" layoutY="194.0" prefHeight="25.0" prefWidth="128.0" promptText="E-mail" styleClass="emptxtfieldsprofile" />
+        <Button fx:id="cancelbtn" layoutX="500.0" layoutY="324.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="85.0" styleClass="empbtnsprofile" text="Cancel" />
+        <Button fx:id="savebtn" layoutX="403.0" layoutY="324.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="85.0" styleClass="empbtnsprofile" text="Save" />
+        <Pane layoutX="132.0" layoutY="223.0" prefHeight="442.0" prefWidth="225.0" rotate="-53.1" style="-fx-background-radius: 70; -fx-background-color: #24fff8;" />
         <Label fx:id="erorlbl" layoutX="278.0" layoutY="300.0" textFill="#fc0000">
             <font>
                 <Font size="13.0" />
             </font>
         </Label>
-        <Label layoutX="55.0" layoutY="139.0" text="Name :" textFill="#46fb62" />
-        <Label layoutX="243.0" layoutY="140.0" text="LAstName :" textFill="#46fb62" />
-        <Label layoutX="14.0" layoutY="199.0" text="phonenumber :" textFill="#46fb62" />
-        <Label layoutX="446.0" layoutY="140.0" text="Password :" textFill="#46fb62" />
-        <Label layoutX="446.0" layoutY="199.0" text="Money :" textFill="#46fb62" />
-        <Label layoutX="257.0" layoutY="199.0" text="E-mail :" textFill="#46fb62" />
-      <Button fx:id="username" layoutX="165.0" layoutY="9.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="74.0" styleClass="emprtg" text="username" />
-      <TextArea fx:id="addresfirld" layoutX="391.0" layoutY="247.0" prefHeight="53.0" prefWidth="194.0" promptText="Addres" styleClass="emptxtarea" />
-      <Label layoutX="391.0" layoutY="230.0" text="Addres" textFill="#46fb62" />
+        <Label layoutX="55.0" layoutY="139.0" text="Name :" textFill="#ec407a" />
+        <Label layoutX="243.0" layoutY="140.0" text="LAstName :" textFill="#ec407a" />
+        <Label layoutX="14.0" layoutY="199.0" text="phonenumber :" textFill="#ec407a" />
+        <Label layoutX="446.0" layoutY="140.0" text="Password :" textFill="#ec407a" />
+        <Label layoutX="446.0" layoutY="199.0" text="Money :" textFill="#ec407a" />
+        <Label layoutX="257.0" layoutY="199.0" text="E-mail :" textFill="#ec407a" />
+      <Button fx:id="username" layoutX="165.0" layoutY="9.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="74.0" styleClass="emprtgprofile" text="username" />
+      <TextArea fx:id="addresfirld" layoutX="391.0" layoutY="247.0" prefHeight="53.0" prefWidth="194.0" promptText="Addres" styleClass="emptxtareaprofile" />
+      <Label layoutX="391.0" layoutY="230.0" text="Addres" textFill="#ec407a" />
     </children>
 </AnchorPane>

@@ -32,22 +32,23 @@
 .emptxtfields{
     -fx-background-color: transparent;
     -fx-border-width:  0px 0px 2px 0px;
-    -fx-border-color:  #af739a;
+    -fx-border-color:  #ffff29;
     -fx-text-fill: #BDBDBD;
 }
 .emptxtarea{
     -fx-border-width:  2px 2px 2px 2px;
-    -fx-border-color:  #af739a;
+    -fx-border-color:  #ffff29;
 }
 .empbtns{
     -fx-background-color: transparent;
     -fx-border-width:  2px 2px 2px 2px;
-    -fx-border-color:  #af739a;
+    -fx-border-color:  #ffff29;
     -fx-border-radius: 10;
     -fx-background-radius: 10;
     -fx-text-fill: #BDBDBD;
     -fx-cursor: hand;
-}.addairplanebtns{
+}
+.addairplanebtns{
     -fx-background-color: transparent;
     -fx-border-width:  2px 2px 2px 2px;
     -fx-border-color:   #f4d52b;
@@ -74,6 +75,61 @@
     -fx-background-color: transparent;
     -fx-border-width:  2px 2px 2px 2px;
     -fx-border-color:  #EC407A;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-text-fill: #BDBDBD;
+    -fx-cursor: hand;
+}
+.emprtgprofile{
+    -fx-background-color: transparent;
+    -fx-border-width:  2px 2px 2px 2px;
+    -fx-border-color:   #24fff8;
+    -fx-border-radius: 20 20 20 0;
+    -fx-background-radius: 21 21 21 0;
+    -fx-text-fill: #BDBDBD;
+}
+.emptxtfieldsprofile{
+    -fx-background-color: transparent;
+    -fx-border-width:  0px 0px 2px 0px;
+    -fx-border-color:   #24fff8;
+    -fx-text-fill: #BDBDBD;
+}
+.emptxtareaprofile{
+    -fx-border-width:  2px 2px 2px 2px;
+    -fx-border-color:   #24fff8;
+}
+.empbtnsprofile{
+    -fx-background-color: transparent;
+    -fx-border-width:  2px 2px 2px 2px;
+    -fx-border-color:   #24fff8;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-text-fill: #BDBDBD;
+    -fx-cursor: hand;
+}
+
+.manrtg{
+    -fx-background-color: transparent;
+    -fx-border-width:  2px 2px 2px 2px;
+    -fx-border-color:   #af739a;
+    -fx-border-radius: 20 20 20 0;
+    -fx-background-radius: 21 21 21 0;
+    -fx-text-fill: #BDBDBD;
+}
+.mantxtfields{
+    -fx-background-color: transparent;
+    -fx-border-width:  0px 0px 2px 0px;
+    -fx-border-color:    #af739a;
+    -fx-text-fill: #BDBDBD;
+}
+.mantxtarea{
+    -fx-border-width:  2px 2px 2px 2px;
+    -fx-border-color:    #af739a;
+}
+.manbtns{
+    -fx-background-color: transparent;
+    -fx-border-width:  2px 2px 2px 2px;
+    -fx-border-color:    #af739a;
     -fx-border-radius: 10;
     -fx-background-radius: 10;
     -fx-text-fill: #BDBDBD;
