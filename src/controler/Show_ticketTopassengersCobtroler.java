@@ -98,22 +98,25 @@ public class Show_ticketTopassengersCobtroler implements Initializable {
             try {
                 Flight flight = DataBase.searchForflight(selected.getFlight_id());
                 if (flight.getStatus().equals(Status.open)) {
-                    if (selected != null) {
-                        if (DataBase.passengercanbuy(selected.getId(),passenger.getId())) {
+                    if (flight.getSold_tickets() > 0) {
+                        if (DataBase.passengercanbuy(selected.getId(), passenger.getId())) {
                             if ((passenger.getMoney() - selected.getPrice()) > 0) {
                                 DataBase.createpassengers_ticket(selected.getId(), passenger.getId());
                                 passenger.setMoney(passenger.getMoney() - selected.getPrice());
                                 flight.setSold_tickets(flight.getSold_tickets() - 1);
                                 DataBase.updateflight(flight);
-                                DataBase.updatpassenger(passenger);
+                                DataBase.updatpassengersmony(passenger);
                             } else {
                                 erorlbl.setText("You are low on money,charg it");
                                 Toolkit.getDefaultToolkit().beep();
                             }
-                        }else {
+                        } else {
                             erorlbl.setText("You already have one");
                             Toolkit.getDefaultToolkit().beep();
                         }
+                    }else {
+                        erorlbl.setText("Thers no seat!!");
+                        Toolkit.getDefaultToolkit().beep();
                     }
                 }else {
                     erorlbl.setText("you cant buy it");

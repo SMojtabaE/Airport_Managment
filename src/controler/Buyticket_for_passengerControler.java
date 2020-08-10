@@ -26,6 +26,7 @@ public class Buyticket_for_passengerControler implements Initializable {
     @FXML TextField passengerid;
     @FXML Label erorlbl;
     @FXML AnchorPane root;
+
     private double x = 0, y = 0;
     private Ticket ticket;
     @Override
@@ -43,32 +44,33 @@ public class Buyticket_for_passengerControler implements Initializable {
                 try {
                     Passenger passenger = DataBase.searchFrompassenger(Integer.parseInt(passengerid.getText()));
                     if (passenger != null) {
-                        Flight flight = null;
-                        try {
+                        Flight flight;
                             flight = DataBase.searchForflight(ticket.getFlight_id());
-                        } catch (SQLException ex) {
-                            ex.printStackTrace();
-                        }
                         if (flight.getStatus().equals(Status.open)) {
-                            if (DataBase.passengercanbuy(ticket.getId(),passenger.getId())) {
-                                if ((passenger.getMoney() - ticket.getPrice()) > 0) {
-                                    DataBase.createpassengers_ticket(ticket.getId(), passenger.getId());
-                                    passenger.setMoney(passenger.getMoney() - ticket.getPrice());
-                                    DataBase.updatpassenger(passenger);
-                                    flight.setSold_tickets(flight.getSold_tickets() - 1);
-                                    DataBase.updateflight(flight);
-                                    Ticket_tableControler.registerstage = null;
-                                    ((Stage) savebtn.getScene().getWindow()).close();
+                            if (flight.getSold_tickets() > 0) {
+                                if (DataBase.passengercanbuy(ticket.getId(), passenger.getId())) {
+                                    if ((passenger.getMoney() - ticket.getPrice()) > 0) {
+                                        DataBase.createpassengers_ticket(ticket.getId(), passenger.getId());
+                                        passenger.setMoney(passenger.getMoney() - ticket.getPrice());
+                                        DataBase.updatpassengersmony(passenger);
+                                        flight.setSold_tickets(flight.getSold_tickets() - 1);
+                                        DataBase.updateflight(flight);
+                                        Ticket_tableControler.registerstage = null;
+                                        ((Stage) savebtn.getScene().getWindow()).close();
+                                    } else {
+                                        erorlbl.setText("Passenger is low on money,charg it");
+                                        Toolkit.getDefaultToolkit().beep();
+                                    }
                                 } else {
-                                    erorlbl.setText("Passenger is low on money,charg it");
+                                    erorlbl.setText("Already have one");
                                     Toolkit.getDefaultToolkit().beep();
                                 }
                             }else {
-                                erorlbl.setText("Already have one");
+                                erorlbl.setText("thers no seat!!");
                                 Toolkit.getDefaultToolkit().beep();
                             }
                         }else {
-                        erorlbl.setText("you cant buy it");
+                        erorlbl.setText("you cant buy it,its late");
                         Toolkit.getDefaultToolkit().beep();
                     }
                     }else {

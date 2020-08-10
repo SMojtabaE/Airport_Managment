@@ -369,6 +369,12 @@ public class DataBase {
          report( "passenger " + user.getUsername() + " updated.");
         closeconection();
     }
+    public static void updatpassengersmony(Passenger user) throws SQLException {
+        makeconnection();
+        statement.execute(String.format("update passengers set mony = '%f' where id = %d",user.getMoney(),user.getId()));
+         report( "passengers mony " + user.getUsername() + " updated.");
+        closeconection();
+    }
     public static void updatpassengersthem(Passenger user) throws SQLException {
         makeconnection();
         statement.execute(String.format("update passengers set them = '%s' where id = %d",user.getDarkthem(),user.getId()));
