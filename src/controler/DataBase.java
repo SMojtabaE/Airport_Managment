@@ -681,7 +681,7 @@ public class DataBase {
 
             LocalDate now = LocalDate.now();
             Period between = Period.between(now,ldate);
-            if ((between.getDays() < 0 ) && (flight.getStatus().equals(Status.open) || flight.getStatus().equals(Status.now))){
+            if ((between.getDays() <= 0 ) && (flight.getStatus().equals(Status.open) || flight.getStatus().equals(Status.now))){
                 DateTimeFormatter ftime = DateTimeFormatter.ofPattern("HH:mm:ss");
                 LocalTime time1 = LocalTime.now();
                 String timenow = time1.format(ftime);

@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import model.*;
 
 import java.sql.SQLException;
@@ -27,6 +28,7 @@ public class Main extends Application{
         primaryStage.setScene(new Scene(pane));
        // primaryStage.setFullScreen(true);
     //    primaryStage.setTitle("Airport Manager by S_M_E");
+        primaryStage.initStyle(StageStyle.UNDECORATED);
         primaryStage.show();
     }
 

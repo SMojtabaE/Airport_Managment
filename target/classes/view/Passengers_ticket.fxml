@@ -5,6 +5,7 @@
 <?import javafx.scene.effect.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="422.0" prefWidth="573.0" stylesheets="@passengerstable.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controler.Passengers_ticketControler">
     <center>
@@ -25,6 +26,26 @@
                         <DropShadow />
                     </effect>
                 </TableView>
+                <HBox alignment="CENTER_LEFT" prefHeight="87.0" prefWidth="632.0" spacing="20.0">
+                    <children>
+                  <HBox prefHeight="25.0" prefWidth="217.0">
+                     <children>
+                        <Label fx:id="erorlbl" textFill="RED">
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                        <Button fx:id="cancelbtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="130.0" styleClass="hand" text="Cancel" />
+                    </children>
+                    <effect>
+                        <DropShadow />
+                    </effect>
+                    <VBox.margin>
+                        <Insets />
+                    </VBox.margin>
+                </HBox>
             </children>
         </VBox>
     </center>

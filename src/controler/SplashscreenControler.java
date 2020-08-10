@@ -5,11 +5,13 @@ import javafx.animation.FadeTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
 import java.io.IOException;
@@ -22,18 +24,15 @@ public class SplashscreenControler implements Initializable {
     @FXML Circle crl2;
     @FXML Circle crl3;
 
+    private double x = 0, y = 0;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         loadsplashscreen();
     }
 
     public void loadsplashscreen(){
-        //            //Load splash screen view FXML
-//            AnchorPane pane = FXMLLoader.load(getClass().getResource(("../view/Splashscreen.fxml")));
-//            //Add it to root container (Can be StackPane, AnchorPane etc)
-//            root.getChildren().removeAll();
-//            root.getChildren().setAll(pane);
 
+        makeDraggable();
         //Load splash screen with fade in effect
         FadeTransition fadeIn = new FadeTransition(Duration.seconds(5), splashroot);
         fadeIn.setFromValue(0);
@@ -62,15 +61,30 @@ public class SplashscreenControler implements Initializable {
         fadeOut.setOnFinished((e) -> {
             try {
                 BorderPane pane =  FXMLLoader.load(getClass().getResource("../view/Loginpage.fxml"));
-                Stage primaryStage = ((Stage)splashroot.getScene().getWindow());
+                //Stage primaryStage = ((Stage)splashroot.getScene().getWindow());
+                Stage primaryStage = new Stage();
 
                 primaryStage.setScene(new Scene(pane));
                 primaryStage.setTitle("Airport Manager by S_M_E");
+                primaryStage.initStyle(StageStyle.DECORATED);
                 primaryStage.show();
+                ((Stage)splashroot.getScene().getWindow()).close();
             } catch (IOException ex) {
                 System.out.println(ex);
             }
         });
+    }
+
+    private void makeDraggable(){
+        splashroot.setOnMousePressed( ( (event) -> {
+            x = event.getSceneX();
+            y = event.getSceneY();
+        }));
+        splashroot.setOnMouseDragged( ( (event) -> {
+            Stage stage =  (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setX(event.getScreenX() - x);
+            stage.setY(event.getScreenY() - y);
+        }));
     }
 
 }
