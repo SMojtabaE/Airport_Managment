@@ -9,7 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import model.Employee;
+
 import model.Flight;
 
 import java.awt.*;
@@ -67,7 +67,7 @@ public class Add_flightControler implements Initializable {
                             }
                             ((Stage) savebtn.getScene().getWindow()).close();
                         }else{
-                            erorlbl.setText("airplane has flight in that time");
+                            erorlbl.setText("airplane has flight in this time");
                             Toolkit.getDefaultToolkit().beep();
                         }
                     }else {

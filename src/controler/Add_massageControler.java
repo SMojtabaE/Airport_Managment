@@ -40,6 +40,7 @@ public class Add_massageControler implements Initializable {
 
         cancelbtn.setOnAction( e -> {
             Dashbord_employeeControler.profilestage = null;
+            Dashbord_passengersControler.profilestage = null;
             ((Stage)cancelbtn.getScene().getWindow()).close();
         });
 
@@ -62,6 +63,7 @@ public class Add_massageControler implements Initializable {
                         DataBase.creatreport(report);
                     }
                     Dashbord_employeeControler.profilestage = null;
+                    Dashbord_passengersControler.profilestage = null;
                     ((Stage) savebtn.getScene().getWindow()).close();
                 } catch (SQLException ex) {
                     ex.printStackTrace();

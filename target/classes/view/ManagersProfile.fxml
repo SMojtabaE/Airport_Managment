@@ -9,15 +9,15 @@
     <children>
         <Pane layoutX="301.0" layoutY="-301.0" prefHeight="442.0" prefWidth="204.0" rotate="-53.1" style="-fx-background-radius: 70; -fx-background-color: #af739a;" />
         <Circle fx:id="crl" fill="DODGERBLUE" layoutX="133.0" layoutY="60.0" radius="32.0" stroke="#af739a" strokeType="INSIDE" strokeWidth="2.0" />
-        <Button fx:id="editprofilephbtn" layoutX="165.0" layoutY="60.0" mnemonicParsing="false" styleClass="empbtns" text="Edit profile phot" />
-        <TextField fx:id="namefeild" layoutX="101.0" layoutY="134.0" prefHeight="25.0" prefWidth="128.0" promptText="Name" styleClass="emptxtfields" />
-        <TextField fx:id="lastnamefeild" layoutX="299.0" layoutY="135.0" prefHeight="25.0" prefWidth="128.0" promptText="LastName" styleClass="emptxtfields" />
-        <TextField fx:id="phnumberfeild" layoutX="101.0" layoutY="194.0" prefHeight="25.0" prefWidth="128.0" promptText="Phonenumber" styleClass="emptxtfields" />
-        <TextField fx:id="moneyfeild" layoutX="493.0" layoutY="194.0" prefHeight="25.0" prefWidth="128.0" promptText="Money" styleClass="emptxtfields" />
-        <TextField fx:id="passwordfeild" layoutX="493.0" layoutY="144.0" prefHeight="25.0" prefWidth="128.0" promptText="Password" styleClass="emptxtfields" />
-        <TextField fx:id="emailfeild" layoutX="299.0" layoutY="194.0" prefHeight="25.0" prefWidth="128.0" promptText="E-mail" styleClass="emptxtfields" />
-        <Button fx:id="cancelbtn" layoutX="500.0" layoutY="324.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="85.0" styleClass="empbtns" text="Cancel" />
-        <Button fx:id="savebtn" layoutX="403.0" layoutY="324.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="85.0" styleClass="empbtns" text="Save" />
+        <Button fx:id="editprofilephbtn" layoutX="165.0" layoutY="60.0" mnemonicParsing="false" styleClass="manbtns" text="Edit profile phot" />
+        <TextField fx:id="namefeild" layoutX="101.0" layoutY="134.0" prefHeight="25.0" prefWidth="128.0" promptText="Name" styleClass="mantxtfields" />
+        <TextField fx:id="lastnamefeild" layoutX="299.0" layoutY="135.0" prefHeight="25.0" prefWidth="128.0" promptText="LastName" styleClass="mantxtfields" />
+        <TextField fx:id="phnumberfeild" layoutX="101.0" layoutY="194.0" prefHeight="25.0" prefWidth="128.0" promptText="Phonenumber" styleClass="mantxtfields" />
+        <TextField fx:id="moneyfeild" layoutX="493.0" layoutY="194.0" prefHeight="25.0" prefWidth="128.0" promptText="Money" styleClass="mantxtfields" />
+        <TextField fx:id="passwordfeild" layoutX="493.0" layoutY="144.0" prefHeight="25.0" prefWidth="128.0" promptText="Password" styleClass="mantxtfields" />
+        <TextField fx:id="emailfeild" layoutX="299.0" layoutY="194.0" prefHeight="25.0" prefWidth="128.0" promptText="E-mail" styleClass="mantxtfields" />
+        <Button fx:id="cancelbtn" layoutX="500.0" layoutY="324.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="85.0" styleClass="manbtns" text="Cancel" />
+        <Button fx:id="savebtn" layoutX="403.0" layoutY="324.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="85.0" styleClass="manbtns" text="Save" />
         <Pane layoutX="132.0" layoutY="223.0" prefHeight="442.0" prefWidth="225.0" rotate="-53.1" style="-fx-background-radius: 70; -fx-background-color: #af739a;" />
         <Label fx:id="erorlbl" layoutX="278.0" layoutY="300.0" textFill="#fc0000">
             <font>
@@ -30,8 +30,8 @@
         <Label layoutX="440.0" layoutY="149.0" text="Password :" textFill="#46fb62" />
         <Label layoutX="446.0" layoutY="199.0" text="Money :" textFill="#46fb62" />
         <Label layoutX="257.0" layoutY="199.0" text="E-mail :" textFill="#46fb62" />
-        <Button fx:id="username" layoutX="165.0" layoutY="9.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="74.0" styleClass="emprtg" text="username" />
-        <TextArea fx:id="addresfirld" layoutX="391.0" layoutY="247.0" prefHeight="53.0" prefWidth="194.0" promptText="Addres" styleClass="emptxtarea" />
+        <Button fx:id="username" layoutX="165.0" layoutY="9.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="74.0" styleClass="manrtg" text="username" />
+        <TextArea fx:id="addresfirld" layoutX="391.0" layoutY="247.0" prefHeight="53.0" prefWidth="194.0" promptText="Addres" styleClass="mantxtarea" />
         <Label layoutX="391.0" layoutY="230.0" text="Addres" textFill="#46fb62" />
     </children>
 </AnchorPane>

@@ -866,6 +866,48 @@ public class DataBase {
         closeconection();
         return true;
     }
+    public static boolean passengercanbuychektime(Flight flight,int passenger_id) throws SQLException {
+        makeconnection();
+        ResultSet re = statement.executeQuery(String.format("select * from passengers_ticket where passenger_id = %d"
+                ,passenger_id));
+        while (re.next()){
+
+            Flight pastflight= searchForflight(searchInticketsid(re.getInt(1)).getFlight_id());
+
+            if (pastflight.getStatus().equals(Status.close)){
+                continue;
+            }
+            String date = String.valueOf(pastflight.getDate());
+            String[] dt = date.split("-");
+            int[] dtn = new int[3];
+            for (int i = 0 ; i < dtn.length ; i++){
+                dtn[i] = Integer.parseInt(dt[i]);
+            }
+            LocalDate ldate = LocalDate.of(dtn[0],dtn[1],dtn[2]);
+            String time = String.valueOf(pastflight.getTime());
+
+            LocalDate newflight = flight.getDate();
+            Period between = Period.between(newflight,ldate);
+            if (between.getDays() == 0 ){
+                DateTimeFormatter ftime = DateTimeFormatter.ofPattern("HH:mm:ss");
+                LocalTime time1 = flight.getTime();
+                String timenow = time1.format(ftime);
+                String[] timenowsplited = timenow.split(":");
+                int[] timeintnow = new int[2];
+                String[] timesplited = time.split(":");
+                int[] timeint = new int[2];
+                for (int i = 0 ; i < timeint.length ; i++){      ///// timeint[0] === hour // timeint[1] = minet
+                    timeint[i] = Integer.parseInt(timesplited[i]);
+                    timeintnow[i] = Integer.parseInt(timenowsplited[i]);
+                }
+                if (timeint[0] == timeintnow[0]){
+                    return false;
+                }
+            }
+        }
+        closeconection();
+        return true;
+    }
 
     public static ObservableList<Passengers_ticket> getPassengers_ticket() throws SQLException {
         makeconnection();
