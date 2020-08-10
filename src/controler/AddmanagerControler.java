@@ -53,28 +53,33 @@ public class AddmanagerControler implements Initializable {
                 erorlbl.setText("fill all parameters");
                 Toolkit.getDefaultToolkit().beep();
             } else if (isValid(emailfield.getText())) {
-                try {
-                    if (DataBase.checkregisrerOfmanager(usernamefield.getText())){
-                        Manager user = new Manager(namefield.getText(),lastnamefield.getText(),
-                                usernamefield.getText(),passwordfield.getText(),emailfield.getText(),
-                                addresfield.getText(),phnumberfield.getText(),Double.parseDouble(salaryfield.getText()));
-                        user.setId(DataBase.creatmanager(user));
-                        ManagerstableControler.registerstage = null;
-                        ManagerstableControler.editstage = null;
-                        if (table !=null){
-                            table.getItems().add(user);
+                    if (phnumberfield.getText().matches("[\\d]+")) {
+                        try {
+                            if (DataBase.checkregisrerOfmanager(usernamefield.getText())) {
+                                Manager user = new Manager(namefield.getText(), lastnamefield.getText(),
+                                        usernamefield.getText(), passwordfield.getText(), emailfield.getText(),
+                                        addresfield.getText(), phnumberfield.getText(), Double.parseDouble(salaryfield.getText()));
+                                user.setId(DataBase.creatmanager(user));
+                                ManagerstableControler.registerstage = null;
+                                ManagerstableControler.editstage = null;
+                                if (table != null) {
+                                    table.getItems().add(user);
+                                }
+                                ((Stage) savebtn.getScene().getWindow()).close();
+                            } else {
+                                erorlbl.setText("chose another username");
+                                Toolkit.getDefaultToolkit().beep();
+                            }
+                        } catch (SQLException ex) {
+                            ex.printStackTrace();
+                        } catch (NumberFormatException ep) {
+                            erorlbl.setText("Enter Number in money Field");
+                            Toolkit.getDefaultToolkit().beep();
                         }
-                        ((Stage)savebtn.getScene().getWindow()).close();
                     }else {
-                        erorlbl.setText("chose another username");
+                        erorlbl.setText("Enter corroct phnumber");
                         Toolkit.getDefaultToolkit().beep();
                     }
-                } catch (SQLException ex) {
-                    ex.printStackTrace();
-                } catch (NumberFormatException ep){
-                    erorlbl.setText("Enter Number in money Field");
-                    Toolkit.getDefaultToolkit().beep();
-                }
             }else{
                 erorlbl.setText("The email is invalid");
                 Toolkit.getDefaultToolkit().beep();

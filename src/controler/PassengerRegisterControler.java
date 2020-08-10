@@ -50,28 +50,33 @@ public class PassengerRegisterControler implements Initializable {
                 erorlbl.setText("fill all parameters");
                 Toolkit.getDefaultToolkit().beep();
             } else if (isValid(emailfeild.getText())) {
-                try {
-                    if (DataBase.checkregisrerOfpassenger(usernamefeild.getText())){
-                        Passenger passenger = new Passenger(namefeild.getText(),lastnamefeild.getText(),
-                                usernamefeild.getText(),passwordfeild.getText(),emailfeild.getText(),
-                                phonefeild.getText(),Double.parseDouble(monyfeild.getText()));
-                        int id = DataBase.creatpassenger(passenger);
-                        passenger.setId(id);
-                        LoginpageControler.registerstage = null;
-                        PassebgertableControler.registerstage = null;
-                        PassebgertableControler.editstage = null;
-                            if (table !=null){
+                if (phonefeild.getText().matches("[\\d]+")) {
+                    try {
+                        if (DataBase.checkregisrerOfpassenger(usernamefeild.getText())) {
+                            Passenger passenger = new Passenger(namefeild.getText(), lastnamefeild.getText(),
+                                    usernamefeild.getText(), passwordfeild.getText(), emailfeild.getText(),
+                                    phonefeild.getText(), Double.parseDouble(monyfeild.getText()));
+                            int id = DataBase.creatpassenger(passenger);
+                            passenger.setId(id);
+                            LoginpageControler.registerstage = null;
+                            PassebgertableControler.registerstage = null;
+                            PassebgertableControler.editstage = null;
+                            if (table != null) {
                                 table.getItems().add(passenger);
                             }
-                        ((Stage)savebtn.getScene().getWindow()).close();
-                    }else {
-                        erorlbl.setText("chose another username");
+                            ((Stage) savebtn.getScene().getWindow()).close();
+                        } else {
+                            erorlbl.setText("chose another username");
+                            Toolkit.getDefaultToolkit().beep();
+                        }
+                    } catch (SQLException ex) {
+                        ex.printStackTrace();
+                    } catch (NumberFormatException ep) {
+                        erorlbl.setText("Enter Number in money Field");
                         Toolkit.getDefaultToolkit().beep();
                     }
-                } catch (SQLException ex) {
-                    ex.printStackTrace();
-                } catch (NumberFormatException ep){
-                    erorlbl.setText("Enter Number in money Field");
+                }else {
+                    erorlbl.setText("Enter corroct phnumber");
                     Toolkit.getDefaultToolkit().beep();
                 }
             }else{

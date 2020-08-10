@@ -53,26 +53,31 @@ public class AddemployeeControler implements Initializable {
             erorlbl.setText("fill all parameters");
             Toolkit.getDefaultToolkit().beep();
         } else if (isValid(emailfield.getText())) {
-            try {
-                if (DataBase.checkregisrerOfemoloyees(usernamefield.getText())){
-                    Employee user = new Employee(namefield.getText(),lastnamefield.getText(),
-                            usernamefield.getText(),passwordfield.getText(),emailfield.getText(),
-                            addresfield.getText(),phnumberfield.getText(),Double.parseDouble(salaryfield.getText()));
-                    user.setId(DataBase.createmployee(user));
-                    EmployeestableControler.registerstage = null;
-                    EmployeestableControler.editstage = null;
-                    if (table !=null){
-                        table.getItems().add(user);
+            if (phnumberfield.getText().matches("[\\d]+")) {
+                try {
+                    if (DataBase.checkregisrerOfemoloyees(usernamefield.getText())) {
+                        Employee user = new Employee(namefield.getText(), lastnamefield.getText(),
+                                usernamefield.getText(), passwordfield.getText(), emailfield.getText(),
+                                addresfield.getText(), phnumberfield.getText(), Double.parseDouble(salaryfield.getText()));
+                        user.setId(DataBase.createmployee(user));
+                        EmployeestableControler.registerstage = null;
+                        EmployeestableControler.editstage = null;
+                        if (table != null) {
+                            table.getItems().add(user);
+                        }
+                        ((Stage) savebtn.getScene().getWindow()).close();
+                    } else {
+                        erorlbl.setText("chose another username");
+                        Toolkit.getDefaultToolkit().beep();
                     }
-                    ((Stage)savebtn.getScene().getWindow()).close();
-                }else {
-                    erorlbl.setText("chose another username");
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                } catch (NumberFormatException ep) {
+                    erorlbl.setText("Enter Number in money Field");
                     Toolkit.getDefaultToolkit().beep();
                 }
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-            } catch (NumberFormatException ep){
-                erorlbl.setText("Enter Number in money Field");
+            }else {
+                erorlbl.setText("Enter a valid phonnumber");
                 Toolkit.getDefaultToolkit().beep();
             }
         }else{
